@@ -1,16 +1,16 @@
 'use strict';
-//var db = require('./_db');
+var db = require('../index');
 
-var User = require('./user');
-var Dream = require('./dream');
-var Cart = require('./cart');
-var Review = require('./reviews');
-var Order = require('./orders');
+var User = require('./user.js')(db);
+var Dream = require('./dream')(db);
+var Cart = require('./cart.js')(db);
+var Review = require('./reviews')(db);
+var Order = require('./orders')(db);
 
 
-Cart.belongsTo(User);
-Review.belongsTo(User);
-Order.belongsTo(User);
+// Cart.belongsTo(User);
+// Review.belongsTo(User);
+// Order.belongsTo(User);
 
 
 module.exports = {
