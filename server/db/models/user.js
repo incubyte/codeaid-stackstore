@@ -72,9 +72,6 @@ module.exports = db.define('user', {
                 hash.update(plainText);
                 hash.update(salt);
                 return hash.digest('hex');
-            },
-            associate:function(models){
-                User.hasOne(models.Cart, {foreignKey: 'userId'});
             }
         },
         hooks: {

@@ -14,9 +14,9 @@ module.exports = db.define('cart', {
         total: Sequelize.FLOAT
     }, {
         classMethods: {
-            associate: function(models) {
-                Cart.belongsTo(models.User, { foreignKey: 'userId' });
-            }
+            // associate: function(models) {
+            //     Cart.belongsTo(models.User, { foreignKey: 'userId' });
+            // }
         }
     })
     // Cart.belongsTo(User(db));

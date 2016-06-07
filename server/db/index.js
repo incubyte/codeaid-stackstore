@@ -14,4 +14,8 @@ Order.belongsTo(User);
 
 // console.log("What's the dealio?", Cart.associations);
 
-
+// Cart.create({
+//   dreams: [1, 2],
+//   total: 1111111.00,
+//   userId: 2
+// });
