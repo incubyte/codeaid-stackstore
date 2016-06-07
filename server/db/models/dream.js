@@ -8,7 +8,7 @@ var Sequelize = require('sequelize');
 // If there is no photo, there must be a placeholder photo used
 
 module.exports = function(db) {
-    db.define('dream', {
+    return db.define('dream', {
             title: {
                 type: Sequelize.STRING,
                 allowNull: false
