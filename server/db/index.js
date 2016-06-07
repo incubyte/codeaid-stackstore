@@ -2,9 +2,12 @@
 var db = require('./_db');
 module.exports = db;
 
-require('./models/user')(db);
-require('./models/dream')(db);
-require('./models/cart')(db);
-require('./models/reviews')(db);
-require('./models/orders')(db);
+var User = require('./models/user')(db);
+var Dream = require('./models/dream')(db);
+var Cart = require('./models/cart')(db);
+var Review = require('./models/reviews')(db);
+var Order = require('./models/orders')(db);
 
+// Cart.belongsTo(User);
+// Review.belongsTo(User);
+// Order.belongsTo(User);
