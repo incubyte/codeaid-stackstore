@@ -2,9 +2,9 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
+var db = require('../_db');
 
-module.exports = function(db){
-	db.define('reviews', {
+var Review = db.define('reviews', {
 		title: {
 			type: Sequelize.STRING
 		},
@@ -21,4 +21,6 @@ module.exports = function(db){
 			type: Sequelize.BOOLEAN
 		}
 	})
-};
+
+
+module.exports = Review;

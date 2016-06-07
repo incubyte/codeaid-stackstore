@@ -1,23 +1,23 @@
-'use strict';
-var db = require('../index');
+// 'use strict';
 
-var User = require('./user.js')(db);
-var Dream = require('./dream')(db);
-var Cart = require('./cart.js')(db);
-var Review = require('./reviews')(db);
-var Order = require('./orders')(db);
+// var User = require('./user.js');
+// var Dream = require('./dream.js');
+// var Cart = require('./cart.js');
+// var Review = require('./reviews');
+// var Order = require('./orders');
 
+// //console.log("I'm a cart ", Cart)
+// // Cart.belongsTo(User);
+// // Review.belongsTo(User);
+// // Order.belongsTo(User);
 
-// Cart.belongsTo(User);
-// Review.belongsTo(User);
-// Order.belongsTo(User);
+// // console.log("What's the dealio?", User.associations);
 
-
-module.exports = {
-	//db: db,
-	User: User,
-	Dream: Dream,
-	Cart: Cart,
-	Review: Review,
-	Order: Order
-};
+// module.exports = {
+// 	//db: db,
+// 	User: User,
+// 	Dream: Dream,
+// 	Cart: Cart,
+// 	Review: Review,
+// 	Order: Order
+// };

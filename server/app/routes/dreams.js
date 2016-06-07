@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-var Dream = require('../../db/models').Dream;
+var Dream = require('../../db').model('dream');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
