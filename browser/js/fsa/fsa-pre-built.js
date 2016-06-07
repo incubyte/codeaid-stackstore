@@ -86,10 +86,20 @@
 
         };
 
+        this.signup = function(credentials){
+            return $http.post('/signup', credentials)
+            .then(onSuccessfulSignup)
+                .catch(function () {
+                    console.log("I CAUGHT THE POST REQUEST ERROR");
+                    return $q.reject({ message: 'Invalid signup credentials.' });
+                });
+        }
+
         this.login = function (credentials) {
             return $http.post('/login', credentials)
                 .then(onSuccessfulLogin)
                 .catch(function () {
+                    console.log("THIS MESSAGE IS FROM AUTHSERVICE");
                     return $q.reject({ message: 'Invalid login credentials.' });
                 });
         };
