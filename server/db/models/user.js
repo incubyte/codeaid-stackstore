@@ -6,10 +6,36 @@ var Sequelize = require('sequelize');
 module.exports = function (db) {
 
     db.define('user', {
+        name: {
+            type: Sequelize.STRING,
+            defaultValue: 'Dreamer'
+        },
+        photo: {
+            type: Sequelize.STRING,
+            defaultValue: 'dream-bubble.jpg'
+        },
+        phone: {
+            type: Sequelize.STRING,
+            validate: {
+                isNumeric: true,
+                min: 10
+            }
+        },
         email: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
         },
         password: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        shippingAddress: {
+            type: Sequelize.STRING
+        },
+        billingAddress: {
             type: Sequelize.STRING
         },
         salt: {
@@ -23,6 +49,10 @@ module.exports = function (db) {
         },
         google_id: {
             type: Sequelize.STRING
+        },
+        isAdmin: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     }, {
         instanceMethods: {
