@@ -3,9 +3,9 @@ var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
 
-module.exports = function (db) {
+var db = require('../_db');
 
-    db.define('user', {
+module.exports = db.define('user', {
         name: {
             type: Sequelize.STRING,
             defaultValue: 'Dreamer'
@@ -72,6 +72,9 @@ module.exports = function (db) {
                 hash.update(plainText);
                 hash.update(salt);
                 return hash.digest('hex');
+            },
+            associate:function(models){
+                User.hasOne(models.Cart, {foreignKey: 'userId'});
             }
         },
         hooks: {
@@ -86,5 +89,5 @@ module.exports = function (db) {
 
 
 
-};
+
 
