@@ -1,4 +1,15 @@
-<h3>
+<!-- <h3>
     Documentation can be found in
     <a target="_blank" href="https://github.com/FullstackAcademy/fsg/wiki/Getting-Started">the project's Github wiki</a>.
 </h3>
+ -->
+ <section id="dreamCategories">
+    <div class="dream-listing">
+        <div class="dreamCat" ng-repeat="dream in dreams">
+            <p>{{dream.title}}</p>
+            <img src="https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png">
+            <p>{{dream.description}}</p>
+            <p>{{dream.price}}</p>
+        </div>
+    </div>
+</section>
