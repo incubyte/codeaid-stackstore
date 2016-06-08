@@ -2,14 +2,15 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
-var db = require('../_db');
+//var db = require('../_db');
 
 // Must have title, description, price, and inventory quantity
 // Must belong to at least one category
 // If there is no photo, there must be a placeholder photo used
 
 
-    var Dream =  db.define('dream', {
+var Dream = function(db) {
+    return db.define('dream', {
             title: {
                 type: Sequelize.STRING,
                 allowNull: false
@@ -36,7 +37,7 @@ var db = require('../_db');
                     //defaultValue: placeholder
             }
         }
-
-    );
+    )
+}
 
 module.exports = Dream;
