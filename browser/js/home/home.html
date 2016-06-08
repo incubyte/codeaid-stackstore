@@ -2,7 +2,7 @@
     <!--    <fullstack-logo></fullstack-logo>
     <rando-greeting></rando-greeting> -->
     <div class="dream-listing">
-        <div class="dream" ng-repeat="dream in dreams">
+        <div class="dream" ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
             <p>{{dream.title}}</p>
             <img ng-src="{{dream.imageUrl}}">
             <p>{{dream.description}}</p>
