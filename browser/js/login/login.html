@@ -4,8 +4,8 @@
           
             <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
 
-                <alert type="danger" ng-show="error">
-                    {{ error }}
+                <alert type="danger" ng-show="errorLogin">
+                    {{ errorLogin }}
                 </alert>
                 <div class="form-group">
                     <label for="email">Email address</label>
@@ -20,9 +20,9 @@
 
         </div>
         <div class="col-md-6">
-            <form id="signupForm" name="signupForm"  ng-submit="sendSignup(signup)">
-                <alert type="danger" ng-show="error">
-                    {{ error }}
+            <form id="signupForm" name="signupForm"  ng-submit="signupForm.$valid && sendSignup(signup)">
+                <alert type="danger" ng-show="errorSignup">
+                    {{ errorSignup }}
                 </alert>
                 <div class="form-group">
                     <label for="signup-name">Name</label>
@@ -36,7 +36,7 @@
                     <label for="signup-password">Password</label>
                     <input type="password" ng-model="signup.password" class="form-control" id="signup-password" placeholder="Password">
                 </div>
-                <input type="submit" class="btn btn-default">Sign Up</input>
+                <button type="submit" class="btn btn-default">Sign Up</button>
 
             </form>
 

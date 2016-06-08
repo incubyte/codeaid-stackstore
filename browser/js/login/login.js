@@ -17,12 +17,12 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 
     $scope.sendLogin = function (loginInfo) {
 
-        $scope.error = null;
+        $scope.errorLogin = null;
 
         AuthService.login(loginInfo).then(function () {
             $state.go('home');
         }).catch(function () {
-            $scope.error = 'Invalid login credentials.';
+            $scope.errorLogin = 'Invalid login credentials.';
         });
 
     };
@@ -31,11 +31,11 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
     to make an http.post request on the /signup URI path
     */
     $scope.sendSignup = function(signupInfo){ 
-        $scope.error = null;
+        $scope.errorSignup = null;
         AuthService.signup(signupInfo).then(function(){
             $state.go('home');
         }).catch(function () {
-            $scope.error = 'Invalid signup credentials.';
+            $scope.errorSignup = 'Invalid signup credentials.';
         });
     };
 });
