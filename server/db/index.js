@@ -12,7 +12,6 @@ Cart.belongsTo(User);
 Review.belongsTo(User);
 Order.belongsTo(User);
 
-// console.log("What's the dealio?", Cart.associations);
 
 // Cart.create({
 //   dreams: [1, 2],

@@ -14,3 +14,4 @@ if (process.env.NODE_ENV === 'testing') {
 } else {
     module.exports = require(devConfigPath);
 }
+//If our environment is testing, we serve up the testing database
