@@ -10,7 +10,7 @@ module.exports = router;
 
 router.get('/:id', function(req, res, next) {
   console.log("before findAll in cart id");
-    Cart.findAll({
+    Cart.findOne({
             where: { 
               userId: req.params.id 
             }

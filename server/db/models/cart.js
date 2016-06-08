@@ -6,9 +6,6 @@ var Sequelize = require('sequelize');
 
 //cart model has array of dreamIds, total price
 
-
-
-
 module.exports = function(db) {
         return db.define('cart', {
             dreams: Sequelize.ARRAY(Sequelize.INTEGER),
@@ -19,6 +16,5 @@ module.exports = function(db) {
                 //     Cart.belongsTo(models.User, { foreignKey: 'userId' });
                 // }
             }
-        })
-    }
-    // Cart.belongsTo(User(db));
+        });
+    };
