@@ -1,32 +1,37 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  background: #fdfdfd;
+    background: #fdfdfd;
 }
 
 @mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 #main {
-  padding-top: 60px;
-  margin: 0 auto;
+    padding-top: 60px;
+    margin: 0 auto;
 }
 
 #sidebar {
-	background-color: lightgrey;
-	position: absolute;
-	top: 95px;
-	bottom: 0;
-	left: 0;
-	width: 10%;
-	float: left;
+    background-color: lightgrey;
+    position: absolute;
+    top: 95px;
+    bottom: 0;
+    left: 0;
+    width: 10%;
+    float: left;
+    text-align: center;
+}
+
+#product {
+  text-align: center;
 }
 
 @import 'directives/main';
@@ -34,3 +39,5 @@ body {
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+
+
