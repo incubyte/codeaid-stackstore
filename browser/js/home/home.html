@@ -4,7 +4,7 @@
     <div class="dream-listing">
         <div class="dream" ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
             <p>{{dream.title}}</p>
-            <img ng-src="{{dream.imageUrl}}">
+            <img ng-src="{{dream.imageUrl}}" alt="{{dream.title}}">
             <p>{{dream.description}}</p>
             <p>{{dream.price}}</p>
         </div>

@@ -48,28 +48,60 @@ var seedDreams = function () {
 
     var dreams = [
         {
-            title: 'Hopes and Dreams',
-            description: 'Everything you want',
-            price: 12.33,
+            title: 'The Great Escape',
+            description: 'Escape to a fantasy land of your choice',
+            price: 750.00,
             quantity: 1,
-            category: ["hi", "bye"],
-            photo: "I'm a photo :)"
+            category: ["Classic", "Daydream"],
+            photo: "dreamdoor3"
         },
         {
             title: 'Dreams Come True',
             description: 'But only sometimes',
-            price: 85.00,
+            price: 850.00,
             quantity: 12,
-            category: ["LifeGoals", "bye"],
-            photo: "I'm a photo :-|"
+            category: ["Lucid", "Recurring"],
+            photo: "moons"
         },
         {
-            title: "Shoot for the moon; if you miss you'll land amongst the stars.",
-            description: 'Galactic',
-            price: 100.00,
+            title: "Galactic",
+            description: 'Shoot for the moon; if you miss you\'ll land amongst the stars.',
+            price: 1000.00,
             quantity: 12,
-            category: ["hi"],
-            photo: "I'm a photo"
+            category: ["Progressive"],
+            photo: "galaxy"
+        },
+        {
+            title: "Ye Olden Days",
+            description: "Want to be da Vinci for a day?",
+            price: 680.00,
+            quantity: 9,
+            category: ["Historical"],
+            photo: "monalisa"
+        },
+        {
+            title: "Wild Wild West",
+            description: "Grab a ticket to the guns show",
+            price: 400.00,
+            quantity: 8,
+            category: ["Epic", "Daydream"],
+            photo: "wildwildwest"
+        },
+        {
+            title: "How do you solve a problem like Maria?",
+            description: "Gain insight and overcome any problem in your sleep",
+            price: 500.00,
+            quantity: 11,
+            category: ["Signal"],
+            photo: "soundofmusic"
+        },
+        {
+            title: "Money, Money, Money",
+            description: "I want to be rich!",
+            price: 700.00,
+            quantity: 15,
+            category: ["Daydream", "Recurring", "Classic"],
+            photo: "monet"
         }
     ];
 
