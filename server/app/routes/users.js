@@ -17,6 +17,16 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
+router.param('id', function (req, res, next, id) {
+  User.findById(id)
+  .then(function (user) {
+    if (!user) throw HttpError(404);
+    req.requestedUser = user;
+    next();
+  })
+  .catch(next);
+});
+
 // Show all users to admin
 router.get('/', /*ensureAuthenticated, */ function(req, res, next) {
     console.log("before findAll in user");
