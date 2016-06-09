@@ -18,7 +18,7 @@ app.factory('CategoryFactory', function($http, DreamsFactory) {
             .then(function(response) {
                 var dreams = response.data;
                 dreams.forEach(function(dream) {
-                    dream.imageUrl = 'https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png';
+                    dream.imageUrl = '/browser/images/' + dream.photo + '.jpg';
                 });
                 return dreams;
             });
