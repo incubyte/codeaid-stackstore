@@ -104,6 +104,7 @@ var seedDreams = function () {
             photo: "monet"
         }
     ];
+    
 
      var creatingDreams = dreams.map(function (dreamObj) {
         return Dream.create(dreamObj);
