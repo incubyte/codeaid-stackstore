@@ -32,7 +32,7 @@ app.factory('DreamsFactory', function($http) {
 
     return DreamsFactory;
 
-})
+});
 
 app.controller('DreamsCtrl', function($scope, DreamsFactory) {
     $scope.dreams;
@@ -40,7 +40,7 @@ app.controller('DreamsCtrl', function($scope, DreamsFactory) {
     DreamsFactory.getAll().then(function(dreams) {
     	dreams.forEach(function(dream){
     		dream.imageUrl = 'https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png';
-    	})
+    	});
         $scope.dreams = dreams;
     });
    DreamsFactory.getUniqueCategories()
