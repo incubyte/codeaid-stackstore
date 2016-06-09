@@ -2,7 +2,9 @@
 var router = require('express').Router();
 module.exports = router;
 
-router.use('/members', require('./members'));
+//router.use('/members', require('./members'));
+router.use('/users', require('./users'));
+
 router.use('/dreams', require('./dreams'));
 router.use('/cart', require('./cart'));
 // router.use('/orders', require('./orders'));

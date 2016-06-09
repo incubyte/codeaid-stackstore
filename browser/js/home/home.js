@@ -39,7 +39,7 @@ app.controller('DreamsCtrl', function($scope, DreamsFactory) {
     
     DreamsFactory.getAll().then(function(dreams) {
         dreams.forEach(function(dream){
-            dream.imageUrl = '/browser/images/' + dream.photo + '.jpg';
+            dream.imageUrl = '/images/' + dream.photo + '.jpg';
         });
         $scope.dreams = dreams;
     });
