@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 
 var Dream = require('../../db').model('dream');
+var Review = require('../../db').model('reviews');
+
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -39,3 +41,15 @@ router.get('/category/:category', function(req, res, next) {
         })
         .catch(next);
 });
+
+router.get('/:id/reviews', function(req, res, next) {
+    Review.findAll({
+        where: {
+            productId: req.params.id
+        }
+    })
+    .then(function(reviews) {
+        res.json(reviews)
+    })
+    .catch(next)
+})

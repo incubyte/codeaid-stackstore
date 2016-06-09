@@ -14,20 +14,20 @@ app.factory('DreamsFactory', function($http) {
                 return dreams.data;
             });
     };
-    DreamsFactory.getUniqueCategories = function(){
+    DreamsFactory.getUniqueCategories = function() {
         return $http.get('api/dreams')
-        .then(function(dreams){
-            return dreams.data;
-        })
-        .then(function(dreams){
-            var categories = [];
-            dreams.forEach(function(dream){
-                dream.category.forEach(function(cat){
-                    if (!categories.includes(cat)) categories.push(cat);
-                 });
+            .then(function(dreams) {
+                return dreams.data;
+            })
+            .then(function(dreams) {
+                var categories = [];
+                dreams.forEach(function(dream) {
+                    dream.category.forEach(function(cat) {
+                        if (!categories.includes(cat)) categories.push(cat);
+                    });
+                });
+                return categories;
             });
-            return categories;
-        });
     };
 
     return DreamsFactory;
@@ -36,16 +36,16 @@ app.factory('DreamsFactory', function($http) {
 
 app.controller('DreamsCtrl', function($scope, DreamsFactory) {
     $scope.dreams;
-    
-    DreamsFactory.getAll().then(function(dreams) {
-    	dreams.forEach(function(dream){
-    		dream.imageUrl = 'https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png';
-    	})
-        $scope.dreams = dreams;
-    });
-   DreamsFactory.getUniqueCategories()
-   .then(function(categories){
-        $scope.categories = categories;
-   });
-    
+
+    DreamsFactory.getAll()
+        .then(function(dreams) {
+            dreams.forEach(function(dream) {
+                dream.imageUrl = 'https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png';
+            })
+            $scope.dreams = dreams;
+        });
+    DreamsFactory.getUniqueCategories()
+        .then(function(categories) {
+            $scope.categories = categories;
+        });
 });

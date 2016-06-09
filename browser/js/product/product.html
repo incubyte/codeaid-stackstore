@@ -6,10 +6,14 @@
             <p>{{product.title}}</p>
             <img src="https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png">
             <div>
-            <p>{{product.description}}</p>
-            <p>{{product.price}}</p>
-            <p>{{product.quantity}}</p>
+                <p>{{product.description}}</p>
+                <p>{{product.price}}</p>
+                <p>{{product.quantity}}</p>
             </div>
+        </div>
+        <br>
+        <h5>Reviews</h5>
+        <div ui-sref="reviews({id: product.id})">
         </div>
     </div>
 </section>

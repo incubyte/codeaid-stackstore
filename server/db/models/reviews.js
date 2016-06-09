@@ -8,6 +8,9 @@ var Review = db.define('reviews', {
 		title: {
 			type: Sequelize.STRING
 		},
+		productId: {
+			type: Sequelize.INTEGER
+		},
 		stars: {
 			type: Sequelize.INTEGER,
 			validate: {
