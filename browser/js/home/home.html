@@ -2,11 +2,17 @@
     <!--    <fullstack-logo></fullstack-logo>
     <rando-greeting></rando-greeting> -->
     <div class="dream-listing">
-        <div class="dream" ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
-            <p>{{dream.title}}</p>
-            <img ng-src="{{dream.imageUrl}}" alt="{{dream.title}}">
-            <p>{{dream.description}}</p>
-            <p>{{dream.price}}</p>
-        </div>
+    <dream-list the-dreams="dreams"></dream-list>
+        <!-- Equivalent of Bootstrap's container class -->
+       <!--  <div class="row">
+            <div class="dream clickable" ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <p>{{dream.title}}</p>
+                    <img ng-src="{{dream.imageUrl}}">
+                    <p>{{dream.description}}</p>
+                    <p>{{dream.price}}</p>
+                </div> 
+            </div> 
+        </div>  -->
     </div>
 </section>
