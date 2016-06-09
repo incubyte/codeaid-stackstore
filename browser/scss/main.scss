@@ -4,6 +4,7 @@
 
 body {
     background: #fdfdfd;
+    font-family: 'Helvetica', sans-serif
 }
 
 @mixin clearfix {
@@ -32,6 +33,24 @@ body {
 
 #product {
   text-align: center;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.product-title {
+   font-size: 2em;
+   font-weight: bolder;
+}
+
+.product-description {
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+.product-price::before {
+    content: "$"
 }
 
 @import 'directives/main';
