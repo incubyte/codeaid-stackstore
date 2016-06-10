@@ -45,13 +45,13 @@ module.exports = function (app, db) {
 
     app.get('/auth/google', passport.authenticate('google', {
         scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
+            'profile',
+            'email'
         ]
     }));
 
     app.get('/auth/google/callback',
-        passport.authenticate('google', {failureRedirect: '/login'}),
+        passport.authenticate('google', {successRedirect: '/home', failureRedirect: '/login'}),
         function (req, res) {
             res.redirect('/');
         });
