@@ -4,8 +4,6 @@ const express = require('express');
 const router = express.Router();
 var _ = require('lodash');
 var User = require('../../db').model('user');
-// var HttpError = require('../../utils/HttpError');
-// var Auth = require('../../utils/auth.middleware');
 
 module.exports = router;
 
