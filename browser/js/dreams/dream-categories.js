@@ -11,37 +11,8 @@ app.config(function($stateProvider) {
     });
 });
 
-app.config(function($stateProvider) {
-    $stateProvider.state('home', {
-        url: '/api/dreams',
-        controller: 'CategoryCtrl',
-        templateUrl: '/server/views/index.html',
-        resolve: {
-            theCategories: function(CategoryFactory) {
-                return CategoryFactory.getCategories();
-            }
-        }
-    });
-});
-
 app.factory('CategoryFactory', function($http, DreamsFactory) {
     var CategoryFactory = {};
-    CategoryFactory.getCategories = function() {
-        return $http.get('/api/dreams/')
-            .then(function(response) {
-                return response.data;
-            })
-            .then(function(dreams) {
-                var categories = [];
-                dreams.forEach(function(dream) {
-                    dream.category.forEach(function(cat) {
-                        if (!categories.includes(cat)) categories.push(cat);
-                    });
-                });
-                return categories;
-            });
-    };
-
     CategoryFactory.findOne = function(category) {
         return $http.get('/api/dreams/category/' + category)
             .then(function(response) {
@@ -55,8 +26,6 @@ app.factory('CategoryFactory', function($http, DreamsFactory) {
     return CategoryFactory;
 });
 
-app.controller('CategoryCtrl', function($scope, theDreams, theCategories) {
-    console.log("HELLLLOOO I'M HERE");
-    $scope.categories = theCategories;
+app.controller('CategoryCtrl', function($scope, theDreams) {
     $scope.dreams = theDreams;
 });
