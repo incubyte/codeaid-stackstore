@@ -53,7 +53,7 @@ var seedDreams = function () {
             price: 750.00,
             quantity: 1,
             category: ["Classic", "Daydream"],
-            photo: "dreamdoor3"
+            photo: "/images/dreamdoor3.jpg"
         },
         {
             title: 'Dreams Come True',
@@ -61,7 +61,7 @@ var seedDreams = function () {
             price: 850.00,
             quantity: 12,
             category: ["Lucid", "Recurring"],
-            photo: "moons"
+            photo: "/images/moons.jpg"
         },
         {
             title: "Galactic",
@@ -69,7 +69,7 @@ var seedDreams = function () {
             price: 1000.00,
             quantity: 12,
             category: ["Progressive"],
-            photo: "galaxy"
+            photo: "/images/galaxy.jpg"
         },
         {
             title: "Ye Olden Days",
@@ -77,7 +77,7 @@ var seedDreams = function () {
             price: 680.00,
             quantity: 9,
             category: ["Historical"],
-            photo: "monalisa"
+            photo: "/images/monalisa.jpg"
         },
         {
             title: "Wild Wild West",
@@ -85,7 +85,7 @@ var seedDreams = function () {
             price: 400.00,
             quantity: 8,
             category: ["Epic", "Daydream"],
-            photo: "wildwildwest"
+            photo: "/images/wildwildwest.jpg"
         },
         {
             title: "How do you solve a problem like Maria?",
@@ -93,7 +93,7 @@ var seedDreams = function () {
             price: 500.00,
             quantity: 11,
             category: ["Signal"],
-            photo: "soundofmusic"
+            photo: "/images/soundofmusic.jpg"
         },
         {
             title: "Money, Money, Money",
@@ -101,7 +101,7 @@ var seedDreams = function () {
             price: 700.00,
             quantity: 15,
             category: ["Daydream", "Recurring", "Classic"],
-            photo: "monet"
+            photo: "/images/monet.jpg"
         }
     ];
     

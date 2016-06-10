@@ -4,7 +4,8 @@
 
 body {
     background: #fdfdfd;
-    font-family: 'Helvetica', sans-serif
+    font-family: 'Helvetica', sans-serif;
+    background: #EDEDE4;
 }
 
 @mixin clearfix {
@@ -20,19 +21,11 @@ body {
     margin: 0 auto;
 }
 
-#sidebar {
-    background-color: lightgrey;
-    position: absolute;
-    top: 95px;
-    bottom: 0;
-    left: 0;
-    width: 10%;
-    float: left;
-    text-align: center;
-}
-
 #product {
-  text-align: center;
+    text-align: center;
+    img {
+        width: 80%;
+    }
 }
 
 .clickable {
@@ -40,8 +33,8 @@ body {
 }
 
 .product-title {
-   font-size: 2em;
-   font-weight: bolder;
+    font-size: 2em;
+    font-weight: bolder;
 }
 
 .product-description {
@@ -54,10 +47,41 @@ body {
     content: "$"
 }
 
+#sidebar {
+    border-right: 1px ridge #333333;
+    position: absolute;
+    bottom: 0;
+
+    left: 0;
+    width: 10%;
+    float: left;
+    text-align: center;
+    line-height: 200%;
+    a {
+        color: black;
+    }
+}
+
+.dreamListing {
+    margin-left: 8%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.dream {
+    border: 2px solid black;
+    width: 250px;
+    padding: 15px;
+    text-align: center;
+    margin: 2%;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+
+
 
 

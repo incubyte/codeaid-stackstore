@@ -10,12 +10,12 @@ app.config(function($stateProvider){
           return response.dream;
         });
       },
-      currentSession: function(ProductFactory, $stateParams){
-        return ProductFactory.getDream($stateParams.id)
-        .then(function(dream){
-          return dream.sessionId;
-        })
-      }
+      // currentSession: function(ProductFactory, $stateParams){
+      //   return ProductFactory.getDream($stateParams.id)
+      //   .then(function(dream){
+      //     return dream.sessionId;
+      //   })
+      // }
     }
   });
 });
@@ -28,20 +28,20 @@ app.factory('ProductFactory', function($http, $state){
       return response.data;
     })
   }
-  ProductFactory.addDreamToCart = function(sessionId, product){
-    return $http.post('/api/cart/' + sessionId + '/' + product.id, product)
-    .then(function(response){
-      return response.data;
-    });
-  }
+  // ProductFactory.addDreamToCart = function(sessionId, product){
+  //   return $http.post('/api/cart/' + sessionId + '/' + product.id, product)
+  //   .then(function(response){
+  //     return response.data;
+  //   });
+  // }
   return ProductFactory;
 
 
 });
 
-app.controller('ProductCtrl', function($scope, productListing, currentSession, Session){
+app.controller('ProductCtrl', function($scope, productListing){
   $scope.product = productListing;
-  var session = new Session();
-  session.create(currentSession);
-  $scope.currentUser = session;
+  // var session = new Session();
+  // session.create(currentSession);
+  // $scope.currentUser = session;
 });

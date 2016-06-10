@@ -1,7 +1,7 @@
 navbar {
 
   display: block;
-  background: white;
+  background: #EDE9D8;
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
 
@@ -41,6 +41,16 @@ navbar {
     float: right;
     border: 1px solid black;
     margin-top: 10px;
+    margin-right: 5px;
+    background: none;
+    outline: none !important;
+  }
+
+  .shopping-cart-button {
+    float: right;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-right: 5px;
     background: none;
     outline: none !important;
   }
@@ -53,6 +63,7 @@ navbar {
       font-size: 16px;
       margin-right: 5px;
     }
+    
     a {
       color: #f30046;
       cursor: pointer;
