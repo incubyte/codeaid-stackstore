@@ -32,6 +32,7 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
     */
     $scope.sendSignup = function(signupInfo){ 
         $scope.errorSignup = null;
+        //console.log("Sign up info", signupInfo)
         AuthService.signup(signupInfo).then(function(){
             $state.go('home');
         }).catch(function () {
