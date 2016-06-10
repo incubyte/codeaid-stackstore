@@ -1,15 +1,8 @@
 <div class="dreamListing">
     <div class="dream clickable" ng-repeat="dream in theDreams" ui-sref="product({id: dream.id})">
             <p>{{dream.title}}</p>
-<<<<<<< HEAD
-            <img ng-src="{{dream.imageUrl}}">
-            <p>{{dream.description}}</p>
-            <p>{{dream.price}}</p>
-        </div>
-=======
             <img ng-src="{{dream.photo}}">
             <p class="product-price">{{dream.price}}</p>
->>>>>>> dff3fa6a1ae6855bbab659a4404cc6f9489bb91f
         <!-- Ends column -->
     </div>
     <!-- Ends dream class -->
