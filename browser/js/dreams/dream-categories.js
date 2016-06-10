@@ -17,9 +17,6 @@ app.factory('CategoryFactory', function($http, DreamsFactory) {
         return $http.get('/api/dreams/category/' + category)
             .then(function(response) {
                 var dreams = response.data;
-                dreams.forEach(function(dream) {
-                    dream.imageUrl = '/images/' + dream.photo + '.jpg';
-                });
                 return dreams;
             });
     };
