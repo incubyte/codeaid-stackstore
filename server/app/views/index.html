@@ -20,7 +20,7 @@
     <navbar></navbar>
     <div class="container">
     <div class="row">
-    <div class="col-lg-2" id="sidebar" ng-Controller="CategoryCtrl">
+    <div class="col-lg-2" id="sidebar" ng-Controller="DreamsCtrl">
         <section ng-repeat="cat in categories">
             <a ui-sref="Cat({category: cat})">{{cat | uppercase}}</a>
             <!-- on click of the category, go to category page containing all the dreams -->
