@@ -27,6 +27,7 @@ app.factory('ProductFactory', function($http, $state) {
     return ProductFactory;
 });
 
+
 app.controller('ProductCtrl', function($scope, $http, productListing) {
     $scope.product = productListing;
     $scope.currentUser;
@@ -58,3 +59,11 @@ app.controller('ProductCtrl', function($scope, $http, productListing) {
         });
     }
 });
+
+app.controller('ProductCtrl', function($scope, productListing){
+  $scope.product = productListing;
+  // var session = new Session();
+  // session.create(currentSession);
+  // $scope.currentUser = session;
+});
+

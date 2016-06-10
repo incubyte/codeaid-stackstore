@@ -8,6 +8,12 @@ body {
     background: #EDEDE4;
 }
 
+#storeName {
+    margin-top: 5%;
+    margin-bottom: 0;
+   text-align: center;
+}
+
 @mixin clearfix {
     &:after {
         content: "";
@@ -17,14 +23,15 @@ body {
 }
 
 #main {
-    padding-top: 60px;
+    padding-top: 2%;
     margin: 0 auto;
 }
 
 #product {
     text-align: center;
     img {
-        width: 80%;
+        width: 65%;
+        border: 2px solid black;
     }
 }
 
@@ -35,12 +42,14 @@ body {
 .product-title {
     font-size: 2em;
     font-weight: bolder;
+    font-style: italic;
 }
 
 .product-description {
+    margin-top: 15%;
     font-size: 1.2em;
     font-weight: normal;
-    color: orchid;
+    color: black;
 }
 
 .product-price::before {
@@ -50,8 +59,7 @@ body {
 #sidebar {
     border-right: 1px ridge #333333;
     position: absolute;
-    bottom: 0;
-
+    margin-top: 2%;
     left: 0;
     width: 10%;
     float: left;
@@ -62,19 +70,6 @@ body {
     }
 }
 
-.dreamListing {
-    margin-left: 8%;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.dream {
-    border: 2px solid black;
-    width: 250px;
-    padding: 15px;
-    text-align: center;
-    margin: 2%;
-}
 
 @import 'directives/main';
 @import 'home/main';
