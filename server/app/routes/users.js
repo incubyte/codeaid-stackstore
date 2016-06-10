@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 var _ = require('lodash');
 var User = require('../../db').model('user');
-var HttpError = require('../../utils/HttpError');
+// var HttpError = require('../../utils/HttpError');
 // var Auth = require('../../utils/auth.middleware');
 
 module.exports = router;
@@ -29,28 +29,28 @@ router.param('id', function(req, res, next, id) {
 
 // Get ALL users for admin
 router.get('/', /*ensureAuthenticated, */ function(req, res, next) {
-    if (req.user.isAdmin) {
+    //if (req.user.isAdmin) {
         User.findAll()
             .then(function(allUsersForAdmin) {
                 res.json(allUsersForAdmin);
             })
             .catch(next);
-    } else {
-        res.sendStatus(403);
-    }
+    // } else {
+    //     res.sendStatus(403);
+    //}
 });
 
 // Get ONE user by id
 router.get('/:id', function(req, res, next) {
-    if (req.user.isAdmin || req.user === req.params.id) {
+    // if (req.user.isAdmin || req.user === req.params.id) {
         User.findById(req.params.id)
             .then(function(theCurrentUser) {
                 res.json(theCurrentUser);
             })
             .catch(next);
-    } else {
-        res.sendStatus(403);
-    }
+    // } else {
+    //     res.sendStatus(403);
+    // }
 });
 
 // Create ONE user
@@ -64,7 +64,7 @@ router.post('/', function(req, res, next) {
 
 // Update ONE user 
 router.put('/:id', function(req, res, next) {
-    if (req.user.isAdmin || req.user === req.params.id) {
+    //if (req.user.isAdmin || req.user === req.params.id) {
         User.findById(req.params.id)
             .then(function(existingUser) {
                 return existingUser.update(req.body);
@@ -76,14 +76,14 @@ router.put('/:id', function(req, res, next) {
                 res.sendStatus(201);
             })
             .catch(next);
-        } else {
-            res.sendStatus(403);
-        }
+        // } else {
+        //     res.sendStatus(403);
+        // }
 });
 
 // Delete ONE user
 router.delete('/:id', function(req, res, next) {
-    if (req.user.isAdmin || req.user === req.params.id) { 
+    // if (req.user.isAdmin || req.user === req.params.id) { 
     User.findById(req.params.id)
         .then(function(response) {
             return response.destroy();
@@ -92,9 +92,9 @@ router.delete('/:id', function(req, res, next) {
             res.sendStatus(204);
         })
         .catch(next);
-    } else {
-        res.sendStatus(403);
-    }
+    // } else {
+    //     res.sendStatus(403);
+    // }
 });
 
 // router.get('/secret-stash', ensureAuthenticated, function (req, res) {
