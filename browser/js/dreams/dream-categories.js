@@ -24,5 +24,8 @@ app.factory('CategoryFactory', function($http, DreamsFactory) {
 });
 
 app.controller('CategoryCtrl', function($scope, theDreams) {
+
     $scope.dreams = theDreams;
 });
+
+//trying to get back to the right one
