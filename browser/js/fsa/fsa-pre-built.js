@@ -96,6 +96,7 @@
         }
 
         this.login = function (credentials) {
+            console.log("POTUS in the house", credentials);
             return $http.post('/login', credentials)
                 .then(onSuccessfulLogin)
                 .catch(function () {
