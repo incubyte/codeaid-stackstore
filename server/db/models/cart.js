@@ -7,24 +7,17 @@ var Sequelize = require('sequelize');
 //cart model has array of dreamIds, total price
 
 module.exports = function(db) {
-    return db.define('cart', {
-        dreams: Sequelize.ARRAY(Sequelize.INTEGER),
-        total: {
-            type: Sequelize.FLOAT,
-            defaultValue: 0.00
-        }
-    }, {
-        instanceMethods: {
-            // associate: function(models) {
-            //     Cart.belongsTo(models.User, { foreignKey: 'userId' });
-            // }
-            addToDream: function(dreamId){
-                this.dreams.push(dreamId);
-                return this.dreams;
-            },
-            addToTotal: function(price){
-                return this.total + price;
+    return db.define('cart', {}, {
+        getterMethods: {
+            getTotal: function() {
+                return this.getDreams()
+                    .then(function(dreams) {
+                        return dreams.reduce(function(a, b) {
+                            console.log(a, b);
+                            return a + b.price;
+                        }, 0);
+                    });
             }
         }
     });
-};
+}

@@ -7,7 +7,7 @@ var Sequelize = require('sequelize');
 var Order = function(db) {
     return db.define('orders', {
         status: {
-            type: Sequelize.ARRAY(Sequelize.TEXT)
+            type: Sequelize.STRING
         },
         confirmation: {
             type: Sequelize.STRING
