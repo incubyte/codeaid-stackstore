@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     'use strict';
 
@@ -7,7 +7,7 @@
 
     var app = angular.module('fsaPreBuilt', []);
 
-    app.factory('Socket', function () {
+    app.factory('Socket', function() {
         if (!window.io) throw new Error('socket.io not found!');
         return window.io(window.location.origin);
     });
@@ -24,7 +24,7 @@
         notAuthorized: 'auth-not-authorized'
     });
 
-    app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
+    app.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
         var statusDict = {
             401: AUTH_EVENTS.notAuthenticated,
             403: AUTH_EVENTS.notAuthorized,
@@ -32,23 +32,23 @@
             440: AUTH_EVENTS.sessionTimeout
         };
         return {
-            responseError: function (response) {
+            responseError: function(response) {
                 $rootScope.$broadcast(statusDict[response.status], response);
                 return $q.reject(response)
             }
         };
     });
 
-    app.config(function ($httpProvider) {
+    app.config(function($httpProvider) {
         $httpProvider.interceptors.push([
             '$injector',
-            function ($injector) {
+            function($injector) {
                 return $injector.get('AuthInterceptor');
             }
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q) {
+    app.service('AuthService', function($http, Session, $rootScope, AUTH_EVENTS, $q) {
 
         function onSuccessfulLogin(response) {
             var data = response.data;
@@ -57,13 +57,20 @@
             return data.user;
         }
 
+        // function onSuccessfulSignUp(response) {
+        //     var data = response.data;
+        //     console.log("SUCCESSFUL SIGN UP")
+        //     Session.create(data.id, data.user);
+        //     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        //     return data;
+        // }
         // Uses the session factory to see if an
         // authenticated user is currently registered.
-        this.isAuthenticated = function () {
+        this.isAuthenticated = function() {
             return !!Session.user;
         };
 
-        this.getLoggedInUser = function (fromServer) {
+        this.getLoggedInUser = function(fromServer) {
 
             // If an authenticated session exists, we
             // return the user attached to that session
@@ -72,7 +79,7 @@
 
             // Optionally, if true is given as the fromServer parameter,
             // then this cached value will not be used.
-
+            console.log("I am here");
             if (this.isAuthenticated() && fromServer !== true) {
                 return $q.when(Session.user);
             }
@@ -80,33 +87,36 @@
             // Make request GET /session.
             // If it returns a user, call onSuccessfulLogin with the response.
             // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get('/session').then(onSuccessfulLogin).catch(function () {
+            return $http.get('/session').then(onSuccessfulLogin).catch(function() {
                 return null;
             });
 
         };
 
-        this.signup = function(credentials){
+        this.signup = function(credentials) {
             return $http.post('/signup', credentials)
-            .then(onSuccessfulSignup)
-                .catch(function () {
+                .then(onSuccessfulLogin)
+                .catch(function() {
                     console.log("I CAUGHT THE POST REQUEST ERROR");
                     return $q.reject({ message: 'Invalid signup credentials.' });
                 });
         }
 
-        this.login = function (credentials) {
-            console.log("POTUS in the house", credentials);
+        this.login = function(credentials) {
+            //console.log("POTUS in the house", credentials);
             return $http.post('/login', credentials)
-                .then(onSuccessfulLogin)
-                .catch(function () {
+                .then(function(response){
+                    console.log(response)
+                    onSuccessfulLogin(response);
+            })
+                .catch(function() {
                     console.log("THIS MESSAGE IS FROM AUTHSERVICE");
                     return $q.reject({ message: 'Invalid login credentials.' });
                 });
         };
 
-        this.logout = function () {
-            return $http.get('/logout').then(function () {
+        this.logout = function() {
+            return $http.get('/logout').then(function() {
                 Session.destroy();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             });
@@ -114,27 +124,27 @@
 
     });
 
-    app.service('Session', function ($rootScope, AUTH_EVENTS) {
+    app.service('Session', function($rootScope, AUTH_EVENTS) {
 
         var self = this;
 
-        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
             self.destroy();
         });
 
-        $rootScope.$on(AUTH_EVENTS.sessionTimeout, function () {
+        $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
             self.destroy();
         });
 
         this.id = null;
         this.user = null;
 
-        this.create = function (sessionId, user) {
+        this.create = function(sessionId, user) {
             this.id = sessionId;
             this.user = user;
         };
 
-        this.destroy = function () {
+        this.destroy = function() {
             this.id = null;
             this.user = null;
         };
