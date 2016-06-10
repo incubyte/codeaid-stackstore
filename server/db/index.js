@@ -12,9 +12,4 @@ Cart.belongsTo(User);
 Review.belongsTo(User);
 Order.belongsTo(User);
 
-
-// Cart.create({
-//   dreams: [1, 2],
-//   total: 1111111.00,
-//   userId: 2
-// });
+Cart.belongsToMany(Dream, { through: 'DreamCart'});

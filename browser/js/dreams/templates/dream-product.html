@@ -10,8 +10,8 @@
                 <p class="product-description">{{product.description}}</p>
                 <p class="product-price">{{product.price}}</p>
                 <p>{{product.quantity}}</p>
+                <button ng-click="addDreamToCart(currentUser.id, product)">Add to Cart</button>
             </div>
         </div>
     </div>
-<!--     <button ng-click="addDreamToCart({sessionId: currentUsersession.product.id})">Add to Cart</button> -->
 </section>
