@@ -39,7 +39,7 @@ app.controller('DreamsCtrl', function($scope, DreamsFactory) {
     
     DreamsFactory.getAll().then(function(dreams) {
         dreams.forEach(function(dream){
-            dream.imageUrl = 'https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png';
+            dream.imageUrl = '/images/' + dream.photo + '.jpg';
         });
         $scope.dreams = dreams;
     });
