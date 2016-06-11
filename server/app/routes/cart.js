@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
+var Cart = require('../../db').model('orders');
 
-var Cart = require('../../db').model('cart');
 module.exports = router;
 
 router.post('/:id', function(req, res, next) {
@@ -20,15 +20,15 @@ router.post('/:id', function(req, res, next) {
                 });
             } else {
                 updatedCart = theUsersCart;
-                console.log("WHEN CART IS FOUND", updatedCart)
+                console.log("WHEN CART IS FOUND", updatedCart);
             }
             return updatedCart;
         })
         .then(function(cart) {
             cart.addDream(req.body.id);
-            cart.getTotal.then(function(total){
+            cart.getTotal.then(function(total) {
                 cart.total = total;
-                res.json({cart, total});
+                res.json({ cart, total });
             });
         });
 });
