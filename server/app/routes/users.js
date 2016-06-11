@@ -16,6 +16,35 @@ var ensureAuthenticated = function(req, res, next) {
     }
 };
 
+
+// Show all users to admin
+router.get('/', /*ensureAuthenticated, */ function(req, res, next) {
+    console.log("before findAll in user");
+    //if(/*currentUser === 'admin'*/){
+    User.findAll()
+        .then(function(allUsersForAdmin) {
+            res.json(allUsersForAdmin);
+        })
+        .catch(next);
+    // }
+});
+
+// Show user their own user page
+router.get('/:id', function(req, res, next) {
+    console.log("before findOne in user id");
+    // if currentUser.id === req.params.id
+    User.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(function(theCurrentUser) {
+            res.json(theCurrentUser);
+
+        })
+
+})
+
 router.param('id', function(req, res, next, id) {
     User.findById(id)
         .then(function(user) {
@@ -52,6 +81,36 @@ router.get('/:id', function(req, res, next) {
     // }
 });
 
+
+// Create ONE user
+router.post('/', function(req, res, next) {
+    User.create(req.body)
+        .then(function(newUserCreated) {
+            res.status(201).send(newUserCreated); 
+        })
+        .catch(next);
+});
+
+
+    // Update ONE user 
+    router.put('/:id', function(req, res, next) {
+        //if (req.user.isAdmin || req.user === req.params.id) {
+        User.findById(req.params.id)
+            .then(function(existingUser) {
+                return existingUser.update(req.body);
+            })
+            .then(function(userUpdated) {
+                res.json(userUpdated);
+            })
+            .then(function(serverResponse) {
+                res.sendStatus(201);
+            })
+            .catch(next);
+        // } else {
+        //     res.sendStatus(403);
+        // }
+    });
+
 // Create ONE user -signup!
 
 
@@ -74,6 +133,7 @@ router.put('/:id', function(req, res, next) {
     //     res.sendStatus(403);
     // }
 });
+
 
 // Delete ONE user
 router.delete('/:id', function(req, res, next) {
