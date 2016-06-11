@@ -3,7 +3,9 @@
         <div class="col-md-6">
           
             <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-
+                <p><social-button provider-name="Google"></social-button></p>
+                <p><social-button provider-name="Twitter"></social-button></p>
+                <p><social-button provider-name="Facebook"></social-button></p>
                 <alert type="danger" ng-show="errorLogin">
                     {{ errorLogin }}
                 </alert>
