@@ -14,6 +14,7 @@ app.factory('DreamsFactory', function($http) {
                 return dreams.data;
             });
     };
+    
     DreamsFactory.getUniqueCategories = function() {
         return $http.get('api/dreams')
             .then(function(dreams) {

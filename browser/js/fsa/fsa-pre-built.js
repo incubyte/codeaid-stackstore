@@ -34,7 +34,7 @@
         return {
             responseError: function(response) {
                 $rootScope.$broadcast(statusDict[response.status], response);
-                return $q.reject(response)
+                return $q.reject(response);
             }
         };
     });
@@ -100,15 +100,15 @@
                     console.log("I CAUGHT THE POST REQUEST ERROR");
                     return $q.reject({ message: 'Invalid signup credentials.' });
                 });
-        }
+        };
 
         this.login = function(credentials) {
             //console.log("POTUS in the house", credentials);
             return $http.post('/login', credentials)
-                .then(function(response){
-                    console.log(response)
+                .then(function(response) {
+                    console.log(response);
                     onSuccessfulLogin(response);
-            })
+                })
                 .catch(function() {
                     console.log("THIS MESSAGE IS FROM AUTHSERVICE");
                     return $q.reject({ message: 'Invalid login credentials.' });
