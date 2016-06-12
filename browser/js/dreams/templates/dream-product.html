@@ -10,7 +10,7 @@
                 <p class="product-description">{{product.description}}</p>
                 <p class="product-price">{{product.price}}</p>
                 <p>{{product.quantity}}</p>
-                <button ng-click="addDreamToCart(currentUser.id, product)">Add to Cart</button>
+                <button ng-click="addDreamToCart(user.id, product)">Add to Cart</button>
             </div>
             <div class="alert" ng-show="product.quantity === 0"> Out of Stock</div>
         </div>
