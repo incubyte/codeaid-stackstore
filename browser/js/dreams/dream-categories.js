@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('Cat', {
-        url: '/api/dreams/category/:category',
+        url: '/dreams/category/:category',
         controller: 'CategoryCtrl',
         templateUrl: 'js/dreams/templates/dream-categories.html',
         resolve: {
