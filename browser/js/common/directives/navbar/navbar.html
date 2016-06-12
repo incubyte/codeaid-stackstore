@@ -9,15 +9,17 @@
             </li>
         </ul>
         <h1>Dream a Little Dream</h1>
-        <button class="btn shopping-cart-button">
+        <button class="btn shopping-cart-button" ui-sref="cart({id: user.id})">
             <span class="glyphicon glyphicon-shopping-cart"></span>
         </button>
         <button ng-show="!user" ui-sref="login" class="btn login-button">
             <span class="glyphicon glyphicon-log-in"></span> Login
         </button>
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
+            <div>
+                <span>Welcome, {{ user.name }}!</span>
+                <a ng-click="logout()">Logout</a>
+            </div>
         </div>
     </div>
 </nav>

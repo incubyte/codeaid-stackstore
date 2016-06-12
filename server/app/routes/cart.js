@@ -19,11 +19,11 @@ router.post('/:id', function(req, res, next) {
                 .then(function() {
 
                     Dream.findById(req.body.id)
-                    .then(function(dream){
-                        dream.update({
-                            quantity: Number(req.body.quantity) - 1
+                        .then(function(dream) {
+                            dream.update({
+                                quantity: Number(req.body.quantity) - 1
+                            });
                         });
-                    });
 
                     return user.getDreams().then(function(dreams) {
                         return dreams.reduce(function(a, b) {
@@ -39,13 +39,16 @@ router.post('/:id', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    Cart.findOne({
-            where: {
-                userId: req.params.id
-            }
+    User.findById(req.params.id)
+        .then(function(user) {
+            console.log("USER", user);
+            return user.getDreams();
         })
-        .then(function(theUsersCart) {
-            res.json(theUsersCart);
-        })
-        .catch(next);
+        .then(function(dreams) {
+            console.log("USERS DREAMS", dreams);
+            var total = dreams.reduce(function(a,b){
+                return a + b.price
+            }, 0);
+            res.json({dreams: dreams, total: total});
+        });
 });

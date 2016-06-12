@@ -27,8 +27,10 @@ app.factory('ProductFactory', function($http, $state) {
 
 app.controller('ProductCtrl', function($scope, $http, productListing, $rootScope, ProductFactory) {
     $scope.product = productListing;
-    $rootScope.currentUser;
     // $scope.numItems = 0;
+    $scope.$on('user', function(user){
+        $scope.user = user;
+    });
     function generateUser() {
         var email = "";
         var password = "";
@@ -46,21 +48,21 @@ app.controller('ProductCtrl', function($scope, $http, productListing, $rootScope
         return $http.post('/api/users', generateUser())
             //make sure the req.body randomly generates an email and password
             .then(function(user) {
-                $rootScope.currentUser = user.data;
+                $scope.user = user.data;
                 return user.data;
             });
     }
 
     function getUser() {
-        return $http.get('/api/users/' + $rootScope.currentUser.id);
+        return $http.get('/api/users/' + $rootScope.user.id);
     }
 
     $scope.addDreamToCart = function(userId, product) {
         var user;
-        if (!$rootScope.currentUser) user = addUser();
+        if (!$scope.user) user = addUser();
         else user = getUser();
         user.then(function(user) {
-            return $http.post('/api/cart/' + $rootScope.currentUser.id, product)
+            return $http.post('/api/cart/' + $scope.user.id, product)
                 .then(function(userData) {
                     console.log("SUCCESS!!!!!");
                     console.log("USER CART", userData.data);
