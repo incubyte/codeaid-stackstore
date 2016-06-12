@@ -19,7 +19,7 @@ router.get('/:id', function(req, res, next) {
             where: { id: req.params.id }
         })
         .then(function(theDream) {
-            res.json({dream: theDream, sessionId: req.session.id});
+            res.json(theDream);
         })
         .catch(next);
 });

@@ -3,34 +3,55 @@
 const express = require('express');
 const router = express.Router();
 var Cart = require('../../db').model('orders');
+var User = require('../../db').model('user');
 
 module.exports = router;
 
 router.post('/:id', function(req, res, next) {
-    Cart.findOne({
+    User.findOne({
             where: {
-                userId: req.params.id
+                id: req.params.id
             }
         })
-        .then(function(theUsersCart) {
-            var updatedCart;
-            if (!theUsersCart) {
-                updatedCart = Cart.create({
-                    userId: req.params.id
+        .then(function(user) {
+            user.addDream(req.body.id)
+                .then(function(addedDream) {
+                    return user.getDreams().then(function(dreams) {
+                        return dreams.reduce(function(a, b) {
+                            return a + b.price;
+                        }, 0)
+                    });
+
+                })
+                .then(function(total) {
+                    res.json({ user: user, total: total });
                 });
-            } else {
-                updatedCart = theUsersCart;
-                console.log("WHEN CART IS FOUND", updatedCart);
-            }
-            return updatedCart;
         })
-        .then(function(cart) {
-            cart.addDream(req.body.id);
-            cart.getTotal.then(function(total) {
-                cart.total = total;
-                res.json({ cart, total });
-            });
-        });
+
+    // Cart.findOne({
+    //         where: {
+    //             userId: req.params.id
+    //         }
+    //     })
+    //     .then(function(theUsersCart) {
+    //         var updatedCart;
+    //         if (!theUsersCart) {
+    //             updatedCart = Cart.create({
+    //                 userId: req.params.id
+    //             });
+    //         } else {
+    //             updatedCart = theUsersCart;
+    //         }
+    //         return updatedCart;
+    //     })
+    //     .then(function(cart) {
+    //         cart.addDream(req.body.id)
+    //         .then(function(addedDream){
+    //             cart.getTotal().then(function(total){
+    //                 res.json({cart, total});
+    //             })
+    //         });
+    //     });
 });
 
 router.get('/:id', function(req, res, next) {
