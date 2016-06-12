@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('product', {
-        url: '/api/dreams/:id',
+        url: '/dreams/:id',
         controller: 'ProductCtrl',
         templateUrl: 'js/dreams/templates/dream-product.html',
         resolve: {
