@@ -1,6 +1,6 @@
 app.config(function($stateProvider){
 	$stateProvider.state('reviews', {
-		url: '/api/dreams/:id/reviews',
+		url: '/dreams/:id/reviews',
 		controller: 'ReviewCtrl',
 		templateUrl: 'js/review/review.html',
 		resolve: {
