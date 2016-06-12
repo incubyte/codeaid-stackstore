@@ -25,7 +25,7 @@ app.factory('ProductFactory', function($http, $state) {
 });
 
 
-app.controller('ProductCtrl', function($scope, $http, productListing, $rootScope) {
+app.controller('ProductCtrl', function($scope, $http, productListing, $rootScope, ProductFactory) {
     $scope.product = productListing;
     $rootScope.currentUser;
     // $scope.numItems = 0;
@@ -60,11 +60,14 @@ app.controller('ProductCtrl', function($scope, $http, productListing, $rootScope
         if (!$rootScope.currentUser) user = addUser();
         else user = getUser();
         user.then(function(user) {
-            return $http.post('/api/cart/' + $rootScope.currentUser.id, $scope.product)
-                .then(function(addedToCart) {
+            return $http.post('/api/cart/' + $rootScope.currentUser.id, product)
+                .then(function(userData) {
                     console.log("SUCCESS!!!!!");
-                    console.log("ADDED PRODUCT", addedToCart.data);
-                    return addedToCart.data;
+                    console.log("USER CART", userData.data);
+                    return userData.data;
+                })
+                .then(function(){
+                    product.quantity--;
                 });
         });
     }

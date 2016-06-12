@@ -11,33 +11,38 @@ var Sequelize = require('sequelize');
 
 var Dream = function(db) {
     return db.define('dream', {
-            title: {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
-            description: {
-                type: Sequelize.TEXT,
-                allowNull: false
-            },
-            price: {
-                type: Sequelize.FLOAT,
-                allowNull: false
-            },
-            quantity: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            category: {
-                type: Sequelize.ARRAY(Sequelize.STRING),
-                allowNull: false
-            },
-            photo: {
-                type: Sequelize.STRING,
-                allowNull: false
-                    //defaultValue: placeholder
+        title: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        description: {
+            type: Sequelize.TEXT,
+            allowNull: false
+        },
+        price: {
+            type: Sequelize.FLOAT,
+            allowNull: false
+        },
+        quantity: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        category: {
+            type: Sequelize.ARRAY(Sequelize.STRING),
+            allowNull: false
+        },
+        photo: {
+            type: Sequelize.STRING,
+            allowNull: false
+                //defaultValue: placeholder
+        }
+    }, {
+        instanceMethods: {
+            decreaseQuantityByOne: function() {
+                this.quantity--;
             }
         }
-    )
+    });
 }
 
 module.exports = Dream;

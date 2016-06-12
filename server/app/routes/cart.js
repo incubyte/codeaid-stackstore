@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 var Cart = require('../../db').model('orders');
 var User = require('../../db').model('user');
+var Dream = require('../../db').model('dream');
 
 module.exports = router;
 
@@ -15,7 +16,15 @@ router.post('/:id', function(req, res, next) {
         })
         .then(function(user) {
             user.addDream(req.body.id)
-                .then(function(addedDream) {
+                .then(function() {
+
+                    Dream.findById(req.body.id)
+                    .then(function(dream){
+                        dream.update({
+                            quantity: Number(req.body.quantity) - 1
+                        });
+                    });
+
                     return user.getDreams().then(function(dreams) {
                         return dreams.reduce(function(a, b) {
                             return a + b.price;
@@ -27,31 +36,6 @@ router.post('/:id', function(req, res, next) {
                     res.json({ user: user, total: total });
                 });
         })
-
-    // Cart.findOne({
-    //         where: {
-    //             userId: req.params.id
-    //         }
-    //     })
-    //     .then(function(theUsersCart) {
-    //         var updatedCart;
-    //         if (!theUsersCart) {
-    //             updatedCart = Cart.create({
-    //                 userId: req.params.id
-    //             });
-    //         } else {
-    //             updatedCart = theUsersCart;
-    //         }
-    //         return updatedCart;
-    //     })
-    //     .then(function(cart) {
-    //         cart.addDream(req.body.id)
-    //         .then(function(addedDream){
-    //             cart.getTotal().then(function(total){
-    //                 res.json({cart, total});
-    //             })
-    //         });
-    //     });
 });
 
 router.get('/:id', function(req, res, next) {
