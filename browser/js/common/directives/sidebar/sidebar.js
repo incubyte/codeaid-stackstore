@@ -2,7 +2,7 @@ app.directive('sidebar', function($rootScope, $state) {
 	return {
 		restrict: 'E',
 		scope: {},
-		templateURL: 'js/common/directives/sidebar/sidebar.html',
+		templateUrl: 'js/common/directives/sidebar/sidebar.html',
 		link: function(scope) {
 
 			scope.items = [
