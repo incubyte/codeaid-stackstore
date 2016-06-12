@@ -14,6 +14,7 @@ app.factory('DreamsFactory', function($http) {
                 return dreams.data;
             });
     };
+    
     DreamsFactory.getUniqueCategories = function() {
         return $http.get('api/dreams')
             .then(function(dreams) {
@@ -32,20 +33,20 @@ app.factory('DreamsFactory', function($http) {
 
     return DreamsFactory;
 
-})
+});
 
 app.controller('DreamsCtrl', function($scope, DreamsFactory) {
     $scope.dreams;
 
-    DreamsFactory.getAll()
-        .then(function(dreams) {
-            dreams.forEach(function(dream) {
-                dream.imageUrl = 'https://jlau-bucket-1.s3.amazonaws.com/uploads/topic/image/42/fullstack.png';
-            })
-            $scope.dreams = dreams;
+    DreamsFactory.getAll().then(function(dreams) {
+        dreams.forEach(function(dream) {
+            dream.imageUrl = '/images/' + dream.photo + '.jpg';
         });
+        $scope.dreams = dreams;
+    });
     DreamsFactory.getUniqueCategories()
         .then(function(categories) {
             $scope.categories = categories;
         });
+
 });

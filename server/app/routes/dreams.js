@@ -21,7 +21,7 @@ router.get('/:id', function(req, res, next) {
             where: { id: req.params.id }
         })
         .then(function(theDream) {
-            res.json(theDream);
+            res.json({dream: theDream, sessionId: req.session.id});
         })
         .catch(next);
 });
@@ -33,8 +33,6 @@ router.get('/category/:category', function(req, res, next) {
                     $contains: [req.params.category]
                 }
             }
-
-
         })
         .then(function(dreams) {
             res.json(dreams);

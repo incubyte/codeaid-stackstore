@@ -1,23 +1,23 @@
-'use strict';
-var crypto = require('crypto');
-var _ = require('lodash');
-var Sequelize = require('sequelize');
-const db = require('../_db');
+// 'use strict';
+// var crypto = require('crypto');
+// var _ = require('lodash');
+// var Sequelize = require('sequelize');
+// //var db = require('../_db');
 
-//cart model has array of dreamIds, total price
+// //cart model has array of dreamIds, total price
 
-
-
-
-module.exports = db.define('cart', {
-        dreams: Sequelize.ARRAY(Sequelize.INTEGER),
-        total: Sequelize.FLOAT
-    }, {
-        classMethods: {
-            associate: function(models) {
-                Cart.belongsTo(models.User, { foreignKey: 'userId' });
-            }
-        }
-    })
-    // Cart.belongsTo(User(db));
-
+// module.exports = function(db) {
+//     return db.define('cart', {}, {
+//         getterMethods: {
+//             getTotal: function() {
+//                 return this.getDreams()
+//                     .then(function(dreams) {
+//                         return dreams.reduce(function(a, b) {
+//                             console.log(a, b);
+//                             return a + b.price;
+//                         }, 0);
+//                     });
+//             }
+//         }
+//     });
+// };

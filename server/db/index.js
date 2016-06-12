@@ -2,16 +2,17 @@
 var db = require('./_db');
 module.exports = db;
 
-var User = require('./models/user');
-var Dream = require('./models/dream');
-var Cart = require('./models/cart');
-var Review = require('./models/reviews');
-var Order = require('./models/orders');
+var User = require('./models/user')(db);
+var Dream = require('./models/dream')(db);
+//var Cart = require('./models/cart')(db);
+var Review = require('./models/reviews')(db);
+var Order = require('./models/orders')(db);
 
-Cart.belongsTo(User);
-Review.belongsTo(User);
+User.hasMany(Order);
+User.hasMany(Review);
 Order.belongsTo(User);
+Review.belongsTo(User);
+Review.belongsTo(Dream);
+Dream.hasMany(Review);
 
-// console.log("What's the dealio?", Cart.associations);
-
-
+Order.belongsToMany(Dream, { through: 'DreamOrder'});

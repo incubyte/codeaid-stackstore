@@ -1,0 +1,17 @@
+<section id="product">
+    <div class="product-listing">
+        <!-- Equivalent of container -->
+        <div class="row">
+            <div class="col-lg-8">
+                <p class="product-title">{{product.title}}</p>
+                <img ng-src="{{product.photo}}">
+            </div>
+            <div class="col-lg-4">
+                <p class="product-description">{{product.description}}</p>
+                <p class="product-price">{{product.price}}</p>
+                <p>{{product.quantity}}</p>
+                <button ng-click="addDreamToCart(currentUser.id, product)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</section>

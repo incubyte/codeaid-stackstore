@@ -3,7 +3,7 @@
 
 <head>
     <base href="/" />
-    <title>Fullstack Academy Generated Application</title>
+    <title>Dream a Little Dream</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
@@ -18,13 +18,20 @@
 
 <body ng-app="FullstackGeneratedApp">
     <navbar></navbar>
-    <div id="sidebar" ng-Controller="DreamsCtrl">
-        <section ng-repeat="cat in categories">
-            <a ui-sref="Cat({category: cat})">{{cat | uppercase}}</a>
-            <!-- on click of the category, go to category page containing all the dreams -->
-        </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2" id="sidebar" ng-Controller="DreamsCtrl">
+                <section ng-repeat="cat in categories">
+                    <a ui-sref="Cat({category: cat})">{{cat | uppercase}}</a>
+                    <!-- on click of the category, go to category page containing all the dreams -->
+                </section>
+            </div>
+            <div id="storeName">
+                <h3><em>A Dream is a Wish Your Heart Makes...</em></h3>
+            </div>
+            <div id="main" ui-view></div>
+        </div>
     </div>
-    <div id="main" ui-view></div>
 </body>
 
 </html>
