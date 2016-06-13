@@ -16,3 +16,4 @@ Review.belongsTo(Dream);
 Dream.hasMany(Review);
 
 Order.belongsToMany(Dream, { through: 'DreamOrder'});
+User.belongsToMany(Dream, {through: 'DreamUser'});

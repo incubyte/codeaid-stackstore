@@ -3,44 +3,52 @@
 const express = require('express');
 const router = express.Router();
 var Cart = require('../../db').model('orders');
+var User = require('../../db').model('user');
+var Dream = require('../../db').model('dream');
 
 module.exports = router;
 
 router.post('/:id', function(req, res, next) {
-    Cart.findOne({
+    User.findOne({
             where: {
-                userId: req.params.id
+                id: req.params.id
             }
         })
-        .then(function(theUsersCart) {
-            var updatedCart;
-            if (!theUsersCart) {
-                updatedCart = Cart.create({
-                    userId: req.params.id
+        .then(function(user) {
+            user.addDream(req.body.id)
+                .then(function() {
+
+                    Dream.findById(req.body.id)
+                        .then(function(dream) {
+                            dream.update({
+                                quantity: Number(req.body.quantity) - 1
+                            });
+                        });
+
+                    return user.getDreams().then(function(dreams) {
+                        return dreams.reduce(function(a, b) {
+                            return a + b.price;
+                        }, 0)
+                    });
+
+                })
+                .then(function(total) {
+                    res.json({ user: user, total: total });
                 });
-            } else {
-                updatedCart = theUsersCart;
-                console.log("WHEN CART IS FOUND", updatedCart);
-            }
-            return updatedCart;
         })
-        .then(function(cart) {
-            cart.addDream(req.body.id);
-            cart.getTotal.then(function(total) {
-                cart.total = total;
-                res.json({ cart, total });
-            });
-        });
 });
 
 router.get('/:id', function(req, res, next) {
-    Cart.findOne({
-            where: {
-                userId: req.params.id
-            }
+    User.findById(req.params.id)
+        .then(function(user) {
+            console.log("USER", user);
+            return user.getDreams();
         })
-        .then(function(theUsersCart) {
-            res.json(theUsersCart);
-        })
-        .catch(next);
+        .then(function(dreams) {
+            console.log("USERS DREAMS", dreams);
+            var total = dreams.reduce(function(a,b){
+                return a + b.price
+            }, 0);
+            res.json({dreams: dreams, total: total});
+        });
 });
