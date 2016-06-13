@@ -5,6 +5,7 @@ const router = express.Router();
 
 var Dream = require('../../db').model('dream');
 var Review = require('../../db').model('reviews');
+var User = require('../../db').model('user');
 
 module.exports = router;
 
@@ -40,14 +41,36 @@ router.get('/category/:category', function(req, res, next) {
         .catch(next);
 });
 
-router.get('/:id/reviews', function(req, res, next) {
+router.get('/:id/reviews', function(req, res, next) { //get all reviews for a dream
     Review.findAll({
-        where: {
-            productId: req.params.id
-        }
-    })
-    .then(function(reviews) {
-        res.json(reviews)
-    })
-    .catch(next)
+            where: {
+                dreamId: +req.params.id
+            }
+        })
+        .then(function(reviews) {
+            res.json(reviews)
+        })
+        .catch(next)
+})
+
+router.post('/:id/reviews', function(req, res, next) { //get all reviews for a dream
+    console.log("Here is my query: ", req.body)
+    Review.create({
+            title: req.body.title,
+            text: req.body.text
+        })
+        .then(function(review) {
+            User.findById(req.body.userId)
+                .then(function(user) {
+                    review.setUser(user);
+                })
+
+            Dream.findById(req.body.dreamId)
+                .then(function(dream) {
+                    review.setDream(dream);
+                })
+
+
+        })
+        .catch(next)
 })
