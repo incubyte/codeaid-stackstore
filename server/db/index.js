@@ -11,11 +11,11 @@ var Order = require('./models/orders')(db);
 User.hasMany(Order);
 User.hasMany(Review);
 Order.belongsTo(User);
+Order.belongsTo(Dream);
 Review.belongsTo(User);
 Review.belongsTo(Dream);
 Dream.hasMany(Review);
 
-Order.belongsToMany(Dream, { through: 'DreamOrder'});
+//Order.belongsToMany(Dream, { through: 'DreamOrder'});
 User.belongsToMany(Dream, {through: 'DreamUser'});
 
-Order.belongsTo(Dream);

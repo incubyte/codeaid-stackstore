@@ -15,10 +15,12 @@ var Order = function(db) {
             type: Sequelize.INTEGER
         },
         quantity: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         total: {
-            type: Sequelize.DECIMAL(10, 2)
+            type: Sequelize.DECIMAL(10, 2),
+            defaultValue: 0
         }
     }
     // , {

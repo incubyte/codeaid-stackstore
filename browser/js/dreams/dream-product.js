@@ -64,11 +64,12 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
 
     $scope.addDreamToCart = function(userId, product) {
         if (!$scope.user) addUser();
+        console.log("PRODUCT", product, "AMOUNT", $scope.amount);
         return $http.post('/api/cart/' + $scope.user.id, {product: product, amount: $scope.amount})
             .then(function(userInfo) {
                 return userInfo.data;
             })
-            .then(function() {
+            .then(function(userInfo) {
                 product.quantity -= $scope.amount;
             });
     }

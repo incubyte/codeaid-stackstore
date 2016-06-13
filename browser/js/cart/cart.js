@@ -23,6 +23,7 @@ app.factory('CartFactory', function($http) {
     CartFactory.getItems = function(id) {
         return $http.get('/api/cart/' + id)
             .then(function(items) {
+                console.log("items", items)
                 return items.data;
             });
     }
