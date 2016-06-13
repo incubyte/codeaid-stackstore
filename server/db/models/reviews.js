@@ -7,7 +7,10 @@ var Sequelize = require('sequelize');
 var Review = function(db) {
     return db.define('reviews', {
         title: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            validate:{
+            	max: 25
+            }
         },
         stars: {
             type: Sequelize.INTEGER,
@@ -16,7 +19,7 @@ var Review = function(db) {
             }
         },
         text: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT("medium")
         },
         helpful: {
             type: Sequelize.BOOLEAN
