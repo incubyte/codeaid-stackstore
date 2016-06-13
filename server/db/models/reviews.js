@@ -16,7 +16,7 @@ var Review = function(db) {
             }
         },
         text: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT(medium)
         },
         helpful: {
             type: Sequelize.BOOLEAN
