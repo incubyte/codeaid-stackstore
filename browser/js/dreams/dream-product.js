@@ -32,6 +32,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     $scope.product = productListing;
     $scope.user = null;
     $scope.reviews = dreamReviews;
+    $scope.showForm = false;
 
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
@@ -89,5 +90,9 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             .then(function() {
                 product.quantity--;
             });
+    }
+
+    $scope.toggle = function() {
+        $scope.showForm = !$scope.showForm
     }
 });
