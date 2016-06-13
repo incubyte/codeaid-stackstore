@@ -25,7 +25,7 @@ app.factory('ProductFactory', function($http, $state) {
 });
 
 
-app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService) {
+app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory) {
     $scope.product = productListing;
     $scope.user = null;
     var setUser = function() {
@@ -33,6 +33,12 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             $scope.user = user;
         });
     };
+
+    //console.log("I'm the dream Id ", $scope.product.id)
+    $scope.reviews = ReviewFactory.getReviews($scope.product.id);
+
+
+
 
     setUser();
 
@@ -58,9 +64,18 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             });
     }
 
-    // function getUser() {
-    //     return $http.get('/api/users/' + $scope.user.id);
-    // }
+    $scope.sendReview = function(review) {
+        $scope.errorReview = null;
+        review.dreamId = $scope.product.id;
+        review.userId = $scope.user.id;
+
+        ReviewFactory.addReview(review)
+            .then(function() {
+                console.log("added a review from " + review.userId);
+            }).catch(function() {
+                $scope.errorLogin = 'Invalid login credentials.';
+            });
+    }
 
     $scope.addDreamToCart = function(userId, product) {
         if (!$scope.user) addUser();
