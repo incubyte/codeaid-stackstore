@@ -14,28 +14,26 @@ var Order = function(db) {
             // confirmation number
             type: Sequelize.INTEGER
         },
+        quantity: {
+            type: Sequelize.INTEGER
+        },
         total: {
             type: Sequelize.DECIMAL(10, 2)
-                // ,
-                // get: function(){
-                //     return this.getDataValue('total');
-                // },
-                // set: function(price){
-                //     return this.setDataValue('total', this.getDataValue('total') + price);
-                // }
         }
-    }, {
-        instanceMethods: {
-            getTotal: function() {
-                return this.getDreams()
-                    .then(function(dreams) {
-                        return dreams.reduce(function(a, b) {
-                            return a + b.price;
-                        }, 0);
-                    });
-            }
-        }
-    });
+    }
+    // , {
+    //     instanceMethods: {
+    //         getTotal: function() {
+    //             return this.getDreams()
+    //                 .then(function(dreams) {
+    //                     return dreams.reduce(function(a, b) {
+    //                         return a + b.price;
+    //                     }, 0);
+    //                 });
+    //         }
+    //     }
+    // }
+    );
 };
 
 module.exports = Order;

@@ -23,7 +23,7 @@ var Dream = function(db) {
             type: Sequelize.FLOAT,
             allowNull: false
         },
-        quantity: {
+        quantity: { //how many dreams are in stock
             type: Sequelize.INTEGER,
             allowNull: false
         },
@@ -36,13 +36,15 @@ var Dream = function(db) {
             allowNull: false
                 //defaultValue: placeholder
         }
-    }, {
-        instanceMethods: {
-            decreaseQuantityByOne: function() {
-                this.quantity--;
-            }
-        }
-    });
+    }
+    // , {
+    //     instanceMethods: {
+    //         decreaseQuantityByOne: function() {
+    //             this.quantity--;
+    //         }
+    //     }
+    // }
+    );
 }
 
 module.exports = Dream;

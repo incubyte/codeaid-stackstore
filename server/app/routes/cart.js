@@ -15,37 +15,59 @@ router.post('/:id', function(req, res, next) {
             }
         })
         .then(function(user) {
-            user.addDream(req.body.id)
+            Cart.findOne({
+                where: {
+                    userId: user.id
+                }
+            })
+            .then(function(cart){
+                if (!cart) {
+                    Cart.create({
+                        
+                    })
+                }
+            })
+            return user.addDream(req.body.product.id)
                 .then(function() {
 
-                    Dream.findById(req.body.id)
+                    return Dream.findById(req.body.product.id)
                         .then(function(dream) {
                             dream.update({
-                                quantity: Number(req.body.quantity) - 1
+                                quantity: Number(req.body.product.quantity) - req.body.amount
+                            });
+                        })
+                        .then(function(dream){
+                            return user.getDreams().then(function(dreams){
+                                return dreams.reduce(function(a,b){
+                                    if (b === dream) return a + b.price*req.body.amount;
+                                    else return a + b.price;
+                                }, 0);
                             });
                         });
 
-                    return user.getDreams().then(function(dreams) {
-                        return dreams.reduce(function(a, b) {
-                            return a + b.price;
-                        }, 0)
-                    });
+                    // return user.getDreams().then(function(dreams) {
+                    //     return dreams.reduce(function(a, b) {
+                    //         return a + b.price;
+                    //     }, 0)
+                    // });
 
                 })
                 .then(function(total) {
-                    res.json({ user: user, total: total });
+                    res.json({ user: user, total: total, amount: req.body.amount});
                 });
         })
+});
+
+router.put('/:id', function(req, res, next){
+
 });
 
 router.get('/:id', function(req, res, next) {
     User.findById(req.params.id)
         .then(function(user) {
-            console.log("USER", user);
             return user.getDreams();
         })
         .then(function(dreams) {
-            console.log("USERS DREAMS", dreams);
             var total = dreams.reduce(function(a,b){
                 return a + b.price
             }, 0);

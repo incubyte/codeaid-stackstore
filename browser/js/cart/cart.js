@@ -8,26 +8,43 @@ app.config(function($stateProvider) {
         resolve: {
             theCart: function(CartFactory, $stateParams) {
                 return CartFactory.getItems($stateParams.id);
+            },
+            theUser: function(CartFactory, $stateParams) {
+                return CartFactory.getUser($stateParams.id);
             }
         }
     });
 });
 
 app.factory('CartFactory', function($http) {
+
     var CartFactory = {};
+
     CartFactory.getItems = function(id) {
         return $http.get('/api/cart/' + id)
             .then(function(items) {
-            	console.log(items.data);
                 return items.data;
             });
     }
+
+    CartFactory.getUser = function(id){
+        return $http.get('/api/users/' + id)
+        .then(function(user){
+            return user.data;
+        });
+    }
+
     return CartFactory;
+
 });
 
-app.controller('CartCtrl', function($scope, theCart){
-	console.log("HELLLLLOOOOO CARRTTT");
-	console.log(theCart.dreams)
+app.controller('CartCtrl', function($scope, theCart, $http, theUser){
+    
 	$scope.cart = theCart.dreams;
 	$scope.total = theCart.total;
+    $scope.user = theUser;
+
+    $scope.removeItem = function(id, item){
+        $http.put('/api/cart/' + id, item)
+    }
 });
