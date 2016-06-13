@@ -16,14 +16,20 @@ var Order = function(db) {
         },
         total: {
             type: Sequelize.DECIMAL(10, 2)
+                // ,
+                // get: function(){
+                //     return this.getDataValue('total');
+                // },
+                // set: function(price){
+                //     return this.setDataValue('total', this.getDataValue('total') + price);
+                // }
         }
     }, {
-        getterMethods: {
+        instanceMethods: {
             getTotal: function() {
                 return this.getDreams()
                     .then(function(dreams) {
                         return dreams.reduce(function(a, b) {
-                            console.log(a, b);
                             return a + b.price;
                         }, 0);
                     });
