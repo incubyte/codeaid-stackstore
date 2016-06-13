@@ -1,0 +1,11 @@
+<div>
+<p>List of Items in Cart</p>
+<div ng-repeat="item in cart">
+    <img ng-src="{{item.photo}}">
+    <div>
+        <span>Title: {{item.title}}</span>
+        <span>Price: {{item.price}}</span>
+    </div>
+</div>
+<div>Total: {{total}}</div>
+</div>
