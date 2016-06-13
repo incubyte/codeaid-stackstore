@@ -44,10 +44,11 @@ router.get('/category/:category', function(req, res, next) {
 router.get('/:id/reviews', function(req, res, next) { //get all reviews for a dream
     Review.findAll({
             where: {
-                dreamId: +req.params.id
+                dreamId: req.params.id
             }
         })
         .then(function(reviews) {
+            //console.log("WTF", reviews);
             res.json(reviews)
         })
         .catch(next)

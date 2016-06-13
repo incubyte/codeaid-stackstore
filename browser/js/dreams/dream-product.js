@@ -6,6 +6,9 @@ app.config(function($stateProvider) {
         resolve: {
             productListing: function(ProductFactory, $stateParams) {
                 return ProductFactory.getDream($stateParams.id);
+            },
+            dreamReviews: function(ReviewFactory, productListing){
+                return ReviewFactory.getOneDreamReviews(productListing.id)
             }
         }
     });
@@ -25,22 +28,20 @@ app.factory('ProductFactory', function($http, $state) {
 });
 
 
-app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory) {
+app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory, dreamReviews) {
     $scope.product = productListing;
     $scope.user = null;
+    $scope.reviews = dreamReviews;
+
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
             $scope.user = user;
         });
     };
 
-    //console.log("I'm the dream Id ", $scope.product.id)
-    $scope.reviews = ReviewFactory.getReviews($scope.product.id);
-
-
-
-
     setUser();
+
+    console.log("Where am i??", $scope.reviews)
 
     function generateUser() {
         var email = "";
