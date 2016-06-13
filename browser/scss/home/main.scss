@@ -8,21 +8,17 @@
         margin-top: 40px;
         text-align: center;
     }
-}
-
-.dreamListing {
-    margin: 0 auto 0 10%;
-}
-
-.dream {
-    border: 2px solid black;
-    display: inline-block;
-    margin-right: 2%;
-    margin-top: 2%;
-    width: 30%;
-    padding: 15px;
-    text-align: center;
-    img {
-        padding-bottom: 2%;
+    #mainImages {
+        display: flex;
+        flex-direction: row wrap;
+        .left-image {
+            margin-left: -1%
+        }
+        .center-image {
+            margin: 0 1%;
+        }
+        .right-image {
+            margin-right: -1%;
+        }
     }
 }

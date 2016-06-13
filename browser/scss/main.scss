@@ -57,16 +57,14 @@ body {
 }
 
 #sidebar {
-    border-right: 1px ridge #333333;
-    position: absolute;
-    margin-top: 2%;
-    left: 0;
-    width: 10%;
-    float: left;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 1%;
     text-align: center;
-    line-height: 200%;
+    display: flex;
     a {
         color: black;
+        padding: 0 10%;
     }
 }
 
@@ -74,6 +72,7 @@ body {
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
+@import 'dreams/main';
 @import 'tutorial/main';
 @import 'login/main';
 
