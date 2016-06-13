@@ -18,7 +18,7 @@ app.factory('ProductFactory', function($http, $state) {
         return $http.get('/api/dreams/' + id)
             .then(function(response) {
                 return response.data;
-            })
+            });
     };
 
     return ProductFactory;
@@ -75,18 +75,18 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             }).catch(function() {
                 $scope.errorLogin = 'Invalid login credentials.';
             });
-    }
+    };
 
     $scope.addDreamToCart = function(userId, product) {
         if (!$scope.user) addUser();
-        return $http.post('/api/cart/' + $scope.user.id, product)
+        //console.log("PRODUCT", product, "AMOUNT", $scope.amount);
+        return $http.post('/api/cart/' + $scope.user.id, {product: product, amount: $scope.amount})
             .then(function(userInfo) {
-                console.log("SUCCESS!!!!!");
-                console.log("USER CART", userInfo.data);
+                console.log("user info looks like: ",userInfo.data);
                 return userInfo.data;
             })
-            .then(function() {
-                product.quantity--;
+            .then(function(userInfo) {
+                product.quantity -= $scope.amount;
             });
-    }
+    };
 });
