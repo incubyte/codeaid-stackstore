@@ -18,4 +18,35 @@
             <div class="alert" ng-show="product.quantity === 0"> Out of Stock</div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form id="review-form" name="reviewForm" ng-submit="reviewForm.$valid && sendReview(review)">
+                    <alert type="danger" ng-show="errorReview">
+                        {{ errorReview }}
+                    </alert>
+                    <div class="form-group">
+                        <label for="review-title">Title</label>
+                        <input type="text" ng-model="review.title" class="form-control" id="review-title" placeholder="Enter title">
+                    </div>
+                    <!-- <div>
+                    <select id="stars"> 
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    </select>
+
+                </div> -->
+                    <div class="form-group">
+                        <label for="review-text">Review</label>
+                        <input type="text" ng-model="review.text" class="form-control" id="review-text" placeholder="Please enter your review">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <review-listing the-reviews="reviews"></review-listing>
 </section>
