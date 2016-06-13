@@ -42,30 +42,60 @@ var seedUsers = function() {
 
 };
 
+
 var seedDreams = function() {
 
     var dreams = [{
-        title: 'Hopes and Dreams',
-        description: 'Everything you want',
-        price: 12.33,
+        title: 'The Great Escape',
+        description: 'Escape to a fantasy land of your choice',
+        price: 750.00,
         quantity: 1,
-        category: ["hi", "bye"],
-        photo: "I'm a photo :)"
+        category: ["Classic", "Daydream"],
+        photo: "/images/dreamdoor3.jpg"
     }, {
         title: 'Dreams Come True',
         description: 'But only sometimes',
-        price: 85.00,
+        price: 850.00,
         quantity: 12,
-        category: ["LifeGoals", "bye"],
-        photo: "I'm a photo :-|"
+        category: ["Lucid", "Recurring"],
+        photo: "/images/moons.jpg"
     }, {
-        title: "Shoot for the moon; if you miss you'll land amongst the stars.",
-        description: 'Galactic',
-        price: 100.00,
+        title: "Galactic",
+        description: 'Shoot for the moon; if you miss you\'ll land amongst the stars.',
+        price: 1000.00,
         quantity: 12,
-        category: ["hi"],
-        photo: "I'm a photo"
+        category: ["Progressive"],
+        photo: "/images/galaxy.jpg"
+    }, {
+        title: "Ye Olden Days",
+        description: "Want to be da Vinci for a day?",
+        price: 680.00,
+        quantity: 9,
+        category: ["Historical"],
+        photo: "/images/monalisa.jpg"
+    }, {
+        title: "Wild Wild West",
+        description: "Grab a ticket to the guns show",
+        price: 400.00,
+        quantity: 8,
+        category: ["Epic", "Daydream"],
+        photo: "/images/wildwildwest.jpg"
+    }, {
+        title: "How do you solve a problem like Maria?",
+        description: "Gain insight and overcome any problem in your sleep",
+        price: 500.00,
+        quantity: 11,
+        category: ["Signal"],
+        photo: "/images/soundofmusic.jpg"
+    }, {
+        title: "Money, Money, Money",
+        description: "I want to be rich!",
+        price: 700.00,
+        quantity: 15,
+        category: ["Daydream", "Recurring", "Classic"],
+        photo: "/images/monet.jpg"
     }];
+
 
     var creatingDreams = dreams.map(function(dreamObj) {
         return Dream.create(dreamObj);
@@ -75,31 +105,12 @@ var seedDreams = function() {
 
 };
 
-var seedReviews = function() {
-
-    var reviews = [{
-        title: "Perfect sleep accessory!",
-        productId: 1,
-        stars: 5,
-        text: "This is the BEST dream I've ever had. Will definitely buy again!"
-    }];
-
-    var creatingReviews = reviews.map(function(reviewObj) {
-        return Review.create(reviewObj);
-    });
-
-    return Promise.all(creatingReviews);
-}
-
 db.sync({ force: true })
     .then(function() {
         return seedUsers();
     })
     .then(function() {
         return seedDreams();
-    })
-    .then(function() {
-        return seedReviews();
     })
     .then(function() {
         console.log(chalk.green('Seed successful!'));

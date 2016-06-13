@@ -33,8 +33,6 @@ router.get('/category/:category', function(req, res, next) {
                     $contains: [req.params.category]
                 }
             }
-
-
         })
         .then(function(dreams) {
             res.json(dreams);

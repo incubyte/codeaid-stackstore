@@ -1,23 +1,24 @@
 #home {
-  fullstack-logo {
-    padding-top: 30px;
-    width: 150px;
-    margin: 0 auto;
-  }
-  h1 {
-    margin-top: 40px;
-    text-align: center;
-  }
-  .dream {
-  	width: 30%;
-  	height: 50%;
-  	float: right;
-    margin-right: -10px;
-  }
+    fullstack-logo {
+        padding-top: 30px;
+        width: 150px;
+        margin: 0 auto;
+    }
+    h1 {
+        margin-top: 40px;
+        text-align: center;
+    }
+    #mainImages {
+        display: flex;
+        flex-direction: row wrap;
+        .left-image {
+            margin-left: -1%
+        }
+        .center-image {
+            margin: 0 1%;
+        }
+        .right-image {
+            margin-right: -1%;
+        }
+    }
 }
-
-.dreamCat {
-  width: 30%;
-  float: right;
-}
-

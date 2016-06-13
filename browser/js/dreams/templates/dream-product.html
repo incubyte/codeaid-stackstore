@@ -1,0 +1,18 @@
+<section id="product">
+    <div class="product-listing">
+        <!-- Equivalent of container -->
+        <div class="row">
+            <div class="col-lg-8">
+                <p class="product-title">{{product.title}}</p>
+                <img ng-src="{{product.photo}}">
+            </div>
+            <div class="col-lg-4" ng-hide="product.quantity === 0">
+                <p class="product-description">{{product.description}}</p>
+                <p class="product-price">{{product.price}}</p>
+                <p>{{product.quantity}}</p>
+                <button ng-click="addDreamToCart(user.id, product)">Add to Cart</button>
+            </div>
+            <div class="alert" ng-show="product.quantity === 0"> Out of Stock</div>
+        </div>
+    </div>
+</section>

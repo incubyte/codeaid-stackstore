@@ -1,12 +1,10 @@
 <section id="home">
-    <!--    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting> -->
-    <div class="dream-listing">
-        <div class="dream" ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
-            <p>{{dream.title}}</p>
-            <img ng-src="{{dream.imageUrl}}">
-            <p>{{dream.description}}</p>
-            <p>{{dream.price}}</p>
-        </div>
+    <!--     <div class="dream-listing">
+        <dream-list the-dreams="dreams"></dream-list>
+    </div> -->
+    <div id="mainImages">
+    	<img class="left-image" src="./images/home/dream-left.jpg">
+        <img class="center-image" src="./images/home/dream-main.jpg">
+        <img class="right-image" src="./images/home/dream-right.png">
     </div>
 </section>
