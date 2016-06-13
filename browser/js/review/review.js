@@ -27,7 +27,7 @@ app.factory('ReviewFactory', function($http) {
     ReviewFactory.addReview = function(review) {
         var id = +review.dreamId;
 
-        return $http.post('/api/dreams/' + id + '/reviews', review)
+        return $http.post('/api/dreams/' + id + '/reviews', review, { user: review.userId})
             .then(function(newReview) {
                 console.log("Thanks for the review")
             })

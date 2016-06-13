@@ -42,29 +42,29 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
 
     setUser();
 
-    console.log("Where am i??", $scope.reviews)
+    //console.log("Where am i??", $scope.reviews)
 
-    function generateUser() {
-        var email = "";
-        var password = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    // function generateUser() {
+    //     var email = "";
+    //     var password = "";
+    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        for (var i = 0; i < 5; i++) {
-            password += possible.charAt(Math.floor(Math.random() * possible.length));
-            email += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        email += "@email.com";
-        return { email: email, password: password };
-    }
+    //     for (var i = 0; i < 5; i++) {
+    //         password += possible.charAt(Math.floor(Math.random() * possible.length));
+    //         email += possible.charAt(Math.floor(Math.random() * possible.length));
+    //     }
+    //     email += "@email.com";
+    //     return { email: email, password: password };
+    // }
 
-    function addUser() {
-        return $http.post('/api/users', generateUser())
-            //make sure the req.body randomly generates an email and password
-            .then(function(user) {
-                $scope.user = user.data;
-                return user.data;
-            });
-    }
+    // function addUser() {
+    //     return $http.post('/api/users', generateUser())
+    //         //make sure the req.body randomly generates an email and password
+    //         .then(function(user) {
+    //             $scope.user = user.data;
+    //             return user.data;
+    //         });
+    // }
 
     $scope.sendReview = function(review) {
         $scope.errorReview = null;
@@ -75,7 +75,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             .then(function() {
                 console.log("added a review from " + review.userId);
             }).catch(function() {
-                $scope.errorLogin = 'Invalid login credentials.';
+                $scope.errorLogin = 'Invalid review';
             });
     }
 
