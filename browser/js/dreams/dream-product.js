@@ -81,11 +81,11 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
         if (!$scope.user) addUser();
         //console.log("PRODUCT", product, "AMOUNT", $scope.amount);
         return $http.post('/api/cart/' + $scope.user.id, {product: product, amount: $scope.amount})
-            .then(function(userInfo) {
-                console.log("user info looks like: ",userInfo.data);
-                return userInfo.data;
+            .then(function(orderInfo) {
+                console.log("orderr info looks like: ",orderInfo.data);
+                return orderInfo.data;
             })
-            .then(function(userInfo) {
+            .then(function(order) {
                 product.quantity -= $scope.amount;
             });
     };
