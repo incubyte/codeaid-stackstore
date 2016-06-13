@@ -1,11 +1,11 @@
 <div>
 <p>List of Items in Cart</p>
 <div ng-repeat="item in cart">
-    <div>{{item.photo}}</div>
+    <img ng-src="{{item.photo}}">
     <div>
-        <div>{{item.title}}</div>
-        <div>{{item.price}}</div>
+        <span>Title: {{item.title}}</span>
+        <span>Price: {{item.price}}</span>
     </div>
 </div>
-<div>{{total}}</div>
+<div>Total: {{total}}</div>
 </div>

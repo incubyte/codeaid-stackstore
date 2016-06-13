@@ -9,7 +9,7 @@
             </li>
         </ul>
         <h1>Dream a Little Dream</h1>
-        <button class="btn shopping-cart-button" ui-sref="cart({id: user.id})">
+        <button class="btn shopping-cart-button" ng-show='user' ui-sref="cart({id: user.id})">
             <span class="glyphicon glyphicon-shopping-cart"></span>
         </button>
         <button ng-show="!user" ui-sref="login" class="btn login-button">
