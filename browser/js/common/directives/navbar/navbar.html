@@ -8,7 +8,9 @@
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        <h1>Dream a Little Dream</h1>
+        <div class="store-name">
+            <h1>Dream a Little Dream</h1>
+        </div>
         <button class="btn shopping-cart-button" ui-sref="cart({id: user.id})">
             <span class="glyphicon glyphicon-shopping-cart"></span>
         </button>
@@ -19,7 +21,9 @@
             <div>
                 <span>Welcome, {{ user.name }}!</span>
                 <img ng-src="{{user.photo}}" ng-show="user">
-                <a ng-click="logout()">Logout</a>
+                <button class="btn login-button">
+                    <span class="glyphicon glyphicon-log-in" ng-click="logout()">Logout</span>
+                </button>
             </div>
         </div>
     </div>
