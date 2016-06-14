@@ -39,7 +39,7 @@ app.factory('CartFactory', function($http) {
 
 });
 
-app.controller('CartCtrl', function($scope, theCart, $http, theUser){
+app.controller('CartCtrl', function($scope, theCart, $http, theUser, CartFactory){
 
 	$scope.cart = theCart.dreams;
 	$scope.total = theCart.total;
@@ -47,11 +47,12 @@ app.controller('CartCtrl', function($scope, theCart, $http, theUser){
 
     $scope.removeItem = function(id, item){
         $http.put('/api/cart/' + id, item)
-        .then(function(response){
-            return response.data;
-        })
         .then(function(data){
-            return $http.get('/api/cart/' + id);
+            CartFactory.getItems()
+            .then(function(daCart){
+                $scope.cart = daCart.dreams;
+                $scope.total = daCart.total;
+            })
         })
     }
 });
