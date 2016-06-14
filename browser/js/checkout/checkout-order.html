@@ -1,5 +1,8 @@
 <div class="well">
-    <form class="form-horizontal" id="checkout-form">
+    <div ng-show="order">
+        <p>Your order has been processed!</p>
+    </div>
+    <form ng-hide="order" ng-submit="submitOrder()" class="form-horizontal" id="checkout-form">
         <fieldset>
             <legend>Place Your Order</legend>
             <div class="checkout-info">
@@ -8,16 +11,16 @@
                     <label for="name-info">Ship To</label>
                     <input type="text" class="form control" placeholder="Jane Smith">
                     <label for="shipping-street-info">Street Address</label>
-                    <input type="text" class="form control" placeholder="1600 Pennsylvania Avenue">
+                    <input ng-model="shipping.address" type="text" class="form control" placeholder="1600 Pennsylvania Avenue">
                     <label for="shipping-city-info">City</label>
-                    <input type="text" class="form control" placeholder="New York City">
+                    <input ng-model="shipping.city" type="text" class="form control" placeholder="New York City">
                     <div class="state-abbrev">
                         <label class="ship-state" for="shipping-state-info">State</label>
-                        <input class="ship-state" type="text" class="form-control" placeholder="NY">
+                        <input ng-model="shipping.state" class="ship-state" type="text" class="form-control" placeholder="NY">
                     </div>
                     <div class="zip-code">
                         <label class="ship-zip" for="shiping-zip-info">Zip Code</label>
-                        <input class="ship-zip" type="text" class="form-control" placeholder="10001">
+                        <input ng-model="shipping.zip" class="ship-zip" type="text" class="form-control" placeholder="10001">
                     </div>
                 </div>
                 <br>
@@ -46,19 +49,19 @@
                 <label for="name-info">Name On Credit Card</label>
                 <input type="text" class="form control" placeholder="Jane Smith">
                 <label for="billing-street-info">Street Address</label>
-                <input type="text" class="form control" placeholder="1600 Pennsylvania Avenue">
+                <input ng-model="billing.address" type="text" class="form control" placeholder="1600 Pennsylvania Avenue">
                 <label for="billing-city-info">City</label>
-                <input type="text" class="form control" placeholder="New York City">
+                <input ng-model="billing.city" type="text" class="form control" placeholder="New York City">
                 <div class="state-abbrev">
                     <label class="bill-state" for="billing-state-info">State</label>
-                    <input class="bill-state" type="text" class="form-control" placeholder="NY">
+                    <input ng-model="billing.state" class="bill-state" type="text" class="form-control" placeholder="NY">
                 </div>
                 <div class="zip-code">
                     <label class="bill-zip" for="billing-zip-info">Zip Code</label>
-                    <input class="bill-zip" type="text" class="form-control" placeholder="10001">
+                    <input ng-model="billing.zip" class="bill-zip" type="text" class="form-control" placeholder="10001">
                 </div>
             </div>
         </fieldset>
-        <button>Submit</button>
+        <input type="submit" value="Submit Order">
     </form>
 </div>

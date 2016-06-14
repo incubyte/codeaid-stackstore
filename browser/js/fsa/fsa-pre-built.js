@@ -99,7 +99,7 @@
             //console.log("POTUS in the house", credentials);
             return $http.post('/login', credentials)
                 .then(function(response) {
-                    console.log(response);
+                    //console.log(response);
                     onSuccessfulLogin(response);
                 })
                 .catch(function() {
