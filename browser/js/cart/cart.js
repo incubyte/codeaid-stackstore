@@ -36,7 +36,7 @@ app.controller('CartCtrl', function($scope, theCart, $http, CartFactory){
 	$scope.total = theCart.total;
 
     $scope.removeItem = function(id, item){
-        $http.delete('/api/cart/', item)
+        $http.put('/api/cart/', item)
         .then(function(data){
             CartFactory.getItems()
             .then(function(daCart){
