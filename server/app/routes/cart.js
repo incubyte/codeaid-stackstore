@@ -11,6 +11,11 @@ var OrderItems = require('../../db').model('orderItems');
 module.exports = router;
 
 router.post('/:id', function(req, res, next) {
+    // if(req.params.id = 0)
+    // {
+    //     req.user = 1000;
+    // }
+
     Dream.findById(req.body.product.id)
         .then(function(dream) {
             dream.update({
@@ -66,14 +71,20 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
+    console.log('cart session...are we here?', req.session.cart);
+
     var orderItems, theDreams, amountPurchased;
     Order.findOne({
             where: {
-                userId: req.user.id
+                userId: req.user.id,
+                status: "Pending"
             }
         })
         .then(function(order) {
-            return order.getOrderItems();
+            if(!order)
+                res.send(200)
+            else
+                return order.getOrderItems();
         })
         .then(function(items) {
             orderItems = items;

@@ -57,13 +57,6 @@
             return data.user;
         }
 
-        // function onSuccessfulSignUp(response) {
-        //     var data = response.data;
-        //     console.log("SUCCESSFUL SIGN UP")
-        //     Session.create(data.id, data.user);
-        //     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        //     return data;
-        // }
         // Uses the session factory to see if an
         // authenticated user is currently registered.
         this.isAuthenticated = function() {
@@ -79,7 +72,7 @@
 
             // Optionally, if true is given as the fromServer parameter,
             // then this cached value will not be used.
-            //console.log("I am here");
+           
             if (this.isAuthenticated() && fromServer !== true) {
                 return $q.when(Session.user);
             }
