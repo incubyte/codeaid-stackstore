@@ -28,6 +28,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/category/:category', function(req, res, next) {
+
     Dream.findAll({
             where: {
                 category: {
@@ -39,13 +40,14 @@ router.get('/category/:category', function(req, res, next) {
             res.json(dreams);
         })
         .catch(next);
+
 });
 
 router.get('/:id/reviews', function(req, res, next) { //get all reviews for a dream
     Review.findAll({
             where: {
                 dreamId: req.params.id
-            }, 
+            },
             include: [User, Dream]
         })
         .then(function(reviews) {
@@ -56,7 +58,7 @@ router.get('/:id/reviews', function(req, res, next) { //get all reviews for a dr
 })
 
 router.post('/:id/reviews', function(req, res, next) { //get all reviews for a dream
-        Review.create({
+    Review.create({
             title: req.body.title,
             text: req.body.text,
             userId: req.body.userId,
