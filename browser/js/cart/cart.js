@@ -17,17 +17,15 @@ app.factory('CartFactory', function($http) {
     var CartFactory = {};
     CartFactory.getItems = function(id) {
         return $http.get('/api/cart/' + id)
-            .then(function(items) {
-            	console.log(items.data);
-                return items.data;
+            .then(function(response) {
+            	console.log("ITEMS IN CART", response.data);
+                return response.data;
             });
     }
     return CartFactory;
 });
 
 app.controller('CartCtrl', function($scope, theCart){
-	console.log("HELLLLLOOOOO CARRTTT");
-	console.log(theCart.dreams)
 	$scope.cart = theCart.dreams;
 	$scope.total = theCart.total;
 });

@@ -7,6 +7,7 @@ var Dream = require('./models/dream')(db);
 //var Cart = require('./models/cart')(db);
 var Review = require('./models/reviews')(db);
 var Order = require('./models/orders')(db);
+var OrderItems = require('./models/order-items-model')(db);
 
 User.hasMany(Order);
 User.hasMany(Review);
@@ -16,6 +17,10 @@ Review.belongsTo(Dream);
 
 Dream.hasMany(Review);
 
+Order.hasMany(OrderItems);
 Order.belongsTo(User);
-Order.belongsToMany(Dream, { through: 'DreamOrder'});
-User.belongsToMany(Dream, {through: 'DreamUser'});
+//Order.belongsToMany(OrderItems, {through: 'items_on_order'});
+OrderItems.belongsTo(Dream);
+
+Order.belongsToMany(Dream, { through: OrderItems});
+// User.belongsToMany(Dream, {through: 'DreamUser'});

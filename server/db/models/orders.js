@@ -8,7 +8,8 @@ var Sequelize = require('sequelize');
 var Order = function(db) {
     return db.define('orders', {
         status: {
-            type: Sequelize.ENUM('Shipped', 'Delivered', 'Cancelled', 'Returned', 'Pending')
+            type: Sequelize.ENUM('Shipped', 'Delivered', 'Cancelled', 'Returned', 'Pending'),
+            defaultValue: 'Pending'
         },
         confirmation: {
             // confirmation number
