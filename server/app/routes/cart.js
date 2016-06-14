@@ -74,8 +74,6 @@ router.put('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    console.log('cart session...are we here?', req.session.cart);
-
     var orderItems, theDreams, amountPurchased;
     Order.findOne({
             where: {
