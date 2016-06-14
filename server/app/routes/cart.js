@@ -34,7 +34,6 @@ router.use(function(req, res, next) {
 
 })
 router.post('/', function(req, res, next) {
-    console.log("Here I am, posting to cart", req.order)
     Dream.findById(req.body.product.id)
         .then(function(dream) {
             dream.update({
