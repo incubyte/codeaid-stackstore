@@ -2,7 +2,7 @@
 
 app.config(function($stateProvider){
 	$stateProvider.state('checkout', {
-		url: '/api/cart/checkout/:id',
+		url: '/cart/checkout/:id',
 		templateUrl: '/js/checkout/checkout-order.html',
 		controller: 'CheckoutCtrl',
 		resolve: {

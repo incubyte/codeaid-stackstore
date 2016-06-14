@@ -2,7 +2,7 @@
 
 app.config(function($stateProvider) {
     $stateProvider.state('cart', {
-        url: '/api/cart/:id',
+        url: '/cart/:id',
         templateUrl: '/js/cart/cart.html',
         controller: 'CartCtrl',
         resolve: {
