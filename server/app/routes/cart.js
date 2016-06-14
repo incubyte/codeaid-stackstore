@@ -59,13 +59,15 @@ router.get('/:id', function(req, res, next) {
         })
         .then(function(items) {
             orderItems = items;
-            return $Promise.map(items, function(item) {
-                return item.getDream().then(function(dream){
-                    dream.amountPurchased = item.amount;
+            return $Promise.map(items, function(item) { 
+                return item.getDream()
+                .then(function(dream){
+                    return {dream: dream.dataValues, amountPurchased: item.amount};
                 });
             });
         })
         .then(function(dreams) {
+            console.log("DREAMS", dreams);
             theDreams = dreams;
             return $Promise.map(orderItems, function(item) {
                 return parseFloat(item.amount) * item.priceAtPurchase;
