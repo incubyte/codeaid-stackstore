@@ -16,9 +16,9 @@ app.factory('OrderHistoryFactory', function($http) {
 
     OrderHistoryFactory.viewOrders = function(id) {
         return $http.get('/api/order/' + id)
-            .then(function(orders) {
-            	console.log("VIEW MY ORDERS", orders.data);
-                return orders.data;
+            .then(function(response) {
+            	console.log("VIEW MY ORDERS", response.data);
+                return response.data;
             });
     };
 
