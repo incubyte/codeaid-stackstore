@@ -7,6 +7,7 @@ var User = require('../../../db').model('user');
 module.exports = function(app, db) {
 
     var User = db.model('user');
+    var Order = db.model('orders');
 
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
@@ -42,7 +43,7 @@ module.exports = function(app, db) {
                     })
                     .catch(next);
             })
-        
+
         //passport.authenticate('local', authCb)(req, res, next);
 
     })
@@ -51,7 +52,6 @@ module.exports = function(app, db) {
 
     // A POST /login route is created to handle login.
     app.post('/login', function(req, res, next) {
-        console.log("Why?");
         var authCb = function(err, user) {
 
             if (err) return next(err);
@@ -63,14 +63,23 @@ module.exports = function(app, db) {
             }
 
             // req.logIn will establish our session.
-            req.logIn(user, function(loginErr) {
-                if (loginErr) return next(loginErr);
-                // We respond with a response object that has user with _id and email.
-                res.status(200).send({
-                    user: user.sanitize()
-                });
-            });
+            Order.findById(req.session.orderId)
+                .then(function(order) {
 
+                    if (order) {
+                        order.setUser(user.id)
+                    }
+                })
+                .then(function() {
+                    req.logIn(user, function(loginErr) {
+                        if (loginErr) return next(loginErr);
+                        // We respond with a response object that has user with _id and email.
+                        res.status(200).send({
+                            user: user.sanitize()
+                        });
+                    });
+
+                })
         };
 
         passport.authenticate('local', authCb)(req, res, next);

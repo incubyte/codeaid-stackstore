@@ -33,7 +33,10 @@ module.exports = function(db) {
         },
         password: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 4,
+            }
         },
         shippingStreetAddress: {
             type: Sequelize.STRING
@@ -50,7 +53,9 @@ module.exports = function(db) {
         shippingZip: {
             type: Sequelize.INTEGER,
             validate: {
-                max: 5
+                maxLength: function(zipcode){
+                    return zipcode.length <=5;
+                }
             }
         },
         billingStreetAddress: {
@@ -68,7 +73,9 @@ module.exports = function(db) {
         billingZip: {
             type: Sequelize.STRING,
             validate: {
-                max: 5
+                maxLength: function(zipcode){
+                    return zipcode.length <=5;
+                }
             }
         },
         salt: {

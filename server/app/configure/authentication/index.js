@@ -18,7 +18,7 @@ module.exports = function(app, db) {
     });
 
     var User = db.model('user');
-
+    var Order = db.model('orders');
     dbStore.sync();
 
     // First, our session middleware will set/read sessions from the request.
@@ -50,26 +50,11 @@ module.exports = function(app, db) {
             .catch(done);
     });
 
-    // We provide a simple GET /session in order to get session information directly.
-    // This is used by the browser application (Angular) to determine if a user is
-    // logged in already.
-    // app.get('/', function(req ,res, next){
-    //     var userSession = req.session.cookie;
-    //     console.log("userSession", req.session)
-    //     req.session.hey = "heyyyy"
-    //     // if(!userSession.data)
-    //     // {
-    //     //     userSession.data.user = 1900;
-    //     // }
-    //     next()
-    // })
     app.get('/session', function(req, res) {
 
         if (req.user) {
-            //console.log(req.session)
-            res.send({ user: req.user.sanitize() });
+            res.send({ user: req.user.sanitize() })
         } else {
-            //res.send({ user: { userId: 1 } })
             res.status(401).send("No authenticated User");
         }
     });

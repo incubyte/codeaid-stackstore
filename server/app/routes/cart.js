@@ -10,7 +10,7 @@ var OrderItems = require('../../db').model('orderItems');
 
 module.exports = router;
 router.use(function(req, res, next) {
-    var order
+    var order;
 
     if (req.user)
         order = Order.findOrCreate({
@@ -18,7 +18,7 @@ router.use(function(req, res, next) {
                 userId: req.user.id
             }
         })
-     .then(([theOrder]) => theOrder)
+        .then(([theOrder]) => theOrder)
     else if (req.session.orderId) {
         order = Order.findById(req.session.orderId)
     } else {
@@ -34,7 +34,6 @@ router.use(function(req, res, next) {
 
 })
 router.post('/', function(req, res, next) {
-    console.log("Here I am, posting to cart", req.order)
     Dream.findById(req.body.product.id)
         .then(function(dream) {
             dream.update({
@@ -75,11 +74,18 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    console.log('cart session...are we here?', req.session.cart);
-
     var orderItems, theDreams, amountPurchased;
-
-    req.order.getOrderItems()
+    Order.findOne({
+            where: {
+                id: req.order.id,
+                status: "Pending"
+            }
+        })
+        .then(function(order) {
+            if (order) return order.getOrderItems();
+            else res.status(200).send();
+        })
+        //req.order.getOrderItems()
         .then(function(items) {
             orderItems = items;
             return $Promise.map(items, function(item) {
