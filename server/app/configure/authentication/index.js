@@ -67,6 +67,7 @@ module.exports = function(app, db) {
 
         if (req.user) {
             //console.log(req.session)
+            delete req.session.orderId;
             res.send({ user: req.user.sanitize() });
         } else {
             //res.send({ user: { userId: 1 } })
