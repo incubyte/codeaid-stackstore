@@ -53,30 +53,31 @@ module.exports = function(app, db) {
     // We provide a simple GET /session in order to get session information directly.
     // This is used by the browser application (Angular) to determine if a user is
     // logged in already.
-    app.get('/', function(req ,res, next){
-        var userSession = req.session.cookie;
-        console.log("userSession", req.session)
-        req.session.hey = "heyyyy"
-        // if(!userSession.data)
-        // {
-        //     userSession.data.user = 1900;
-        // }
-        next()
-    })
+    // app.get('/', function(req ,res, next){
+    //     var userSession = req.session.cookie;
+    //     console.log("userSession", req.session)
+    //     req.session.hey = "heyyyy"
+    //     // if(!userSession.data)
+    //     // {
+    //     //     userSession.data.user = 1900;
+    //     // }
+    //     next()
+    // })
     app.get('/session', function(req, res) {
 
         if (req.user) {
-            console.log(req.session)
+            //console.log(req.session)
             res.send({ user: req.user.sanitize() });
         } else {
-            res.send({ user: { userId: 1 } })
-                //res.send(401).send("No authenticated User");
+            //res.send({ user: { userId: 1 } })
+            res.send(401).send("No authenticated User");
         }
     });
 
     // Simple /logout route.
     app.get('/logout', function(req, res) {
         req.logout();
+        delete req.session.orderId
         res.status(200).end();
     });
 

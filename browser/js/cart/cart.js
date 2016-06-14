@@ -21,7 +21,7 @@ app.factory('CartFactory', function($http) {
     var CartFactory = {};
 
      CartFactory.getItems = function(id) {
-        return $http.get('/api/cart/' + id)
+        return $http.get('/api/cart/')
             .then(function(response) {
                 console.log("ITEMS IN CART", response.data);
                 return response.data;
