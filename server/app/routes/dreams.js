@@ -33,38 +33,51 @@ router.get('/:id', function(req, res, next) {
 
 //post ONE dream for admin
 router.post('/', function(req, res, next) {
-    Dream.create()
-        .then(function(newDreamCreated) {
-            res.status(201).send(newDreamCreated);
-        })
-        .catch(next)
+    if (!req.user.isAdmin) {
+        res.sendStatus(403);
+    } else {
+        Dream.create(req.body)
+            .then(function(newDreamCreated) {
+                res.status(201).send(newDreamCreated);
+            })
+            .catch(next)
+    }
+
 })
 
 //update ONE dream for admin
 router.put('/:id', function(req, res, next) {
-    Dream.findById(req.params.id)
-        .then(function(theDream) {
-            if (!theDream) {
-                res.sendStatus(404)
-            }
-            return theDream.update(req.body)
-        })
-        .then(function(updatedDream) {
-            res.json(updatedDream)
-        })
-        .catch(next)
+    if (!req.user.isAdmin) {
+        res.sendStatus(403);
+    } else {
+        Dream.findById(req.params.id)
+            .then(function(theDream) {
+                if (!theDream) {
+                    res.sendStatus(404)
+                }
+                return theDream.update(req.body)
+            })
+            .then(function(updatedDream) {
+                res.json(updatedDream)
+            })
+            .catch(next)
+    }
 })
 
 //delete ONE dream for admin
 router.delete('/:id', function(req, res, next) {
-    Dream.findById(req.params.id)
-        .then(function(theDream) {
-            return theDream.destroy()
-        })
-        .then(function() {
-            res.sendStatus(204)
-        })
-        .catch(next)
+    if (!req.user.isAdmin) {
+        res.sendStatus(403);
+    } else {
+        Dream.findById(req.params.id)
+            .then(function(theDream) {
+                return theDream.destroy()
+            })
+            .then(function() {
+                res.sendStatus(204)
+            })
+            .catch(next)
+    }
 })
 
 //get ALL dreams in one category

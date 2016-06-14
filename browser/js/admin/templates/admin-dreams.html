@@ -1,0 +1,76 @@
+<div>
+    <h3>Create New Dream</h3>
+    <form name="add-dream" ng-model="addDreamForm" ng-submit="createDream(dream)">
+        <label for="dream-title">Title</label>
+        <input class="form-control" type="text" ng-model="dream.title" name="dream-title">
+        <label for="description">Description</label>
+        <input class="form-control" type="text" ng-model="dream.description" name="description">
+        <label for="category">Category</label>
+        <input class="form-control" type="text" ng-model="dream.category" name="category">
+        <label for="price">Price</label>
+        <input class="form-control" type="text" ng-model="dream.price" name="price">
+        <label for="image">Photo</label>
+        <input class="form-control" type="text" ng-model="dream.photo" name="image">
+        <label for="quantity">Quantity</label>
+        <input class="form-control" type="text" ng-model="dream.quantity" name="inventory">
+        <button type="submit" class="btn btn-success" ng-disabled="addDreamForm.$invalid">Create Dream</button>
+    </form>
+    <br>
+    <section class="bg-info container">
+        <div ng-repeat="dream in dreams">
+            <div class="dream-container">
+                <div class="row">
+                    <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>{{ dream.title }}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img id="dream-image" ng-src="{{ dream.photo }}" class="dream-image" width="20%">
+                    </div>
+                    <div class="col-lg-6">
+                        <p>{{ dream.description }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-6">
+                        <p>$ {{ dream.price }}</p>
+                    </div>
+                </div>
+                <form name="update-dream-form" novalidate>
+                    <label for="dream-title">
+                        <h6> Title: </h6>
+                    </label>
+                    <input type="text" name="dream-title" ng-model="newDream.name" class="form-control">
+                    <label for="dream-desc">
+                        <h6> Description: </h6>
+                    </label>
+                    <input type="text" name="dream-desc" ng-model="newDream.description" class="form-control">
+                    <label for="dream-category">
+                        <h6> Category: </h6>
+                    </label>
+                    <input type="text" name="dream-category" ng-model="newDream.category" class="form-control">
+                    <label for="dream-price">
+                        <h6> Price: </h6>
+                    </label>
+                    <input type="text" name="dream-price" ng-model="newDream.price" class="form-control">
+                    <label for="dream-photo">
+                        <h6> Photo URL: </h6>
+                    </label>
+                    <input type="text" name="dream-photo" ng-model="newDream.photo" class="form-control">
+                    <label for="dream-quantity">
+                        <h6> Quantity: </h6>
+                    </label>
+                    <input type="text" name="dream-quantity" ng-model="newDream.quantity" class="form-control">
+                    <button type="submit" class="btn btn-success" ng-click="updateDream(newDream, dream)">Update Dream</button>
+                    <button type="submit" class="btn btn-success" ng-click="deleteDream(dream)">Delete Dream</button>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

@@ -35,8 +35,7 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             allowNull: false,
             validate: {
-                min: 6,
-                max: 12
+                min: 4,
             }
         },
         shippingStreetAddress: {
