@@ -56,13 +56,12 @@ router.put('/:id', function(req, res, next) {
         }
     })
     .then(function(item){
-        console.log("ITEM I WANT TO DESTROY", item);
         return item.destroy();
     })
     .then(function(destroyedItem){
-        res.redirect('/api/cart/' + req.user.id);
-    })
-
+        res.sendStatus(200);
+        next();
+    });
 
 });
 
@@ -86,7 +85,6 @@ router.get('/:id', function(req, res, next) {
             });
         })
         .then(function(dreams) {
-            console.log("DREAMS", dreams);
             theDreams = dreams;
             return $Promise.map(orderItems, function(item) {
                 return parseFloat(item.amount) * item.priceAtPurchase;
