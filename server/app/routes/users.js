@@ -70,14 +70,23 @@ router.put('/:id', function(req, res, next) {
     //if (req.user.isAdmin || req.user === req.params.id) {
     User.findById(req.params.id)
         .then(function(existingUser) {
-            return existingUser.update(req.body);
+            return existingUser.update({
+                shippingStreetAddress: req.body.shipping.address,
+                shippingCity: req.body.shipping.city,
+                shippingState: req.body.shipping.state,
+                shippingZip: req.body.shipping.zip,
+                billingStreetAddress: req.body.billing.address,
+                billingCity: req.body.billing.city,
+                billingState: req.body.billing.state,
+                billingZip: req.body.billing.zip
+            });
         })
         .then(function(userUpdated) {
-            res.json(userUpdated);
+            res.status(201).json(userUpdated);
         })
-        .then(function(serverResponse) {
-            res.sendStatus(201);
-        })
+        // .then(function(serverResponse) {
+        //     res.sendStatus(201);
+        // })
         .catch(next);
     // } else {
     //     res.sendStatus(403);
