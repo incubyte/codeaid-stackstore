@@ -9,90 +9,84 @@ var Dream = require('../../db').model('dream');
 var OrderItems = require('../../db').model('orderItems');
 
 module.exports = router;
+router.use(function(req, res, next) {
+    var order
 
-router.post('/:id', function(req, res, next) {
-    // if(req.params.id = 0)
-    // {
-    //     req.user = 1000;
-    // }
+    if (req.user)
+        order = Order.findOrCreate({
+            where: {
+                userId: req.user.id
+            }
+        })
+     .then(([theOrder]) => theOrder)
+    else if (req.session.orderId) {
+        order = Order.findById(req.session.orderId)
+    } else {
+        order = Order.create({ user: req.user })
+    }
 
+    order
+        .then(function(theOrder) {
+            req.session.orderId = theOrder.id;
+            req.order = theOrder;
+            next();
+        })
+
+})
+router.post('/', function(req, res, next) {
+    console.log("Here I am, posting to cart", req.order)
     Dream.findById(req.body.product.id)
         .then(function(dream) {
             dream.update({
                 quantity: dream.quantity - Number(req.body.amount)
             });
-        });
-    var order;
-    Order.findOrCreate({
-            where: {
-                userId: req.user.id
-            }
         })
-        .then(function(data) {
-            order = data;
-            return OrderItems.create({
-                dreamId: req.body.product.id,
-                orderId: order[0].id,
-                amount: req.body.amount,
-                priceAtPurchase: req.body.product.price
-            });
+    OrderItems.create({
+            dreamId: req.body.product.id,
+            orderId: req.order.id,
+            amount: req.body.amount,
+            priceAtPurchase: req.body.product.price
         })
-        .then(function() {
-            return Order.findById(order[0].id, {
-                include: [OrderItems, Dream]
-            });
-
+        .then(function(orderItems) {
+            res.json(orderItems);
         })
-        .then(function(order) {
-            res.json(order);
-        });
 });
 
 router.put('/:id', function(req, res, next) {
     Dream.findById(req.body.dream.id)
-    .then(function(dream){
-        dream.update({
-            quantity: dream.quantity + Number(req.body.amountPurchased)
-        })
-    });
+        .then(function(dream) {
+            dream.update({
+                quantity: dream.quantity + Number(req.body.amountPurchased)
+            })
+        });
     OrderItems.findOne({
-        where: {
-            dreamId: req.body.dream.id
-        }
-    })
-    .then(function(item){
-        return item.destroy();
-    })
-    .then(function(destroyedItem){
-        res.sendStatus(200);
-        next();
-    });
+            where: {
+                dreamId: req.body.dream.id
+            }
+        })
+        .then(function(item) {
+            return item.destroy();
+        })
+        .then(function(destroyedItem) {
+            res.sendStatus(200);
+            next();
+        });
 
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/', function(req, res, next) {
     console.log('cart session...are we here?', req.session.cart);
 
     var orderItems, theDreams, amountPurchased;
-    Order.findOne({
-            where: {
-                userId: req.user.id,
-                status: "Pending"
-            }
-        })
-        .then(function(order) {
-            if(!order)
-                res.send(200)
-            else
-                return order.getOrderItems();
-        })
+
+    req.order.getOrderItems()
         .then(function(items) {
             orderItems = items;
-            return $Promise.map(items, function(item) { 
+            return $Promise.map(items, function(item) {
                 return item.getDream()
-                .then(function(dream){
-                    return {dream: dream.dataValues, amountPurchased: item.amount};
-                });
+                    .then(function(dream) {
+                        return { dream: dream.dataValues, amountPurchased: item.amount };
+                    });
             });
         })
         .then(function(dreams) {

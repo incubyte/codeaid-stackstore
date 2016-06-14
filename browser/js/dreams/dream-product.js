@@ -80,19 +80,19 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     }
 
     $scope.addDreamToCart = function(userId, product) {
-        var id;
-        console.log("I'm scope:", $scope)
+        // var id;
+        // console.log("I'm scope:", $scope)
 
-        if (!$scope.user.id)
-        {
-            id = 0;
-        }
-        else
-        {
-            id = $scope.user.id
-        }
+        // if (!$scope.user.id)
+        // {
+        //     id = 0;
+        // }
+        // else
+        // {
+        //     id = $scope.user.id
+        // }
         //console.log("PRODUCT", product, "AMOUNT", $scope.amount);
-        return $http.post('/api/cart/' + id, {product: product, amount: $scope.amount})
+        return $http.post('/api/cart/', {product: product, amount: $scope.amount})
             .then(function(userInfo) {
                 return userInfo.data;
             })
