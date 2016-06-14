@@ -47,5 +47,11 @@ app.controller('CartCtrl', function($scope, theCart, $http, theUser){
 
     $scope.removeItem = function(id, item){
         $http.put('/api/cart/' + id, item)
+        .then(function(response){
+            return response.data;
+        })
+        .then(function(data){
+            return $http.get('/api/cart/' + id);
+        })
     }
 });

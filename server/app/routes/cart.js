@@ -44,6 +44,25 @@ router.post('/:id', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
+    Dream.findById(req.body.dream.id)
+    .then(function(dream){
+        dream.update({
+            quantity: dream.quantity + Number(req.body.amountPurchased)
+        })
+    });
+    OrderItems.findOne({
+        where: {
+            dreamId: req.body.dream.id
+        }
+    })
+    .then(function(item){
+        console.log("ITEM I WANT TO DESTROY", item);
+        return item.destroy();
+    })
+    .then(function(destroyedItem){
+        res.redirect('/api/cart/' + req.user.id);
+    })
+
 
 });
 
