@@ -14,7 +14,7 @@ module.exports = function(db) {
         },
         photo: {
             type: Sequelize.STRING,
-            defaultValue: 'dream-bubble.jpg'
+            defaultValue: '/images/dream-bubble.jpg'
         },
         phone: {
             type: Sequelize.STRING,

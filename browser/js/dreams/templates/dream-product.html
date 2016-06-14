@@ -6,12 +6,15 @@
                 <p class="product-title">{{product.title}}</p>
                 <img ng-src="{{product.photo}}">
             </div>
+            <form ng-submit="addDreamToCart(user.id, product)">
             <div class="col-lg-4" ng-hide="product.quantity === 0">
                 <p class="product-description">{{product.description}}</p>
                 <p class="product-price">{{product.price}}</p>
                 <p>{{product.quantity}}</p>
-                <button ng-click="addDreamToCart(user.id, product)">Add to Cart</button>
+                <input type="text" placeholder="Please specify amount" ng-model='amount' ng-required>
+                <input type="submit" value="Add To Cart"></input>
             </div>
+            </form>
             <div class="alert" ng-show="product.quantity === 0"> Out of Stock</div>
             <div class="col-lg-4" id="submitReviewForm">
                 <!-- <button ng-click="toggle()">Review this Dream</button> -->
