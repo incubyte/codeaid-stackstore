@@ -6,6 +6,9 @@ app.config(function($stateProvider) {
         resolve: {
             productListing: function(ProductFactory, $stateParams) {
                 return ProductFactory.getDream($stateParams.id);
+            },
+            dreamReviews: function(ReviewFactory, productListing){
+                return ReviewFactory.getOneDreamReviews(productListing.id)
             }
         }
     });
@@ -25,44 +28,43 @@ app.factory('ProductFactory', function($http, $state) {
 });
 
 
-app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory) {
+app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory, dreamReviews) {
     $scope.product = productListing;
     $scope.user = null;
+    $scope.reviews = dreamReviews;
+    $scope.showForm = false;
+
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
             $scope.user = user;
         });
     };
 
-    //console.log("I'm the dream Id ", $scope.product.id)
-    $scope.reviews = ReviewFactory.getReviews($scope.product.id);
-
-
-
-
     setUser();
 
-    function generateUser() {
-        var email = "";
-        var password = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    //console.log("Where am i??", $scope.reviews)
 
-        for (var i = 0; i < 5; i++) {
-            password += possible.charAt(Math.floor(Math.random() * possible.length));
-            email += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        email += "@email.com";
-        return { email: email, password: password };
-    }
+    // function generateUser() {
+    //     var email = "";
+    //     var password = "";
+    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    function addUser() {
-        return $http.post('/api/users', generateUser())
-            //make sure the req.body randomly generates an email and password
-            .then(function(user) {
-                $scope.user = user.data;
-                return user.data;
-            });
-    }
+    //     for (var i = 0; i < 5; i++) {
+    //         password += possible.charAt(Math.floor(Math.random() * possible.length));
+    //         email += possible.charAt(Math.floor(Math.random() * possible.length));
+    //     }
+    //     email += "@email.com";
+    //     return { email: email, password: password };
+    // }
+
+    // function addUser() {
+    //     return $http.post('/api/users', generateUser())
+    //         //make sure the req.body randomly generates an email and password
+    //         .then(function(user) {
+    //             $scope.user = user.data;
+    //             return user.data;
+    //         });
+    // }
 
     $scope.sendReview = function(review) {
         $scope.errorReview = null;
@@ -73,7 +75,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             .then(function() {
                 console.log("added a review from " + review.userId);
             }).catch(function() {
-                $scope.errorLogin = 'Invalid login credentials.';
+                $scope.errorLogin = 'Invalid review';
             });
     }
 
@@ -88,5 +90,9 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             .then(function() {
                 product.quantity--;
             });
+    }
+
+    $scope.toggle = function() {
+        $scope.showForm = !$scope.showForm
     }
 });
