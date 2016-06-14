@@ -53,13 +53,7 @@ module.exports = function(app, db) {
     app.get('/session', function(req, res) {
 
         if (req.user) {
-            // if (req.session.orderId) {
-            //     Order.findById(req.session.orderId)
-            //         .then(function(order) {
-            //             order.setUser(req.user);
-            //         })
-            //         .then(function() {
-            res.send({ user: req.user.sanitize() });
+            res.send({ user: req.user.sanitize() })
         } else {
             res.status(401).send("No authenticated User");
         }
