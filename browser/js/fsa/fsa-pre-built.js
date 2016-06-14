@@ -79,7 +79,7 @@
 
             // Optionally, if true is given as the fromServer parameter,
             // then this cached value will not be used.
-            console.log("I am here");
+            //console.log("I am here");
             if (this.isAuthenticated() && fromServer !== true) {
                 return $q.when(Session.user);
             }

@@ -44,32 +44,28 @@ router.get('/category/:category', function(req, res, next) {
 router.get('/:id/reviews', function(req, res, next) { //get all reviews for a dream
     Review.findAll({
             where: {
-                dreamId: +req.params.id
-            }
+                dreamId: req.params.id
+            }, 
+            include: [User, Dream]
         })
         .then(function(reviews) {
+            //console.log("Here are the reviews and their associations", reviews);
             res.json(reviews)
         })
         .catch(next)
 })
 
 router.post('/:id/reviews', function(req, res, next) { //get all reviews for a dream
-    console.log("Here is my query: ", req.body)
-    Review.create({
+        Review.create({
             title: req.body.title,
-            text: req.body.text
+            text: req.body.text,
+            userId: req.body.userId,
+            dreamId: req.body.dreamId
         })
         .then(function(review) {
-            User.findById(req.body.userId)
-                .then(function(user) {
-                    review.setUser(user);
-                })
 
-            Dream.findById(req.body.dreamId)
-                .then(function(dream) {
-                    review.setDream(dream);
-                })
-
+            console.log("This is the new review", review)
+            res.json(review);
 
         })
         .catch(next)

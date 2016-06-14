@@ -9,7 +9,7 @@ var Review = function(db) {
         title: {
             type: Sequelize.STRING,
             validate:{
-            	max: 25
+                max: 25
             }
         },
         stars: {

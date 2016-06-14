@@ -14,19 +14,20 @@ app.config(function($stateProvider) {
 app.factory('ReviewFactory', function($http) {
     var ReviewFactory = {};
 
-    ReviewFactory.getReviews = function(dreamId) {
+    ReviewFactory.getOneDreamReviews = function(dreamId) {
         var id = +dreamId
 
         return $http.get('/api/dreams/' + id + '/reviews')
             .then(function(reviews) {
                 return reviews.data
+
             })
     }
 
     ReviewFactory.addReview = function(review) {
         var id = +review.dreamId;
 
-        return $http.post('/api/dreams/' + id + '/reviews', review)
+        return $http.post('/api/dreams/' + id + '/reviews', review, { user: review.userId})
             .then(function(newReview) {
                 console.log("Thanks for the review")
             })
@@ -38,18 +39,16 @@ app.factory('ReviewFactory', function($http) {
     return ReviewFactory;
 })
 
-app.controller('ReviewCtrl', function($scope, ReviewFactory) {
+app.controller('ReviewCtrl', function($scope, ReviewFactory, reviewListing) {
 
-    $scope.reviews = reviewListing;
-
-
+    //$scope.reviews = reviewListing;
 
 })
 
 app.directive('reviewList', function() {
     return {
         restrict: 'E',
-        templateUrl: '/js/review/review-list.html',
+        templateUrl: '/js/review/templates/review-list.html',
         scope: {
             theReviews: '='
         }

@@ -13,29 +13,16 @@
                 <button ng-click="addDreamToCart(user.id, product)">Add to Cart</button>
             </div>
             <div class="alert" ng-show="product.quantity === 0"> Out of Stock</div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-4" id="submitReviewForm">
+                <!-- <button ng-click="toggle()">Review this Dream</button> -->
                 <form id="review-form" name="reviewForm" ng-submit="reviewForm.$valid && sendReview(review)">
-                    <alert type="danger" ng-show="errorReview">
+                    <!-- <alert type="danger" ng-show="errorReview">
                         {{ errorReview }}
-                    </alert>
+                    </alert> -->
                     <div class="form-group">
                         <label for="review-title">Title</label>
                         <input type="text" ng-model="review.title" class="form-control" id="review-title" placeholder="Enter title">
                     </div>
-                    <!-- <div>
-                    <select id="stars"> 
-                    <option value = "1">1</option>
-                    <option value = "2">2</option>
-                    <option value = "3">3</option>
-                    <option value = "4">4</option>
-                    <option value = "5">5</option>
-                    </select>
-
-                </div> -->
                     <div class="form-group">
                         <label for="review-text">Review</label>
                         <input type="text" ng-model="review.text" class="form-control" id="review-text" placeholder="Please enter your review">
@@ -45,5 +32,13 @@
             </div>
         </div>
     </div>
-    <review-listing the-reviews="reviews"></review-listing>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+    <review-list the-reviews="reviews">
+        <h1>Reviews here</h1></review-list>
+    </div>
 </section>
