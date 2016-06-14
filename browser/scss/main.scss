@@ -11,7 +11,7 @@ body {
 #storeName {
     margin-top: 5%;
     margin-bottom: 0;
-   text-align: center;
+    text-align: center;
 }
 
 @mixin clearfix {
@@ -68,12 +68,9 @@ body {
     }
 }
 
-
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
 @import 'dreams/main';
 @import 'tutorial/main';
 @import 'login/main';
-
-

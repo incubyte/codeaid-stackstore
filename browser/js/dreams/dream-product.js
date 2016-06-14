@@ -6,6 +6,9 @@ app.config(function($stateProvider) {
         resolve: {
             productListing: function(ProductFactory, $stateParams) {
                 return ProductFactory.getDream($stateParams.id);
+            },
+            dreamReviews: function(ReviewFactory, productListing){
+                return ReviewFactory.getOneDreamReviews(productListing.id)
             }
         }
     });
@@ -18,51 +21,50 @@ app.factory('ProductFactory', function($http, $state) {
         return $http.get('/api/dreams/' + id)
             .then(function(response) {
                 return response.data;
-            });
+            })
     };
 
     return ProductFactory;
 });
 
 
-app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory) {
+app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory, dreamReviews) {
     $scope.product = productListing;
     $scope.user = null;
+    $scope.reviews = dreamReviews;
+    $scope.showForm = false;
+
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
             $scope.user = user;
         });
     };
 
-    //console.log("I'm the dream Id ", $scope.product.id)
-    $scope.reviews = ReviewFactory.getReviews($scope.product.id);
-
-
-
-
     setUser();
 
-    function generateUser() {
-        var email = "";
-        var password = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    //console.log("Where am i??", $scope.reviews)
 
-        for (var i = 0; i < 5; i++) {
-            password += possible.charAt(Math.floor(Math.random() * possible.length));
-            email += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        email += "@email.com";
-        return { email: email, password: password };
-    }
+    // function generateUser() {
+    //     var email = "";
+    //     var password = "";
+    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    function addUser() {
-        return $http.post('/api/users', generateUser())
-            //make sure the req.body randomly generates an email and password
-            .then(function(user) {
-                $scope.user = user.data;
-                return user.data;
-            });
-    }
+    //     for (var i = 0; i < 5; i++) {
+    //         password += possible.charAt(Math.floor(Math.random() * possible.length));
+    //         email += possible.charAt(Math.floor(Math.random() * possible.length));
+    //     }
+    //     email += "@email.com";
+    //     return { email: email, password: password };
+    // }
+
+    // function addUser() {
+    //     return $http.post('/api/users', generateUser())
+    //         //make sure the req.body randomly generates an email and password
+    //         .then(function(user) {
+    //             $scope.user = user.data;
+    //             return user.data;
+    //         });
+    // }
 
     $scope.sendReview = function(review) {
         $scope.errorReview = null;
@@ -73,20 +75,24 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             .then(function() {
                 console.log("added a review from " + review.userId);
             }).catch(function() {
-                $scope.errorLogin = 'Invalid login credentials.';
+                $scope.errorLogin = 'Invalid review';
             });
-    };
+    }
 
     $scope.addDreamToCart = function(userId, product) {
         if (!$scope.user) addUser();
-        //console.log("PRODUCT", product, "AMOUNT", $scope.amount);
-        return $http.post('/api/cart/' + $scope.user.id, {product: product, amount: $scope.amount})
-            .then(function(orderInfo) {
-                console.log("orderr info looks like: ",orderInfo.data);
-                return orderInfo.data;
+        return $http.post('/api/cart/' + $scope.user.id, product)
+            .then(function(userInfo) {
+                console.log("SUCCESS!!!!!");
+                console.log("USER CART", userInfo.data);
+                return userInfo.data;
             })
-            .then(function(order) {
-                product.quantity -= $scope.amount;
+            .then(function() {
+                product.quantity--;
             });
-    };
+    }
+
+    $scope.toggle = function() {
+        $scope.showForm = !$scope.showForm
+    }
 });
