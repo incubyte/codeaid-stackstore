@@ -12,10 +12,10 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             defaultValue: 'Dreamer'
         },
-        photo: {
-            type: Sequelize.STRING,
-            defaultValue: 'dream-bubble.jpg'
-        },
+        // photo: {
+        //     type: Sequelize.STRING,
+        //     defaultValue: '/images/dream-bubble.jpg'
+        // },
         phone: {
             type: Sequelize.STRING,
             validate: {
@@ -35,11 +35,41 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             allowNull: false
         },
-        shippingAddress: {
+        shippingStreetAddress: {
             type: Sequelize.STRING
         },
-        billingAddress: {
+        shippingCity: {
             type: Sequelize.STRING
+        },
+        shippingState: {
+            type: Sequelize.STRING,
+            validate: {
+                is: /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
+            }
+        },
+        shippingZip: {
+            type: Sequelize.INTEGER,
+            validate: {
+                max: 5
+            }
+        },
+        billingStreetAddress: {
+            type: Sequelize.STRING
+        },
+        billingCity: {
+            type: Sequelize.STRING
+        },
+        billingState: {
+            type: Sequelize.STRING,
+            validate: {
+                is: /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
+            }
+        },
+        billingZip: {
+            type: Sequelize.STRING,
+            validate: {
+                max: 5
+            }
         },
         salt: {
             type: Sequelize.STRING

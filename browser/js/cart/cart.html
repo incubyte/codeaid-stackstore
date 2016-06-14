@@ -1,12 +1,33 @@
-<div>
-<p>List of Items in Cart</p>
-<div ng-repeat="item in cart">
-    <img ng-src="{{item.photo}}">
-    <div>
-        <span>Title: {{item.title}}</span>
-        <span>Price: {{item.price}}</span>
-        <span>Amount: {{item.amountPurchased}}</span>
+<div class="cart-list">
+    <h3>List of Items in Cart</h3>
+    <table class="table" id="cart-table">
+        <thead>
+            <tr>
+                <th width="10%"></th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in cart">
+                <td><img ng-src="{{item.dream.photo}}" width="35%"></td>
+                <td>{{item.dream.title}}</td>
+                <td>${{item.dream.price}}</td>
+                <td>{{item.amountPurchased}}</td>
+                <td>
+                    <button class="remove" ng-click="removeItem(user.id, item)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="total-amount">
+        <h4>Total: ${{total}}</h4>
     </div>
-</div>
-<div>Total: {{total}}</div>
+    <div class="checkout-button">
+        <button ui-sref="checkout({id: user.id})">Proceed to Checkout</button>
+    </div>
 </div>

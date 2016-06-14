@@ -81,14 +81,13 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
 
     $scope.addDreamToCart = function(userId, product) {
         if (!$scope.user) addUser();
-        return $http.post('/api/cart/' + $scope.user.id, product)
+        console.log("PRODUCT", product, "AMOUNT", $scope.amount);
+        return $http.post('/api/cart/' + $scope.user.id, {product: product, amount: $scope.amount})
             .then(function(userInfo) {
-                console.log("SUCCESS!!!!!");
-                console.log("USER CART", userInfo.data);
                 return userInfo.data;
             })
-            .then(function() {
-                product.quantity--;
+            .then(function(userInfo) {
+                product.quantity -= $scope.amount;
             });
     }
 
