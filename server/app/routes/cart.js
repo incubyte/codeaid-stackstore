@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
         })
 });
 
-router.put('/:id', function(req, res, next) {
+router.delete('/', function(req, res, next) {
     Dream.findById(req.body.dream.id)
         .then(function(dream) {
             dream.update({
