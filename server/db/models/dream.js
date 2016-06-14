@@ -2,7 +2,6 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
-//var db = require('../_db');
 
 // Must have title, description, price, and inventory quantity
 // Must belong to at least one category
@@ -43,6 +42,6 @@ var Dream = function(db) {
             }
         }
     });
-}
+};
 
 module.exports = Dream;

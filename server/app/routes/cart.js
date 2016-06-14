@@ -2,53 +2,100 @@
 
 const express = require('express');
 const router = express.Router();
-var Cart = require('../../db').model('orders');
+const $Promise = require('bluebird');
+var Order = require('../../db').model('orders');
 var User = require('../../db').model('user');
 var Dream = require('../../db').model('dream');
+var OrderItems = require('../../db').model('orderItems');
 
 module.exports = router;
 
 router.post('/:id', function(req, res, next) {
-    User.findOne({
+    Dream.findById(req.body.product.id)
+        .then(function(dream) {
+            dream.update({
+                quantity: dream.quantity - Number(req.body.amount)
+            });
+        });
+    var order;
+    Order.findOrCreate({
             where: {
-                id: req.params.id
+                userId: req.user.id
             }
         })
-        .then(function(user) {
-            user.addDream(req.body.id)
-                .then(function() {
-
-                    Dream.findById(req.body.id)
-                        .then(function(dream) {
-                            dream.update({
-                                quantity: Number(req.body.quantity) - 1
-                            });
-                        });
-
-                    return user.getDreams().then(function(dreams) {
-                        return dreams.reduce(function(a, b) {
-                            return a + b.price;
-                        }, 0)
-                    });
-
-                })
-                .then(function(total) {
-                    res.json({ user: user, total: total });
-                });
+        .then(function(data) {
+            order = data;
+            return OrderItems.create({
+                dreamId: req.body.product.id,
+                orderId: order[0].id,
+                amount: req.body.amount,
+                priceAtPurchase: req.body.product.price
+            });
         })
+        .then(function() {
+            return Order.findById(order[0].id, {
+                include: [OrderItems, Dream]
+            });
+
+        })
+        .then(function(order) {
+            res.json(order);
+        });
+});
+
+router.put('/:id', function(req, res, next) {
+    Dream.findById(req.body.dream.id)
+    .then(function(dream){
+        dream.update({
+            quantity: dream.quantity + Number(req.body.amountPurchased)
+        })
+    });
+    OrderItems.findOne({
+        where: {
+            dreamId: req.body.dream.id
+        }
+    })
+    .then(function(item){
+        return item.destroy();
+    })
+    .then(function(destroyedItem){
+        res.sendStatus(200);
+        next();
+    });
+
 });
 
 router.get('/:id', function(req, res, next) {
-    User.findById(req.params.id)
-        .then(function(user) {
-            console.log("USER", user);
-            return user.getDreams();
+    var orderItems, theDreams, amountPurchased;
+    Order.findOne({
+            where: {
+                userId: req.user.id
+            }
+        })
+        .then(function(order) {
+            return order.getOrderItems();
+        })
+        .then(function(items) {
+            orderItems = items;
+            return $Promise.map(items, function(item) { 
+                return item.getDream()
+                .then(function(dream){
+                    return {dream: dream.dataValues, amountPurchased: item.amount};
+                });
+            });
         })
         .then(function(dreams) {
-            console.log("USERS DREAMS", dreams);
-            var total = dreams.reduce(function(a,b){
-                return a + b.price
+            theDreams = dreams;
+            return $Promise.map(orderItems, function(item) {
+                return parseFloat(item.amount) * item.priceAtPurchase;
+            });
+        })
+        .then(function(prices) {
+            return prices.reduce(function(a, b) {
+                return a + b;
             }, 0);
-            res.json({dreams: dreams, total: total});
+        })
+        .then(function(total) {
+            res.json({ items: orderItems, dreams: theDreams, total: total });
         });
 });

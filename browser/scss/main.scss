@@ -6,6 +6,7 @@ body {
     background: #fdfdfd;
     font-family: 'Helvetica', sans-serif;
     background: #EDEDE4;
+    margin-bottom: 3%;
 }
 
 #storeName {
@@ -68,6 +69,58 @@ body {
     }
 }
 
+.cart-list {
+    h3 {
+        margin-bottom: 2%;
+    }
+    h4 {
+        text-align: right;
+    }
+    .checkout-button {
+        float: right;
+    }
+}
+
+#cart-table {
+    background-color: white;
+    border: 2px solid black;
+    th {
+        border: 1px solid black;
+        text-align: center;
+    }
+    td {
+        border: 1px solid black;
+        text-align: center;
+    }
+}
+
+#checkout-form {
+    max-width: 80%;
+    margin: 0 auto;
+    label {
+        display: block;
+    }
+    input {
+        display: block;
+        width: 100%;
+        margin-bottom: 1%;
+    }
+    .ship-state, .bill-state {
+        width: 5%;
+    }
+    .ship-zip, .bill-zip {
+        width: 7%;
+    }
+    #card-number {
+        width: 18%;
+    }
+    #card-security {
+        width: 6%;
+    }
+    #expiration-date {
+        width: 5%;
+    }
+}
 
 @import 'directives/main';
 @import 'home/main';
