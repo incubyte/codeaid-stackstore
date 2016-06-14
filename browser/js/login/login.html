@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-          
+        <div class="col-md-6" id="login-col">
+            <h3>Login</h3>
             <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
                 <p><social-button provider-name="Google"></social-button></p>
                 <p><social-button provider-name="Twitter"></social-button></p>
@@ -22,6 +22,7 @@
 
         </div>
         <div class="col-md-6">
+            <h3>Sign-Up</h3>
             <form id="signupForm" name="signupForm"  ng-submit="signupForm.$valid && sendSignup(signup)">
                 <alert type="danger" ng-show="errorSignup">
                     {{ errorSignup }}
