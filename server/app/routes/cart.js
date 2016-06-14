@@ -44,6 +44,25 @@ router.post('/:id', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
+    Dream.findById(req.body.dream.id)
+    .then(function(dream){
+        dream.update({
+            quantity: dream.quantity + Number(req.body.amountPurchased)
+        })
+    });
+    OrderItems.findOne({
+        where: {
+            dreamId: req.body.dream.id
+        }
+    })
+    .then(function(item){
+        console.log("ITEM I WANT TO DESTROY", item);
+        return item.destroy();
+    })
+    .then(function(destroyedItem){
+        res.redirect('/api/cart/' + req.user.id);
+    })
+
 
 });
 
@@ -59,13 +78,15 @@ router.get('/:id', function(req, res, next) {
         })
         .then(function(items) {
             orderItems = items;
-            return $Promise.map(items, function(item) {
-                return item.getDream().then(function(dream){
-                    dream.amountPurchased = item.amount;
+            return $Promise.map(items, function(item) { 
+                return item.getDream()
+                .then(function(dream){
+                    return {dream: dream.dataValues, amountPurchased: item.amount};
                 });
             });
         })
         .then(function(dreams) {
+            console.log("DREAMS", dreams);
             theDreams = dreams;
             return $Promise.map(orderItems, function(item) {
                 return parseFloat(item.amount) * item.priceAtPurchase;
