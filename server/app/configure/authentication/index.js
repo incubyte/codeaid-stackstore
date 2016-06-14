@@ -70,7 +70,7 @@ module.exports = function(app, db) {
             res.send({ user: req.user.sanitize() });
         } else {
             //res.send({ user: { userId: 1 } })
-            res.send(401).send("No authenticated User");
+            res.status(401).send("No authenticated User");
         }
     });
 

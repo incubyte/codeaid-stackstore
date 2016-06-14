@@ -1,61 +1,68 @@
 .navbar {
-  position: relative;
-  display: block;
-  background: #EDE9D8;
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
-  .navbar-container {
-    margin: 0 auto;
-    width: 95%;
-    padding-top: 3%;
-  }
-  fullstack-logo {
-    img {
-      display: inline;
-      float: left;
-      width: 5%;  
+    position: relative;
+    display: block;
+    background: #EDE9D8;
+    border-bottom: 1px solid black;
+    box-shadow: 1px 1px 14px -3px black;
+    .navbar-container {
+        margin: 0 auto;
+        width: 95%;
+        padding-top: 3%;
     }
-  }
-  a {
-    display: inline;
-    float: left;
-    color: black;
-    font-size: 16px;
-  }
-  .nav > li > a {
-    cursor: pointer;
-    transition: color 0.2s;
-    &.active {
-      color: darken(#5ED3DB, 10%);
+    #site-nav-bbam {
+        margin-bottom: 2%;
     }
-    &:hover {
-      background: none;
-      color: #5ED3DB;
+    fullstack-logo {
+        img {
+            display: inline;
+            float: left;
+            max-width: 30%;
+        }
     }
-    &:focus {
-      background: none;
-    }
-  }
-  h1 {
-    width: 30%;
-    margin: 0 auto;
-    text-align: center;
-  }
-    button {
-      display: inline;
-      float: right;
-      border: 1px solid black;
-      background: none;
-      outline: none !important;
-      margin-left: 10px;
-      margin-top: 0
-    }
-    .welcome {
-      display: inline;
-      float: right;
-      span {
+    a {
+        display: inline;
+        float: left;
         color: black;
         font-size: 16px;
-      }
+    }
+    .nav > li > a {
+        cursor: pointer;
+        transition: color 0.2s;
+        &.active {
+            color: darken(#5ED3DB, 10%);
+        }
+        &:hover {
+            background: none;
+            color: #5ED3DB;
+        }
+        &:focus {
+            background: none;
+        }
+    }
+    h1 {
+        margin: 0 auto;
+        text-align: center;
+        a {
+            font-size: 32px;
+            text-decoration: none;
+            float: none;
+        }
+    }
+    button {
+        display: inline;
+        float: right;
+        border: 1px solid black;
+        background: none;
+        outline: none !important;
+        margin-left: 10px;
+        margin-top: 3%;
+    }
+    .welcome {
+        display: inline;
+        float: right;
+        span {
+            color: black;
+            font-size: 16px;
+        }
     }
 }

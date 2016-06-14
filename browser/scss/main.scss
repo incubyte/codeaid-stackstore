@@ -1,18 +1,38 @@
 * {
     box-sizing: border-box;
+    margin: 0;
 }
 
 body {
+    height: 100%;
     background: #fdfdfd;
     font-family: 'Helvetica', sans-serif;
     background: #EDEDE4;
-    margin-bottom: 3%;
+}
+
+#stackstore-bbam-main {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -8em;
+}
+
+.push {
+    height: 4em;
+}
+
+.pad-div {
+    margin-top: 15px;
 }
 
 #storeName {
     margin-top: 5%;
     margin-bottom: 0;
     text-align: center;
+}
+
+#rainbow {
+    margin-left: 5px;
 }
 
 @mixin clearfix {
@@ -105,10 +125,12 @@ body {
         width: 100%;
         margin-bottom: 1%;
     }
-    .ship-state, .bill-state {
+    .ship-state,
+    .bill-state {
         width: 5%;
     }
-    .ship-zip, .bill-zip {
+    .ship-zip,
+    .bill-zip {
         width: 7%;
     }
     #card-number {

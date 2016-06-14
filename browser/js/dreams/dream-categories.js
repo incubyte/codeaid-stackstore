@@ -5,6 +5,7 @@ app.config(function($stateProvider) {
         templateUrl: 'js/dreams/templates/dream-categories.html',
         resolve: {
             theDreams: function(CategoryFactory, $stateParams) {
+                console.log("$stateParams.category is: ",$stateParams.category);
                 return CategoryFactory.findOne($stateParams.category);
             }
         }
