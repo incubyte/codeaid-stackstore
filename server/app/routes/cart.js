@@ -48,6 +48,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
+    var orderItems, theDreams, amountPurchased;
     Order.findOne({
             where: {
                 userId: req.user.id
@@ -57,7 +58,14 @@ router.get('/:id', function(req, res, next) {
             return order.getOrderItems();
         })
         .then(function(items) {
+            orderItems = items;
             return $Promise.map(items, function(item) {
+                return item.getDream();
+            });
+        })
+        .then(function(dreams) {
+            theDreams = dreams;
+            return $Promise.map(orderItems, function(item) {
                 return parseFloat(item.amount) * item.priceAtPurchase;
             });
         })
@@ -67,6 +75,6 @@ router.get('/:id', function(req, res, next) {
             }, 0);
         })
         .then(function(total) {
-            res.json(total);
+            res.json({ items: orderItems, dreams: theDreams, total: total });
         });
 });
