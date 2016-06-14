@@ -1,31 +1,27 @@
-navbar {
+.navbar {
   position: relative;
   display: block;
   background: #EDE9D8;
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
-
-  .container {
-    width: 91%;
-    max-width: 1340px;
-    padding-top: 20px;
+  .navbar-container {
+    margin: 0 auto;
+    width: 95%;
+    padding-top: 3%;
   }
-
   fullstack-logo {
-    margin-top: 5px;
-    margin-right: 20px;
-    width: 40px;
+    img {
+      display: inline;
+      float: left;
+      width: 5%;  
+    }
   }
-
-  h1 {
-    display: inline;
-  }
-
   a {
+    display: inline;
+    float: left;
     color: black;
     font-size: 16px;
   }
-
   .nav > li > a {
     cursor: pointer;
     transition: color 0.2s;
@@ -40,38 +36,26 @@ navbar {
       background: none;
     }
   }
-
-  .login-button {
-    float: right;
-    border: 1px solid black;
-    margin-top: 10px;
-    margin-right: 5px;
-    background: none;
-    outline: none !important;
+  h1 {
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
   }
-
-  .shopping-cart-button {
-    float: right;
-    border: 1px solid black;
-    margin-top: 10px;
-    margin-right: 5px;
-    background: none;
-    outline: none !important;
-  }
-
-  .welcome {
-    float: right;
-    margin-top: 12px;
-    span {
-      color: black;
-      font-size: 16px;
-      margin-right: 5px;
+    button {
+      display: inline;
+      float: right;
+      border: 1px solid black;
+      background: none;
+      outline: none !important;
+      margin-left: 10px;
+      margin-top: 0
     }
-    
-    a {
-      color: #f30046;
-      cursor: pointer;
+    .welcome {
+      display: inline;
+      float: right;
+      span {
+        color: black;
+        font-size: 16px;
+      }
     }
-  }
-
 }

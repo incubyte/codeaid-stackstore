@@ -1,28 +1,26 @@
 <nav class="navbar navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
+    <div class="navbar-container">
+       
             <fullstack-logo></fullstack-logo>
-        </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-            </li>
-        </ul>
-        <div class="store-name">
-            <h1>Dream a Little Dream</h1>
-        </div>
-        <button class="btn shopping-cart-button" ui-sref="cart({id: user.id})">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-        </button>
+            <ul class="nav navbar-nav">
+                <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                </li>
+            </ul>
+
+        <h1>Dream a Little Dream</h1>
         <button ng-show="!user" ui-sref="login" class="btn login-button">
             <span class="glyphicon glyphicon-log-in"></span> Login
+        </button>
+        <button class="btn shopping-cart-button" ui-sref="cart({id: user.id})">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
         </button>
         <div ng-show="user" class="welcome">
             <div>
                 <span>Welcome, {{ user.name }}!</span>
                 <img ng-src="{{user.photo}}" ng-show="user">
                 <button class="btn login-button">
-                    <span class="glyphicon glyphicon-log-in" ng-click="logout()">Logout</span>
+                    <span class="glyphicon glyphicon-log-in" ng-click="logout()"> Logout</span>
                 </button>
             </div>
         </div>
