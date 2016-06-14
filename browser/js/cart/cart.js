@@ -2,16 +2,17 @@
 
 app.config(function($stateProvider) {
     $stateProvider.state('cart', {
-        url: '/cart/:id',
+        url: '/cart',
         templateUrl: '/js/cart/cart.html',
         controller: 'CartCtrl',
         resolve: {
             theCart: function(CartFactory, $stateParams) {
                 return CartFactory.getItems($stateParams.id);
-            },
-            theUser: function(CartFactory, $stateParams) {
-                return CartFactory.getUser($stateParams.id);
             }
+            // ,
+            // theUser: function(CartFactory, $stateParams) {
+            //     return CartFactory.getUser($stateParams.id);
+            // }
         }
     });
 });
@@ -28,22 +29,22 @@ app.factory('CartFactory', function($http) {
             });
     }
 
-    CartFactory.getUser = function(id){
-        return $http.get('/api/users/' + id)
-        .then(function(user){
-            return user.data;
-        });
-    }
+    // CartFactory.getUser = function(id){
+    //     return $http.get('/api/users/')
+    //     .then(function(user){
+    //         return user.data;
+    //     });
+    // }
 
     return CartFactory;
 
 });
 
-app.controller('CartCtrl', function($scope, theCart, $http, theUser, CartFactory){
+app.controller('CartCtrl', function($scope, theCart, $http, CartFactory){
 
 	$scope.cart = theCart.dreams;
 	$scope.total = theCart.total;
-    $scope.user = theUser;
+    //$scope.user = theUser;
 
     $scope.removeItem = function(id, item){
         $http.put('/api/cart/' + id, item)

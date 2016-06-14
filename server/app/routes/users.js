@@ -66,31 +66,36 @@ router.post('/', function(req, res, next) {
 
 
 // Update ONE user 
-router.put('/:id', function(req, res, next) {
+router.put('/', function(req, res, next) {
     //if (req.user.isAdmin || req.user === req.params.id) {
-    User.findById(req.params.id)
-        .then(function(existingUser) {
-            return existingUser.update({
-                shippingStreetAddress: req.body.shipping.address,
-                shippingCity: req.body.shipping.city,
-                shippingState: req.body.shipping.state,
-                shippingZip: req.body.shipping.zip,
-                billingStreetAddress: req.body.billing.address,
-                billingCity: req.body.billing.city,
-                billingState: req.body.billing.state,
-                billingZip: req.body.billing.zip
-            });
-        })
-        .then(function(userUpdated) {
-            res.status(201).json(userUpdated);
-        })
-        // .then(function(serverResponse) {
-        //     res.sendStatus(201);
-        // })
-        .catch(next);
-    // } else {
-    //     res.sendStatus(403);
-    // }
+    if (req.user) {
+        User.findById(req.user.id)
+            .then(function(existingUser) {
+                return existingUser.update({
+                    shippingStreetAddress: req.body.shipping.address,
+                    shippingCity: req.body.shipping.city,
+                    shippingState: req.body.shipping.state,
+                    shippingZip: req.body.shipping.zip,
+                    billingStreetAddress: req.body.billing.address,
+                    billingCity: req.body.billing.city,
+                    billingState: req.body.billing.state,
+                    billingZip: req.body.billing.zip
+                });
+            })
+            .then(function(userUpdated) {
+                res.status(201).json(userUpdated);
+            })
+            // .then(function(serverResponse) {
+            //     res.sendStatus(201);
+            // })
+            .catch(next);
+        // } else {
+        //     res.sendStatus(403);
+        // }
+    }
+    else {
+        res.sendStatus(200);
+    }
 });
 
 
