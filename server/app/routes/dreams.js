@@ -69,6 +69,7 @@ router.delete('/:id', function(req, res, next) {
 
 //get ALL dreams in one category
 router.get('/category/:category', function(req, res, next) {
+
     Dream.findAll({
             where: {
                 category: {
@@ -80,6 +81,7 @@ router.get('/category/:category', function(req, res, next) {
             res.json(dreams);
         })
         .catch(next);
+
 });
 
 //get ALL reviews for one dream
