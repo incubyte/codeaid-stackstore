@@ -60,7 +60,9 @@ router.get('/:id', function(req, res, next) {
         .then(function(items) {
             orderItems = items;
             return $Promise.map(items, function(item) {
-                return item.getDream();
+                return item.getDream().then(function(dream){
+                    dream.amountPurchased = item.amount;
+                });
             });
         })
         .then(function(dreams) {
