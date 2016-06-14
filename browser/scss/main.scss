@@ -94,6 +94,34 @@ body {
     }
 }
 
+#checkout-form {
+    max-width: 80%;
+    margin: 0 auto;
+    label {
+        display: block;
+    }
+    input {
+        display: block;
+        width: 100%;
+        margin-bottom: 1%;
+    }
+    .ship-state, .bill-state {
+        width: 5%;
+    }
+    .ship-zip, .bill-zip {
+        width: 7%;
+    }
+    #card-number {
+        width: 18%;
+    }
+    #card-security {
+        width: 6%;
+    }
+    #expiration-date {
+        width: 5%;
+    }
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
