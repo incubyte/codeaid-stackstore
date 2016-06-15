@@ -30,10 +30,30 @@ var seedUsers = function () {
             password: 'potus'
         },
         {
-            email: 'dani@gmail.com',
-            password: '1234567',
+            name: 'Danielle',
+            email: 'danielle@gmail.com',
+            password: '1234',
+            isAdmin: true
+        },
+        {
+            name: 'Ashley',
+            email: 'ashley@gmail.com',
+            password: '1234',
+            isAdmin: true
+        },
+        {
+            name: 'Karen',
+            email: 'karen@gmail.com',
+            password: '1234',
+            isAdmin: true
+        },
+        {
+            name: 'Katrina',
+            email: 'katrina@gmail.com',
+            password: '1234',
             isAdmin: true
         }
+
     ];
 
     var creatingUsers = users.map(function (userObj) {

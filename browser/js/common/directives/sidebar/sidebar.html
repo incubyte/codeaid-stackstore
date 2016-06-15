@@ -1,9 +1,12 @@
-<div class="col-lg-2" id="sidebar">
+<div id="sidebar">
     <!-- <ul class="sidebar-listing"> -->
+    <div class="dream-choices">
+        <a ui-sref="dreams">ALL</a>
         <section ng-repeat="item in items">
             <!-- <a ui-sref="{{item.state}}">{{item.label}}</a> -->
             <a ui-sref="Cat({category: item.cat})">{{item.cat | uppercase}}</a>
         </section>
         <!-- on click of the category, go to category page containing all the dreams -->
-    <!-- </ul> -->
+        <!-- </ul> -->
+    </div>
 </div>

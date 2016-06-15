@@ -15,21 +15,21 @@ app.factory('DreamsFactory', function($http) {
             });
     };
     
-    DreamsFactory.getUniqueCategories = function() {
-        return $http.get('api/dreams')
-            .then(function(dreams) {
-                return dreams.data;
-            })
-            .then(function(dreams) {
-                var categories = [];
-                dreams.forEach(function(dream) {
-                    dream.category.forEach(function(cat) {
-                        if (!categories.includes(cat)) categories.push(cat);
-                    });
-                });
-                return categories;
-            });
-    };
+    // DreamsFactory.getUniqueCategories = function() {
+    //     return $http.get('api/dreams')
+    //         .then(function(dreams) {
+    //             return dreams.data;
+    //         })
+    //         .then(function(dreams) {
+    //             var categories = [];
+    //             dreams.forEach(function(dream) {
+    //                 dream.category.forEach(function(cat) {
+    //                     if (!categories.includes(cat)) categories.push(cat);
+    //                 });
+    //             });
+    //             return categories;
+    //         });
+    // };
 
     return DreamsFactory;
 
@@ -44,9 +44,9 @@ app.controller('DreamsCtrl', function($scope, DreamsFactory) {
         });
         $scope.dreams = dreams;
     });
-    DreamsFactory.getUniqueCategories()
-        .then(function(categories) {
-            $scope.categories = categories;
-        });
+    // DreamsFactory.getUniqueCategories()
+    //     .then(function(categories) {
+    //         $scope.categories = categories;
+    //     });
 
 });

@@ -60,6 +60,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
         ReviewFactory.addReview(review)
             .then(function() {
                 console.log("added a review from " + review.userId);
+                $window.location.reload()
             }).catch(function() {
                 $scope.errorLogin = 'Invalid review';
             });
@@ -72,7 +73,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             })
             .then(function(userInfo) {
                 product.quantity -= $scope.amount;
-            });
+            })
     }
 
     $scope.toggle = function() {

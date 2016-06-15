@@ -32,8 +32,8 @@ var Dream = function(db) {
         },
         photo: {
             type: Sequelize.STRING,
-            allowNull: false
-                //defaultValue: placeholder
+            allowNull: false,
+            defaultValue: './browser/images/default-dream.jpg'
         }
     }, {
         instanceMethods: {
