@@ -65,7 +65,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
             });
     }
 
-    $scope.addDreamToCart = function(userId, product) {
+    $scope.addDreamToCart = function(product) {
         return $http.post('/api/cart/', {product: product, amount: $scope.amount})
             .then(function(userInfo) {
                 return userInfo.data;

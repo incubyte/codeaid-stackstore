@@ -34,6 +34,7 @@ app.controller('CartCtrl', function($scope, theCart, $http, CartFactory){
 	$scope.cart = theCart.dreams;
 	$scope.total = theCart.total;
 
+
     $scope.increase = function(dream){
         console.log("DREAM", dream);
         return $http.put('/api/cart/inc/', dream)

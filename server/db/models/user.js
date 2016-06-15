@@ -34,9 +34,9 @@ module.exports = function(db) {
         password: {
             type: Sequelize.STRING,
             allowNull: false,
-            validate: {
-                min: 4,
-            }
+            // validate: {
+            //     min: 4,
+            // }
         },
         shippingStreetAddress: {
             type: Sequelize.STRING

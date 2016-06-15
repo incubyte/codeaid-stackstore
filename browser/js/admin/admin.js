@@ -13,19 +13,26 @@ app.factory('AdminFactory', function($http) {
             })
     };
 
+    AdminFactory.fetchOneDream = function(id) {
+        return $http.get('/api/dreams/' + id)
+            .then(function(dream) {
+                return dream.data
+            })
+    }
+
     //admin create dream
     AdminFactory.createDream = function(data) {
         return $http.post('/api/dreams/', data)
-            .then(function(createdDream) {
-                return createdDream.data
+            .then(function(dream) {
+                console.log("I'm in the factory", dream)
+                return dream.data
             })
     }
 
     //admin update one dream
-    AdminFactory.updateDream = function(id, data) {
-        return $http.put('/api/dreams/' + id, data)
+    AdminFactory.updateDream = function(dreamId, data) {
+        return $http.put('/api/dreams/' + dreamId, data)
             .then(function(dream) {
-                console.log(dream.data)
                 return dream.data
             })
     }
@@ -83,7 +90,7 @@ app.factory('AdminFactory', function($http) {
 
     //admin edit one order
     AdminFactory.fetchOrder = function(id, data) {
-        return $http.get('/api/orders' + id, data)
+        return $http.get('/api/orders/' + id, data)
             .then(function(order) {
                 return order.data
             })
@@ -91,13 +98,77 @@ app.factory('AdminFactory', function($http) {
 
     //admin delete one order
     AdminFactory.deleteOrder = function(id) {
-        return $http.delete('/api/orders' + id)
+        return $http.delete('/api/orders/' + id)
             .then(function(response) {
                 return response.data
             })
     }
 
     return AdminFactory;
+})
+
+app.controller('AdminCtrl', function($scope, AdminFactory, $window) {
+
+    $scope.orders;
+    $scope.dreams;
+    $scope.createdDream;
+    $scope.createUser;
+
+    AdminFactory.fetchDreams()
+        .then(function(dreams) {
+            $scope.dreams = dreams
+        })
+
+    AdminFactory.fetchOrders()
+        .then(function(orders) {
+            $scope.orders = orders
+        })
+
+    AdminFactory.fetchUsers()
+        .then(function(users) {
+            $scope.users = users
+        })
+
+    $scope.createdDream = function(data) {
+        console.log("I'm in the controller, ", data)
+        $scope.dream = {}
+        AdminFactory.createDream(data);
+    }
+
+    $scope.updateDream = function(dreamId, newDream) {
+        var oldDream = AdminFactory.fetchOneDream(dreamId)
+            .then(function(dream) {
+                $scope.dream = dream
+            })
+
+        if (!newDream.title) {
+            newDream.title = oldDream.title;
+        }
+        if (!newDream.description) {
+            newDream.description = oldDream.description;
+        }
+        if (!newDream.category) {
+            newDream.category = oldDream.category;
+        }
+        if (!newDream.price) {
+            newDream.price = oldDream.price;
+        }
+        if (!newDream.photo) {
+            newDream.photo = oldDream.photo;
+        }
+        if (!newDream.quantity) {
+            newDream.quantity = oldDream.quantity;
+        }
+        AdminFactory.updateDream(dreamId, newDream)
+        $window.location.reload()
+    }
+
+    $scope.deleteDream = function(dream) {
+        AdminFactory.deleteDream(dream.id)
+        .then(function() {
+            $window.location.reload();
+        })
+    }
 })
 
 app.config(function($stateProvider) {
@@ -142,55 +213,3 @@ app.config(function($stateProvider) {
     });
 
 });
-
-app.controller('AdminCtrl', function($scope, AdminFactory) {
-
-    $scope.orders = []
-    $scope.dreams = []
-    $scope.users = []
-    $scope.createdDream;
-    $scope.createUser;
-
-    AdminFactory.fetchDreams()
-        .then(function(dreams) {
-            $scope.dreams = dreams
-        })
-
-    AdminFactory.fetchOrders()
-        .then(function(orders) {
-            $scope.orders = orders
-        })
-
-    AdminFactory.fetchUsers()
-        .then(function(users) {
-            $scope.users = users
-        })
-
-    $scope.createdDream = function(dreamData) {
-        AdminFactory.createDream(dreamData);
-    }
-
-    $scope.updateDream = function(newDream, oldDream) {
-        if (!newDream.title) {
-            newDream.title = oldDream.title;
-        }
-        if (!newDream.description) {
-            newDream.description = oldDream.description;
-        }
-        if (!newDream.category) {
-            newDream.category = oldDream.category;
-        }
-        if (!newDream.price) {
-            newDream.price = oldDream.price;
-        }
-        if (!newDream.photo) {
-            newDream.photo = oldDream.photo;
-        }
-        if (!newDream.quantity) {
-            newDream.quantity = oldDream.quantity;
-        }
-        AdminFactory.updateDream(oldDream.id, newDream);
-    }
-})
-
-
