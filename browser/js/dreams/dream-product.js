@@ -37,6 +37,10 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
         $scope.reviews = false;
     $scope.showForm = false;
 
+    $scope.dropdown = Array.apply(null, Array($scope.product.quantity)).map(function(el, i){
+        return i + 1;
+    });
+
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
             if (user)
@@ -62,8 +66,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     }
 
     $scope.addDreamToCart = function(userId, product) {
-
-        return $http.post('/api/cart/', { product: product, amount: $scope.amount })
+        return $http.post('/api/cart/', {product: product, amount: $scope.amount})
             .then(function(userInfo) {
                 return userInfo.data;
             })

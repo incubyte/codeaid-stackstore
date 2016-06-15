@@ -1,7 +1,7 @@
 <div>
     <div ng-repeat="order in orders">
         <div ng-repeat="dreams in order">
-            <div ng-repeat="dream in dreams">
+            <div ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
                 <img ng-src="{{dream.photo}}">
                 <div>Amount: {{dream.orderItems.amount}}</div>
                 <div>Price At Purchase: {{dream.orderItems.priceAtPurchase}}</div>
