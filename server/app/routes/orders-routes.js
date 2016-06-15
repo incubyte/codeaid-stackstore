@@ -2,10 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
+const $Promise = require('bluebird');
 var _ = require('lodash');
 var User = require('../../db').model('user');
 var Order = require('../../db').model('orders');
 var OrderItems = require('../../db').model('orderItems');
+var Dream = require('../../db').model('dream');
+
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport('smtps://ghopperphotos%40gmail.com:GraceHopp3r@smtp.gmail.com');
 
@@ -24,18 +27,19 @@ module.exports = router;
 
 
 // Get ALL orders for user
-// router.get('/:id', function(req, res, next) {
-//     Order.findAll({
-//             where: {
-//                 status: 'Pending',
-//                 userId: req.user.id
-//             }
-//         })
-//         .then(function(orders) {
-//             res.json(orders);
-//         })
-//         .catch(next);
-// });
+router.get('/:id', function(req, res, next) {
+    Order.findAll({
+            where: {
+                status: 'Processed',
+                userId: req.user.id
+            },
+            include: [OrderItems, Dream]
+        })
+        .then(function(orders) {
+            res.json(orders);
+        })
+        .catch(next);
+});
 
 router.put('/', function(req, res, next) {
     var processedOrder;

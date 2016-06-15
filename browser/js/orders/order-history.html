@@ -1,0 +1,13 @@
+<div>
+    <div ng-repeat="order in orders">
+        <div ng-repeat="dreams in order">
+            <div ng-repeat="dream in dreams">
+                <img ng-src="{{dream.photo}}">
+                <div>Amount: {{dream.orderItems.amount}}</div>
+                <div>Price At Purchase: {{dream.orderItems.priceAtPurchase}}</div>
+                <div>Time of Purchase: {{dream.orderItems.updatedAt}}</div>
+                <div>Status: {{order.status}}</div>
+            </div>
+        </div>
+    </div>
+</div>
