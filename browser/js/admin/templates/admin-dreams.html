@@ -1,6 +1,6 @@
 <div class="admin-dream-container">
     <h3>Create a New Dream</h3>
-    <form name="add-dream" ng-model="addDreamForm" ng-submit="createDream(dream)">
+    <form name="add-dream" ng-model="addDreamForm" ng-submit="createdDream(dream)">
         <label for="dream-title">Title</label>
         <input class="form-control" type="text" ng-model="dream.title" name="dream-title">
         <label for="description">Description</label>
@@ -13,7 +13,7 @@
         <input class="form-control" type="text" ng-model="dream.photo" name="image">
         <label for="quantity">Quantity</label>
         <input class="form-control" type="text" ng-model="dream.quantity" name="inventory">
-        <button type="submit" class="btn btn-success" ng-disabled="addDreamForm.$invalid">Create Dream</button>
+        <input type="submit" class="btn btn-success" ng-disabled="addDreamForm.$invalid" value= "Create Dream">
     </form>
     <br>
     <section class="bg-info container">

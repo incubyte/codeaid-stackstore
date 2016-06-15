@@ -32,8 +32,7 @@ var Dream = function(db) {
         },
         photo: {
             type: Sequelize.STRING,
-            allowNull: false
-                //defaultValue: placeholder
+            defaultValue: '/images/Moon-logo.jpg'
         }
     }, {
         instanceMethods: {

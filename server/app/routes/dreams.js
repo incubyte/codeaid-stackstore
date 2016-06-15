@@ -38,7 +38,14 @@ router.post('/', function(req, res, next) {
         res.sendStatus(403);
     } else {
         console.log("I'm in the routes", req.body)
-        Dream.create(req.body)
+        Dream.create({
+            title: req.body.title,
+            description: req.body.description,
+            price: req.body.price,
+            quantity: req.body.quantity,
+            category: req.body.category.split(/[\s+]/),
+            photo: req.body.photo
+        })
             .then(function(newDreamCreated) {
                 res.status(201).send(newDreamCreated);
             })
