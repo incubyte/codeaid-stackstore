@@ -22,5 +22,8 @@
                 <a ng-click="logout()">Logout</a>
             </div>
         </div>
+        <button ng-show="user" class="btn login-button"
+            ui-sref="Orders({id: user.id})"> Order History  
+        </button>
     </div>
 </nav>
