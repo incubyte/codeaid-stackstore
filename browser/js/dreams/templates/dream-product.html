@@ -11,7 +11,8 @@
                 <p class="product-description">{{product.description}}</p>
                 <p class="product-price">{{product.price}}</p>
                 <p>{{product.quantity}}</p>
-                <input type="text" placeholder="Please specify amount" ng-model='amount' ng-required>
+                <!-- <input type="text" placeholder="Please specify amount" ng-model='amount' ng-required> -->
+                <select ng-model='amount' size="{{product.quantity}}"><option ng-repeat="num in dropdown">{{num}}</option></select>
                 <input type="submit" value="Add To Cart"></input>
             </div>
             </form>

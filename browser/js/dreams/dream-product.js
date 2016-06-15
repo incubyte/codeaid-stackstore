@@ -34,6 +34,10 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     $scope.reviews = dreamReviews;
     $scope.showForm = false;
 
+    $scope.dropdown = Array.apply(null, Array($scope.product.quantity)).map(function(el, i){
+        return i + 1;
+    });
+
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
             $scope.user = user;
@@ -41,30 +45,6 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     };
 
     setUser();
-
-    //console.log("Where am i??", $scope.reviews)
-
-    // function generateUser() {
-    //     var email = "";
-    //     var password = "";
-    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    //     for (var i = 0; i < 5; i++) {
-    //         password += possible.charAt(Math.floor(Math.random() * possible.length));
-    //         email += possible.charAt(Math.floor(Math.random() * possible.length));
-    //     }
-    //     email += "@email.com";
-    //     return { email: email, password: password };
-    // }
-
-    // function addUser() {
-    //     return $http.post('/api/users', generateUser())
-    //         //make sure the req.body randomly generates an email and password
-    //         .then(function(user) {
-    //             $scope.user = user.data;
-    //             return user.data;
-    //         });
-    // }
 
     $scope.sendReview = function(review) {
         $scope.errorReview = null;
@@ -80,18 +60,6 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     }
 
     $scope.addDreamToCart = function(userId, product) {
-        // var id;
-        // console.log("I'm scope:", $scope)
-
-        // if (!$scope.user.id)
-        // {
-        //     id = 0;
-        // }
-        // else
-        // {
-        //     id = $scope.user.id
-        // }
-        //console.log("PRODUCT", product, "AMOUNT", $scope.amount);
         return $http.post('/api/cart/', {product: product, amount: $scope.amount})
             .then(function(userInfo) {
                 return userInfo.data;
