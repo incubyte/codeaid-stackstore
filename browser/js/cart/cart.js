@@ -21,7 +21,6 @@ app.factory('CartFactory', function($http) {
      CartFactory.getItems = function(id) {
         return $http.get('/api/cart/')
             .then(function(response) {
-                console.log("ITEMS IN CART", response.data);
                 return response.data;
             });
     }
@@ -35,7 +34,32 @@ app.controller('CartCtrl', function($scope, theCart, $http, CartFactory){
 	$scope.cart = theCart.dreams;
 	$scope.total = theCart.total;
 
-    $scope.removeItem = function(id, item){
+    $scope.increase = function(dream){
+        console.log("DREAM", dream);
+        return $http.put('/api/cart/inc/', dream)
+        .then(function(response){
+            CartFactory.getItems()
+            .then(function(cart){
+                $scope.cart = cart.dreams;
+                $scope.total = cart.total;
+            });
+        });
+    }
+
+    $scope.decrease = function(dream){
+        console.log("DREAM", dream);
+        return $http.put('/api/cart/dec/', dream)
+        .then(function(response){
+            CartFactory.getItems()
+            .then(function(cart){
+                $scope.cart = cart.dreams;
+                $scope.total = cart.total;
+            });
+        });
+
+    }
+
+    $scope.removeItem = function(item){
         $http.put('/api/cart/', item)
         .then(function(data){
             CartFactory.getItems()

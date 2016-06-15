@@ -7,6 +7,7 @@
                 <th>Title</th>
                 <th>Price</th>
                 <th>Amount</th>
+                <th>Edit</th>
                 <th>Remove</th>
             </tr>
         </thead>
@@ -16,8 +17,10 @@
                 <td>{{item.dream.title}}</td>
                 <td>${{item.dream.price}}</td>
                 <td>{{item.amountPurchased}}</td>
+                <td><span class="well glyphicon glyphicon-plus" ng-click="increase(item)"></span>
+                <span class="well glyphicon glyphicon-minus" ng-click="decrease(item)"></span></td>
                 <td>
-                    <button class="remove" ng-click="removeItem(user.id, item)">
+                    <button class="well remove" ng-click="removeItem(item)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>
