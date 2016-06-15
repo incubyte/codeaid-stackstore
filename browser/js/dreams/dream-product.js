@@ -12,9 +12,19 @@ app.config(function($stateProvider) {
             }
         }
     });
+    $stateProvider.state('dreams', {
+        url: '/dreams',
+        controller: 'DreamingCtrl',
+        templateUrl: 'js/dreams/templates/all-dreams.html',
+        // resolve: {
+        //     allDreams: function(ProductFactory) {
+        //         return ProductFactory.getAllDreams()
+        //     }
+        // }
+    })
 });
 
-app.factory('ProductFactory', function($http, $state) {
+app.factory('ProductFactory', function($http) {
     var ProductFactory = {};
 
     ProductFactory.getDream = function(id) {
@@ -24,20 +34,37 @@ app.factory('ProductFactory', function($http, $state) {
             })
     };
 
+    ProductFactory.getAllDreams = function() {
+        return $http.get('/api/dreams')
+            .then(function(response) {
+                console.log(response.data)
+                return response.data
+            })
+    }
+
     return ProductFactory;
 });
+
+app.controller('DreamingCtrl', function($scope, ProductFactory) {
+    ProductFactory.getAllDreams()
+    .then(function(dreams) {
+        $scope.dreams = dreams
+    })
+
+})
 
 
 app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory, dreamReviews) {
     $scope.product = productListing;
     $scope.user = null;
-    if(dreamReviews.length)
+    if (dreamReviews.length)
         $scope.reviews = dreamReviews;
-    else 
+    else
         $scope.reviews = false;
     $scope.showForm = false;
 
-    $scope.dropdown = Array.apply(null, Array($scope.product.quantity)).map(function(el, i){
+
+    $scope.dropdown = Array.apply(null, Array($scope.product.quantity)).map(function(el, i) {
         return i + 1;
     });
 
@@ -67,7 +94,7 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     }
 
     $scope.addDreamToCart = function(userId, product) {
-        return $http.post('/api/cart/', {product: product, amount: $scope.amount})
+        return $http.post('/api/cart/', { product: product, amount: $scope.amount })
             .then(function(userInfo) {
                 return userInfo.data;
             })
@@ -79,4 +106,5 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     $scope.toggle = function() {
         $scope.showForm = !$scope.showForm
     }
+
 });
