@@ -1,5 +1,5 @@
-<div>
-    <h3>Create New Dream</h3>
+<div class="admin-dream-container">
+    <h3>Create a New Dream</h3>
     <form name="add-dream" ng-model="addDreamForm" ng-submit="createDream(dream)">
         <label for="dream-title">Title</label>
         <input class="form-control" type="text" ng-model="dream.title" name="dream-title">
@@ -36,6 +36,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
+                    	<p> {{ dream.quantity }} </p>
                     </div>
                     <div class="col-lg-6">
                         <p>$ {{ dream.price }}</p>
@@ -45,7 +46,7 @@
                     <label for="dream-title">
                         <h6> Title: </h6>
                     </label>
-                    <input type="text" name="dream-title" ng-model="newDream.name" class="form-control">
+                    <input type="text" name="dream-title" ng-model="newDream.title" class="form-control">
                     <label for="dream-desc">
                         <h6> Description: </h6>
                     </label>
@@ -66,7 +67,7 @@
                         <h6> Quantity: </h6>
                     </label>
                     <input type="text" name="dream-quantity" ng-model="newDream.quantity" class="form-control">
-                    <button type="submit" class="btn btn-success" ng-click="updateDream(newDream, dream)">Update Dream</button>
+                    <button type="submit" class="btn btn-success" ng-click="updateDream(dream.id, newDream)">Update Dream</button>
                     <button type="submit" class="btn btn-success" ng-click="deleteDream(dream)">Delete Dream</button>
                     <br>
                 </form>

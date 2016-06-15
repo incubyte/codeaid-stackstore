@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
 
 //get ONE dream by id
 router.get('/:id', function(req, res, next) {
+    // console.log("I'm here,", req.params.id)
     Dream.findById(req.params.id)
         .then(function(theDream) {
             if (!theDream) {
@@ -36,6 +37,7 @@ router.post('/', function(req, res, next) {
     if (!req.user.isAdmin) {
         res.sendStatus(403);
     } else {
+        console.log("I'm in the routes", req.body)
         Dream.create(req.body)
             .then(function(newDreamCreated) {
                 res.status(201).send(newDreamCreated);
@@ -122,7 +124,7 @@ router.post('/:id/reviews', function(req, res, next) { //get all reviews for a d
         })
         .then(function(review) {
 
-            console.log("This is the new review", review)
+            // console.log("This is the new review", review)
             res.json(review);
 
         })
