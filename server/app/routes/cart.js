@@ -96,6 +96,7 @@ router.get('/', function(req, res, next) {
             });
         })
         .then(function(dreams) {
+            console.log("DREAMS", dreams);
             theDreams = dreams;
             return $Promise.map(orderItems, function(item) {
                 return parseFloat(item.amount) * item.priceAtPurchase;
