@@ -33,10 +33,7 @@ module.exports = function(db) {
         },
         password: {
             type: Sequelize.STRING,
-            allowNull: false,
-            validate: {
-                min: 4,
-            }
+            allowNull: false
         },
         shippingStreetAddress: {
             type: Sequelize.STRING
