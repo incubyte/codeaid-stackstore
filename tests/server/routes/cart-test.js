@@ -60,11 +60,11 @@ describe('Cart Routes', function() {
 
     describe("Request for a user\'s cart", function() {
         it('should get a 200 response with the correct cart as the body', function(done) {
-            agent.get('/api/cart/1').expect(200).end(function(err, response) {
+            agent.get('/api/cart').expect(200).end(function(err, response) {
                 if (err) return done(err);
                 console.log("Am I a cart????", response.body)
                 expect(response.body).to.be.an('object');
-                expect(response.body.userId).to.equal(1);
+                expect(response.body.dreams).to.be.an('array');
                 done();
             });
         });
