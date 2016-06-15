@@ -12,10 +12,10 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             defaultValue: 'Dreamer'
         },
-        // photo: {
-        //     type: Sequelize.STRING,
-        //     defaultValue: '/images/dream-bubble.jpg'
-        // },
+        photo: {
+            type: Sequelize.STRING,
+            defaultValue: '/images/dream-bubble.jpg'
+        },
         phone: {
             type: Sequelize.STRING,
             validate: {
@@ -33,10 +33,7 @@ module.exports = function(db) {
         },
         password: {
             type: Sequelize.STRING,
-            allowNull: false,
-            // validate: {
-            //     min: 4,
-            // }
+            allowNull: false
         },
         shippingStreetAddress: {
             type: Sequelize.STRING

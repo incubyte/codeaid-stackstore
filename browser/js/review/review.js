@@ -40,10 +40,15 @@ app.factory('ReviewFactory', function($http) {
     return ReviewFactory;
 })
 
-app.controller('ReviewCtrl', function($scope, ReviewFactory, reviewListing) {
+app.controller('ReviewCtrl', function($scope, ReviewFactory, $window) {
 
     //$scope.reviews = reviewListing;
-
+    $scope.addReview = function(review) {
+        ReviewFactory.addReview(review)
+        .then(function() {
+            $window.location.reload
+        })
+    }
 })
 
 app.directive('reviewList', function() {

@@ -1,18 +1,16 @@
 <section id="reviews">
     <div class="reviewListing">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3 ng-show="theReviews.length">Reviews of {{theReviews[0].dream.title}}</h3>
-                <h4 ng-hide="theReviews.length"> There are no reviews for this dream yet. </h4>
-                <div ng-repeat="review in theReviews" class="each-review">
-                    <p class="dream-title">{{review.title}}</p> by
-                    <p>{{review.user.name}}</p>
-                    <img ng-src="{{review.dream.photo}}">
-                    <p class="review-text">{{review.text}}</p>
-                    <!-- Ends column -->
-                </div>
-                <!-- Ends dream class -->
-            </div>
+        <h3 ng-show="theReviews.length">Reviews of '{{theReviews[0].dream.title}}'</h3>
+        <div id="review-response">
+            <h4 ng-hide="theReviews.length"> We have no reviews for this dream yet. Be the first! </h4>
         </div>
+        <div ng-repeat="review in theReviews" class="each-review">
+            <p class="dream-title">{{review.title}}</p> by
+            <p>{{review.user.name}}</p>
+            <img ng-src="{{review.user.photo}}">
+            <h5 class="review-text">{{review.text}}</h5>
+            <!-- Ends column -->
+        </div>
+        <!-- Ends dream class -->
     </div>
 </section>

@@ -6,12 +6,12 @@ app.directive('sidebar', function($rootScope, $state) {
         link: function(scope) {
 
             scope.items = [
-                { cat: 'Daydream'},
-                { cat: 'Lucid'},
-                { cat: 'Signal'},
-                { cat: 'Epic'},
-                { cat: 'Progressive'},
-                { cat: 'Recurring'}             
+                { cat: 'Daydream' },
+                { cat: 'Lucid' },
+                { cat: 'Signal' },
+                { cat: 'Epic' },
+                { cat: 'Progressive' },
+                { cat: 'Recurring' }
             ];
         }
     };

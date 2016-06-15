@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <div ng-repeat="order in orders">
         <div ng-repeat="dreams in order">
             <div ng-repeat="dream in dreams" ui-sref="product({id: dream.id})">
@@ -10,4 +10,33 @@
             </div>
         </div>
     </div>
+</div> -->
+<div class="order-list" ng-repeat="order in orders">
+    <h3>List of Items in Order</h3>
+    <table class="table" id="order-table">
+        <thead>
+            <tr>
+                <th width="10%"></th>
+                <th>Title</th>
+                <th>Price at Purchase</th>
+                <th>Quantity Purchased</th>
+                <th>Time of Purchase</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="dreams in order">
+                <td><img ng-src="{{dream.photo}}" width="35%"></td>
+                <td>{{dream.title}}</td>
+                <td>${{dream.orderItems.priceAtPurchase}}</td>
+                <td>{{dream.orderItems.amount}}</td>
+                <td>{{dream.orderItems.updatedAt}}</td>
+                <td>{{order.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+<!--     <div class="total-amount">
+        <h4>Total: ${{total}}</h4>
+    </div> -->
 </div>
+
