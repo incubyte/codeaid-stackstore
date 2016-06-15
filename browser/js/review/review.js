@@ -19,6 +19,7 @@ app.factory('ReviewFactory', function($http) {
 
         return $http.get('/api/dreams/' + id + '/reviews')
             .then(function(reviews) {
+                console.log("Here is the reviews for ya", reviews.data);
                 return reviews.data
 
             })
@@ -27,7 +28,7 @@ app.factory('ReviewFactory', function($http) {
     ReviewFactory.addReview = function(review) {
         var id = +review.dreamId;
 
-        return $http.post('/api/dreams/' + id + '/reviews', review, { user: review.userId})
+        return $http.post('/api/dreams/' + id + '/reviews', review, { user: review.userId })
             .then(function(newReview) {
                 console.log("Thanks for the review")
             })

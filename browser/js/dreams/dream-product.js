@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
             productListing: function(ProductFactory, $stateParams) {
                 return ProductFactory.getDream($stateParams.id);
             },
-            dreamReviews: function(ReviewFactory, productListing){
+            dreamReviews: function(ReviewFactory, productListing) {
                 return ReviewFactory.getOneDreamReviews(productListing.id)
             }
         }
@@ -31,7 +31,10 @@ app.factory('ProductFactory', function($http, $state) {
 app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory, dreamReviews) {
     $scope.product = productListing;
     $scope.user = null;
-    $scope.reviews = dreamReviews;
+    if(dreamReviews.length)
+        $scope.reviews = dreamReviews;
+    else 
+        $scope.reviews = false;
     $scope.showForm = false;
 
     $scope.dropdown = Array.apply(null, Array($scope.product.quantity)).map(function(el, i){
@@ -40,7 +43,10 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
 
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
-            $scope.user = user;
+            if (user)
+                $scope.user = user;
+            else
+                $scope.user = false;
         });
     };
 

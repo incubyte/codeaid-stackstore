@@ -7,19 +7,21 @@
                 <img ng-src="{{product.photo}}">
             </div>
             <form ng-submit="addDreamToCart(user.id, product)">
-            <div class="col-lg-4" ng-hide="product.quantity === 0">
-                <p class="product-description">{{product.description}}</p>
-                <p class="product-price">{{product.price}}</p>
-                <p>{{product.quantity}}</p>
-                <!-- <input type="text" placeholder="Please specify amount" ng-model='amount' ng-required> -->
-                <select ng-model='amount' size="{{product.quantity}}"><option ng-repeat="num in dropdown">{{num}}</option></select>
-                <input type="submit" value="Add To Cart"></input>
-            </div>
+                <div class="col-lg-4" ng-hide="product.quantity === 0">
+                    <p class="product-description">{{product.description}}</p>
+                    <p class="product-price">{{product.price}}</p>
+                    <p>{{product.quantity}}</p>
+                    <!-- <input type="text" placeholder="Please specify amount" ng-model='amount' ng-required> -->
+                    <select ng-model='amount' size="{{product.quantity}}">
+                        <option ng-repeat="num in dropdown">{{num}}</option>
+                    </select>
+                    <input type="submit" value="Add To Cart"></input>
+                </div>
             </form>
             <div class="alert" ng-show="product.quantity === 0"> Out of Stock</div>
             <div class="col-lg-4" id="submitReviewForm">
-                <!-- <button ng-click="toggle()">Review this Dream</button> -->
-                <form id="review-form" name="reviewForm" ng-submit="reviewForm.$valid && sendReview(review)">
+                <button ng-click="toggle()" ng-show="user">Review this Dream</button>
+                <form id="review-form" name="reviewForm" ng-submit="reviewForm.$valid && sendReview(review)" ng-show="showForm">
                     <!-- <alert type="danger" ng-show="errorReview">
                         {{ errorReview }}
                     </alert> -->
@@ -42,7 +44,9 @@
             </div>
         </div>
     </div>
-    <review-list the-reviews="reviews">
-        <h1>Reviews here</h1></review-list>
+    <div>
+        <review-list the-reviews="reviews">
+        </review-list>
+    </div>
     </div>
 </section>
