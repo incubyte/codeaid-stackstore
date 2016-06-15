@@ -33,6 +33,7 @@ router.use(function(req, res, next) {
         })
 
 })
+
 router.post('/', function(req, res, next) {
     Dream.findById(req.body.product.id)
         .then(function(dream) {
@@ -48,6 +49,50 @@ router.post('/', function(req, res, next) {
         })
         .then(function(orderItems) {
             res.json(orderItems);
+        })
+});
+
+router.put('/inc', function(req, res, next) {
+    Order.findById(req.session.orderId)
+        .then(function(order) {
+            return order.getOrderItems();
+        })
+        .then(function(items){
+            console.log("ITEMS", items);
+            return $Promise.each(items, function(item){
+                if (item.dreamId === req.body.dream.id) {
+                    return item;
+                }
+            });
+        })
+        .then(function(item){
+            console.log("ITEM", item);
+            item[0].update({
+                amount: Number(req.body.amountPurchased) + 1
+            });
+            res.sendStatus(200);
+        })
+});
+
+router.put('/dec', function(req, res, next) {
+    Order.findById(req.session.orderId)
+        .then(function(order) {
+            return order.getOrderItems();
+        })
+        .then(function(items){
+            console.log("ITEMS", items);
+            return $Promise.each(items, function(item){
+                if (item.dreamId === req.body.dream.id) {
+                    return item;
+                }
+            });
+        })
+        .then(function(item){
+            console.log("ITEM", item);
+            item[0].update({
+                amount: Number(req.body.amountPurchased) - 1
+            });
+            res.sendStatus(200);
         })
 });
 
