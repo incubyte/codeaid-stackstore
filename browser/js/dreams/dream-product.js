@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
             productListing: function(ProductFactory, $stateParams) {
                 return ProductFactory.getDream($stateParams.id);
             },
-            dreamReviews: function(ReviewFactory, productListing){
+            dreamReviews: function(ReviewFactory, productListing) {
                 return ReviewFactory.getOneDreamReviews(productListing.id)
             }
         }
@@ -31,40 +31,22 @@ app.factory('ProductFactory', function($http, $state) {
 app.controller('ProductCtrl', function($scope, $http, productListing, ProductFactory, AuthService, ReviewFactory, dreamReviews) {
     $scope.product = productListing;
     $scope.user = null;
-    $scope.reviews = dreamReviews;
+    if(dreamReviews.length)
+        $scope.reviews = dreamReviews;
+    else 
+        $scope.reviews = false;
     $scope.showForm = false;
 
     var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
-            $scope.user = user;
+            if (user)
+                $scope.user = user;
+            else
+                $scope.user = false;
         });
     };
 
     setUser();
-
-    //console.log("Where am i??", $scope.reviews)
-
-    // function generateUser() {
-    //     var email = "";
-    //     var password = "";
-    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    //     for (var i = 0; i < 5; i++) {
-    //         password += possible.charAt(Math.floor(Math.random() * possible.length));
-    //         email += possible.charAt(Math.floor(Math.random() * possible.length));
-    //     }
-    //     email += "@email.com";
-    //     return { email: email, password: password };
-    // }
-
-    // function addUser() {
-    //     return $http.post('/api/users', generateUser())
-    //         //make sure the req.body randomly generates an email and password
-    //         .then(function(user) {
-    //             $scope.user = user.data;
-    //             return user.data;
-    //         });
-    // }
 
     $scope.sendReview = function(review) {
         $scope.errorReview = null;
@@ -80,19 +62,8 @@ app.controller('ProductCtrl', function($scope, $http, productListing, ProductFac
     }
 
     $scope.addDreamToCart = function(userId, product) {
-        // var id;
-        // console.log("I'm scope:", $scope)
 
-        // if (!$scope.user.id)
-        // {
-        //     id = 0;
-        // }
-        // else
-        // {
-        //     id = $scope.user.id
-        // }
-        //console.log("PRODUCT", product, "AMOUNT", $scope.amount);
-        return $http.post('/api/cart/', {product: product, amount: $scope.amount})
+        return $http.post('/api/cart/', { product: product, amount: $scope.amount })
             .then(function(userInfo) {
                 return userInfo.data;
             })
