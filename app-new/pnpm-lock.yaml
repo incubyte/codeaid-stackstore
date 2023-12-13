@@ -35,6 +35,9 @@ dependencies:
   angular:
     specifier: ^1.8.3
     version: 1.8.3
+  reflect-metadata:
+    specifier: ^0.1.14
+    version: 0.1.14
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
@@ -6035,7 +6038,6 @@ packages:
 
   /reflect-metadata@0.1.14:
     resolution: {integrity: sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==}
-    dev: true
 
   /regenerate-unicode-properties@10.1.1:
     resolution: {integrity: sha512-X007RyZLsCJVVrjgEFVpLUTZwyOZk3oiL75ZcuYjlIWd6rNJtOjkBwQc5AsRrpbKVkxN6sklw/k/9m2jJYOf8Q==}
