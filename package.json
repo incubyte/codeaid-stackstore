@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "nodemon --watch server -e js,html server/start.js",
     "postinstall": "gulp build",
-    "test": "gulp testBrowserJS",
+    "test": "gulp build && gulp testBrowserJS",
     "client-watch": "gulp default"
   },
   "engines": {
