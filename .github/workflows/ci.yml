@@ -15,11 +15,14 @@ jobs:
       with:
         node-version: '21'
 
+    - name: Install pnpm
+      run: npm install -g pnpm
+
     - name: Install dependencies and build (Angular app)
       run: |
         cd app-new
-        npm install
-        npm run build
+        pnpm install
+        pnpm run build
         cd ..
 
     - name: Setup Node.js 6
@@ -27,7 +30,7 @@ jobs:
       with:
         node-version: '6'
 
-    - name: Install dependencies and run tests
+    - name: Install dependencies and run tests (using npm)
       run: |
         npm install
         npm run test
