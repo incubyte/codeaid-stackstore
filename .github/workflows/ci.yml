@@ -1,39 +1,33 @@
-name: Run Karma Chrome Tests
+name: Angular Build and Test Workflow
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [6.x]
-
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node-version }}-
+    - name: Setup Node.js 21
+      uses: actions/setup-node@v2
+      with:
+        node-version: '21'
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+    - name: Install dependencies and build (Angular app)
+      run: |
+        cd app-new
+        npm install
+        npm run build
+        cd ..
 
-      - name: Install dependencies
-        run: npm install
+    - name: Setup Node.js 6
+      uses: actions/setup-node@v2
+      with:
+        node-version: '6'
 
-      - name: Setup Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          echo "CHROME_BIN=$(which google-chrome-stable)" >> $GITHUB_ENV
-
-      - name: Run tests
-        run: npm run test
+    - name: Install dependencies and run tests
+      run: |
+        npm install
+        npm run test
