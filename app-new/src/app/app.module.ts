@@ -1,3 +1,6 @@
+import { AuthService } from './common/AuthService';
+import { DreamsFactory } from './common/DreamsFactory';
+import { SecretStashService } from './common/SecretStash';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,7 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, UpgradeModule],
-  providers: [],
+  providers: [AuthService, DreamsFactory, SecretStashService, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
