@@ -1,3 +1,4 @@
+import { OrderHistoryService } from './common/OrderHistoryFactory';
 import { ReviewService } from './common/ReviewFactory';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +10,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, UpgradeModule],
-  providers: [ReviewService, ],
+  providers: [OrderHistoryService, ReviewService, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
