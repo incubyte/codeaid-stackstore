@@ -1,3 +1,4 @@
+import { ProductFactory } from './common/ProductFactory';
 import { AuthService } from './common/Socket';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +10,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, UpgradeModule],
-  providers: [AuthService, ],
+  providers: [ProductFactory, AuthService, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
