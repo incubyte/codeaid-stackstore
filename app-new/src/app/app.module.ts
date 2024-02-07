@@ -1,3 +1,4 @@
+import { ReviewService } from './common/ReviewFactory';
 import { OrderHistoryService } from './common/OrderHistoryFactory';
 import { SecretStashService } from './common/SecretStash';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, UpgradeModule],
-  providers: [OrderHistoryService, SecretStashService, ],
+  providers: [ReviewService, OrderHistoryService, SecretStashService, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
