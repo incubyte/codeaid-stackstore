@@ -1,3 +1,4 @@
+import { ProductFactory } from './common/ProductFactory';
 import { DreamsFactory } from './common/DreamsFactory';
 import { CategoryFactory } from './common/CategoryFactory';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, UpgradeModule],
-  providers: [DreamsFactory, CategoryFactory, ],
+  providers: [ProductFactory, DreamsFactory, CategoryFactory, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
