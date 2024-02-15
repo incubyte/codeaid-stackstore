@@ -1,6 +1,7 @@
 'use strict';
 var path = require('path');
 var express = require('express');
+var csrf = require('csurf');
 var app = express();
 
 module.exports = function (db) {
@@ -13,6 +14,8 @@ module.exports = function (db) {
     // /api so they are isolated from our GET /* wildcard.
     app.use('/api', require('./routes'));
 
+    // CSRF middleware
+    app.use(csrf());
 
     /*
      This middleware will catch any URLs resembling a file extension
@@ -44,4 +47,3 @@ module.exports = function (db) {
     return app;
 
 };
-
