@@ -1,3 +1,4 @@
+import { AdminService } from './common/AdminFactory';
 import { CartFactory } from './common/CartFactory';
 import { CheckoutFactory } from './common/CheckoutFactory';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, UpgradeModule],
-  providers: [CartFactory, CheckoutFactory, ],
+  providers: [AdminService, CartFactory, CheckoutFactory, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
