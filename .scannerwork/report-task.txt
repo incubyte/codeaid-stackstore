@@ -1,0 +1,6 @@
+projectKey=e81b66d9-b624-4310-8317-b7aefb320325
+serverUrl=http://sonar-scanner:9000
+serverVersion=10.3.0.82913
+dashboardUrl=http://sonar-scanner:9000/dashboard?id=e81b66d9-b624-4310-8317-b7aefb320325
+ceTaskId=AY4eNIUO33EcaVTDsxN0
+ceTaskUrl=http://sonar-scanner:9000/api/ce/task?id=AY4eNIUO33EcaVTDsxN0
